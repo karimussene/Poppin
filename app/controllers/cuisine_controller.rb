@@ -1,0 +1,2 @@
+class CuisineController < ApplicationController
+end
