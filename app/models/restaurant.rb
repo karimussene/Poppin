@@ -1,14 +1,14 @@
 class Restaurant < ApplicationRecord
   belongs_to :city
-  belongs_to :cuisine
+  has_many :cuisines, through: :restaurant_cuisines
 
-  validates :name, prensence: true
-  validates :address, prensence: true
-  validates :attendance, prensence: true
-  validates :capacity, prensence: true
-  validates :rating, prensence: true
-  validates :price_range, prensence: true
-  validates :photo, prensence: true
-  validates :city, prensence: true
-  validates :cuisine, prensence: true
+  validates :name, presence: true
+  validates :address, presence: true
+  validates :attendance, presence: true
+  validates :capacity, presence: true
+  validates :rating, presence: true
+  validates :price_range, presence: true
+  validates :photo, presence: true
+  validates :city, presence: true
+  validates :cuisine, presence: true
 end
