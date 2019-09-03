@@ -1,0 +1,44 @@
+.btn-mustard{
+  color: gray;
+  border-radius: 50px;
+}
+
+.btn-mustard:hover{
+  color: white;
+  background-color: $mustard;
+}
+
+.btn-yellow{
+  color: white;
+  border-radius: 50px;
+  background-color: $yellow;
+}
+
+.btn-yellow:hover{
+  color: white;
+  background-color: $mustard;
+}
+
+.btn-outline-yellow{
+  color: $yellow;
+  border-radius: 50px;
+  background-color: white;
+  border-color: $yellow;
+}
+
+.btn-outline-yellow:hover{
+  color: white;
+  background-color: $yellow;
+}
+
+.btn-outline-mustard{
+  color: $mustard;
+  border-radius: 50px;
+  background-color: white;
+  border-color: $mustard;
+}
+
+.btn-outline-mustard:hover{
+  color: white;
+  background-color: $mustard;
+}

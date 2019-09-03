@@ -1,4 +1,38 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<nav class="navbar navbar-poppin ">
+  <!-- LOGO -->
+  <div class="logo">
+    <%= link_to root_path do %>
+      <%= image_tag "Logo.png" %>
+    <% end %>
+  </div>
+
+<div class="nav-content">
+  <!-- OTHER PAGES LINKS -->
+  <div class="nav-links">
+    <%= link_to "Home", "#", class: "nav-link-font"%>
+    <%= link_to "Contacts", "#", class: "nav-link-font"%>
+    <%= link_to "About us", "#", class: "nav-link-font"%>
+  </div>
+
+  <!-- LOGIN SIGNIN -->
+  <div class="nav-links">
+    <%= link_to "Log in", "#", class: "nav-link-font"%>
+    <%= link_to "Sign in", "#", class: "nav-link-font"%>
+  </div>
+</div>
+
+
+<!--   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    </div>
+  </div> -->
+</nav>
+
+<!-- <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <%= link_to "#", class: "navbar-brand" do %>
     <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
     <% end %>
@@ -33,3 +67,4 @@
     </ul>
   </div>
 </div>
+ -->
