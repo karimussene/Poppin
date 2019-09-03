@@ -1,12 +1,42 @@
-.navbar-lewagon {
+.navbar-poppin {
   justify-content: space-between;
-  background: white;
+  background: $yellow;
+  height: 70px;
 }
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
+.navbar-poppin img {
+  justify-content: left;
+  height: 40px;
+  margin: 10px;
 }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+.nav-link-font {
+  display: flex;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  align-items: center;
+  color: #FFFFFF;
+  margin: 7px 10px;
+  border-bottom: 3px solid $yellow;
+
+}
+
+.nav-link-font:hover{
+  color: white;
+  border-bottom: 3px solid $mustard;
+  text-decoration: none;
+}
+
+.nav-links{
+  display: flex;
+  height: 35px;
+}
+
+.nav-content{
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  margin: 0px 0px 0px 15px;
 }
