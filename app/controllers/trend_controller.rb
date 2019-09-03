@@ -1,0 +1,2 @@
+class TrendController < ApplicationController
+end

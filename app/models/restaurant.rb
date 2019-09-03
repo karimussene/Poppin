@@ -8,7 +8,9 @@ class Restaurant < ApplicationRecord
   validates :capacity, presence: true
   validates :rating, presence: true
   validates :price_range, presence: true
-  validates :photo, presence: true
+
+  # validates :photo
+
   validates :city, presence: true
   validates :cuisine, presence: true
 end
