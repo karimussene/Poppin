@@ -1,5 +1,6 @@
 class Cuisine < ApplicationRecord
-  has_many :restaurants
+  has_many :restaurants, through: :restaurant_cuisines
+
   has_many :favorite_cuisines
 
   validates :name, presence: true

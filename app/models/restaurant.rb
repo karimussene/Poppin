@@ -1,6 +1,6 @@
 class Restaurant < ApplicationRecord
   belongs_to :city
-  belongs_to :cuisine
+  has_many :cuisines, through: :restaurant_cuisines
 
   validates :name, presence: true
   validates :address, presence: true
@@ -8,7 +8,9 @@ class Restaurant < ApplicationRecord
   validates :capacity, presence: true
   validates :rating, presence: true
   validates :price_range, presence: true
+
   # validates :photo
+
   validates :city, presence: true
   validates :cuisine, presence: true
 end
