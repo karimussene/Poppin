@@ -5,7 +5,7 @@
   #
   #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
   #   Character.create(name: 'Luke', movie: movies.first)
-  require "zomato_api.rb"
+require "zomato_api.rb"
 require 'json'
 require 'moving_avg'
 require 'pp'
@@ -55,7 +55,7 @@ end
 
 puts "Create restaurants from scraped Json files --------"
 
-json_files = ['restaurants2019-09-04 16:36:57 +0100.json','restaurants2019-09-04 17:05:47 +0100.json';'restaurants2019-09-04 17:11:30 +0100.json','restaurants2019-09-04 17:20:11 +0100.json']
+json_files = ['restaurants2019-09-04 16:36:57 +0100.json','restaurants2019-09-04 17:05:47 +0100.json','restaurants2019-09-04 17:11:30 +0100.json','restaurants2019-09-04 17:20:11 +0100.json']
 json_files.each do |file|
   load_restaurants_json(File.read(file))
 end
@@ -65,6 +65,7 @@ puts "Create trends from json files ---------------------"
 trends_file = 'db/trends_w_average_data.json'
 
 def load_trends_json(trends_file, city)
+  # load the trends data file into a ruby hash
   opened_file = File.open trends_file
   data = JSON.parse(File.read(opened_file))
   relevant_data = data[city]
@@ -75,10 +76,9 @@ def insert_trends_into_database(trends_data_file)
   data = load_trends_json(trends_data_file, 'sydney')
   data.each do |cuisine|
     #iterate over all cuisines
-    key = cuisine.keys
+    key = cuisine.keys # array with the name of this cuisine. Could be refactored
     cuisine.dig(key[0], 'timelineData').each do |item|
       #iterate over the time series
-      puts "new record"
       new_trend_record = Trend.new(
         city: City.where(name: 'Sydney').first,
         month: item['formattedTime'],

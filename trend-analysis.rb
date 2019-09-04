@@ -35,16 +35,16 @@ def insert_moving_average(file)
     @moving_average_results = []
     key = cuisine.keys
     i = 0
-    cuisine.dig(key[0], 'timelineData').each do |item|
-      @moving_average_data << item['value'][0]
+    cuisine.dig(key[0], 'timelineData').each do |month|
+      @moving_average_data << month['value'][0]
       @moving_average_data.shift unless @moving_average_data.size <= 3
       moving_average = calculate_moving_average(@moving_average_data)
       @moving_average_results << {'moving_average' => moving_average}
     end
-    cuisine.dig(key[0], 'timelineData').each do |item|
+    cuisine.dig(key[0], 'timelineData').each do |month|
       i += 1
       if i >= @moving_average_results.size
-        item.merge!('moving_average' => item['value'][0])
+        item.merge!('moving_average' => month['value'][0])
       else
         item.merge!(@moving_average_results[i])
       end
@@ -56,7 +56,7 @@ end
 
 def write_to_json(data)
   # write the hash with the new key/value pairs into a json file
-  File.open("trends_w_average_data.json","w") do |f|
+  File.open("db/trends_w_average_data.json","w") do |f|
     f.write(data.to_json)
   end
   puts "File created"
