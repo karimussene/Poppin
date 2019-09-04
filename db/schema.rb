@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_03_143239) do
+
+ActiveRecord::Schema.define(version: 2019_09_04_171353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,11 +72,13 @@ ActiveRecord::Schema.define(version: 2019_09_03_143239) do
     t.string "month"
     t.string "value"
     t.bigint "city_id"
-    t.bigint "cuisines_id"
+    t.bigint "cuisine_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "moving_average"
+    t.float "scaled_attendance"
     t.index ["city_id"], name: "index_trends_on_city_id"
-    t.index ["cuisines_id"], name: "index_trends_on_cuisines_id"
+    t.index ["cuisine_id"], name: "index_trends_on_cuisine_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -94,5 +97,5 @@ ActiveRecord::Schema.define(version: 2019_09_03_143239) do
   add_foreign_key "restaurant_cuisines", "cuisines"
   add_foreign_key "restaurant_cuisines", "restaurants"
   add_foreign_key "trends", "cities"
-  add_foreign_key "trends", "cuisines", column: "cuisines_id"
+  add_foreign_key "trends", "cuisines"
 end

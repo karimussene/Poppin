@@ -19,9 +19,9 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'cloudinary', '~> 1.9.1'
 gem 'geocoder'
 gem 'pundit'
+gem 'moving_avg'
 gem 'rubyXL' # updload and export from Excel
 gem 'mechanize'
-
 group :development do
   gem 'web-console', '>= 3.3.0'
 end
