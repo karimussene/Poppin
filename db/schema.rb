@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_02_185947) do
+ActiveRecord::Schema.define(version: 2019_09_04_171353) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2019_09_02_185947) do
     t.index ["user_id"], name: "index_favorite_cuisines_on_user_id"
   end
 
+  create_table "restaurant_cuisines", force: :cascade do |t|
+    t.bigint "restaurant_id"
+    t.bigint "cuisine_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cuisine_id"], name: "index_restaurant_cuisines_on_cuisine_id"
+    t.index ["restaurant_id"], name: "index_restaurant_cuisines_on_restaurant_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.text "address"
@@ -60,11 +69,13 @@ ActiveRecord::Schema.define(version: 2019_09_02_185947) do
     t.string "month"
     t.string "value"
     t.bigint "city_id"
-    t.bigint "cuisines_id"
+    t.bigint "cuisine_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "moving_average"
+    t.float "scaled_attendance"
     t.index ["city_id"], name: "index_trends_on_city_id"
-    t.index ["cuisines_id"], name: "index_trends_on_cuisines_id"
+    t.index ["cuisine_id"], name: "index_trends_on_cuisine_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,6 +91,8 @@ ActiveRecord::Schema.define(version: 2019_09_02_185947) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "restaurant_cuisines", "cuisines"
+  add_foreign_key "restaurant_cuisines", "restaurants"
   add_foreign_key "trends", "cities"
-  add_foreign_key "trends", "cuisines", column: "cuisines_id"
+  add_foreign_key "trends", "cuisines"
 end
