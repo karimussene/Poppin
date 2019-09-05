@@ -114,3 +114,27 @@ padding: 22px;
 .cuisine-comparison-horizontal-card-button_array{
   margin: 23px 0px 0px 0px;
 }
+
+// <------------------------------------------ LOGIN SIGNUP PAGE CARD
+.loginsignup-rounded-card{
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  margin: 50px;
+  padding:0;
+}
+
+.loginsignup-rounded-card-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 31px;
+  padding-bottom: 30px;
+  color: #000000;
+}
+
+.loginsignup-rounded-card-text-buttons{
+padding-left: 50px;
+padding-right: 50px;
+}

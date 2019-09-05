@@ -40,6 +40,7 @@
   border-radius: 50px;
   background-color: white;
   border-color: $mustard;
+  text-decoration: none;
 }
 
 .btn-outline-mustard:hover{

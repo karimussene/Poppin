@@ -2,69 +2,26 @@
   <!-- LOGO -->
   <div class="logo">
     <%= link_to root_path do %>
-      <%= image_tag "Logo.png" %>
+      <%= image_tag "logo.png" %>
     <% end %>
   </div>
 
-<div class="nav-content">
-  <!-- OTHER PAGES LINKS -->
-  <div class="nav-links">
-    <%= link_to "Home", "#", class: "nav-link-font"%>
-    <%= link_to "About us", "#", class: "nav-link-font"%>
-    <%= link_to "Contact", "#", class: "nav-link-font"%>
-  </div>
-
-  <!-- LOGIN SIGNIN -->
-  <div class="nav-links">
-    <%= link_to "Log in", "#", class: "nav-link-font"%>
-    <%= link_to "Sign in", "#", class: "nav-link-font"%>
-  </div>
-</div>
-
-
-<!--   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Features</a>
-      <a class="nav-item nav-link" href="#">Pricing</a>
-      <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  <div class="nav-content">
+    <!-- OTHER PAGES LINKS -->
+    <div class="nav-links">
+      <%= link_to "Home", root_path, class: "nav-link-font"%>
+      <%= link_to "About us", "#", class: "nav-link-font"%>
+      <%= link_to "Contact", "#", class: "nav-link-font"%>
     </div>
-  </div> -->
-</nav>
 
-<!-- <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "#", class: "navbar-brand" do %>
-    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+    <% if user_signed_in? %>
+    <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "nav-link-font" %>
+    <!-- LOGIN SIGNIN -->
+    <% else %>
+      <div class="nav-links">
+        <%= link_to "Log in", new_user_session_path, class: "nav-link-font"%>
+        <%= link_to "Sign up", new_user_registration_path, class: "nav-link-font"%>
+      </div>
     <% end %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-        <li class="nav-item active">
-          <%= link_to "Home", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Messages", "#", class: "nav-link" %>
-        </li>
-        <li class="nav-item dropdown">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <%= link_to "Action", "#", class: "dropdown-item" %>
-            <%= link_to "Another action", "#", class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          </div>
-        </li>
-      <% else %>
-        <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
-      <% end %>
-    </ul>
   </div>
-</div>
- -->
+</nav>
