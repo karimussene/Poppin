@@ -48,6 +48,13 @@
   background-color: $mustard;
 }
 
+.season-toggle-button{
+  margin: 0px !important;
+  background-color: #e8a323;
+  border: 0px;
+  border-radius: 0px;
+}
+
 /*ICONS button - small cuisine card*/
 .small-cuisine-card-add-sign{
   position: absolute;
