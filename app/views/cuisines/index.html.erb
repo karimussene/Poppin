@@ -1,16 +1,25 @@
 <h1>Type of food</h1>
-<h2>What type of food would you like to cook? Let's select the one you like</h2>
+<h2>What type of food would you like to cook? Let's select the ones you like</h2>
 
+<div id="create-favorites-form">
+  <%= form_for current_user, url: favorite_cuisines_path, method: :post do |f| %>
 
-<% @cuisines.each do |cuisine| %>
-  <%= cuisine.name %>
-<% end %>
-
-<div>
-  <div class="small-cuisine-card-image">
-      <img src="https://blog.radissonblu.com/wp-content/uploads/2016/01/shutterstock_657175693.jpg" alt="Lebanese cuisine", class="small-cuisine-card-image">
-      <div class="small-cuisine-card-add-sign">
-      </div>
-  </div>
-    <p class="small-cuisine-card-name">lebanese</p>
+    <%= f.collection_check_boxes :cuisine_ids , @cuisines, :id, :name, item_label_class: 'my-custom-class'   %>
+    <%= f.submit 'Submit' %>
+  <% end %>
 </div>
+
+<div class="mt-3 d-flex flex-wrap">
+  <% @cuisines.each do |cuisine| %>
+    <div data-id="<%= cuisine.id %>" class="cuisine-card" >
+      <div class="small-cuisine-card-image">
+          <img src="https://blog.radissonblu.com/wp-content/uploads/2016/01/shutterstock_657175693.jpg" alt="Lebanese cuisine", class="small-cuisine-card-image">
+          <div class="small-cuisine-card-add-sign">
+          </div>
+      </div>
+        <p class="small-cuisine-card-name"> <%= cuisine.name %></p>
+    </div>
+  <% end %>
+</div>
+
+
