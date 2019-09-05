@@ -1,6 +1,3 @@
 import "bootstrap";
-// import "zomato";
-
-import { searchAlgoRestau } from '.zomato';
-
-searchAlgoRestau();
+import {selectFavoriteCuisine} from '../components/select_favorite_cuisine';
+selectFavoriteCuisine();
