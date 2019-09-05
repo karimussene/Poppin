@@ -9,8 +9,8 @@ class ZomatoScraper
 
     agent = Mechanize.new # IH: simulate a new browser?
     agent.user_agent_alias = 'Mac Safari' # IH: user_agent_alias is part of the gem?
-    start = 51
-    limit = 100 # page limit in url = Number of page to scape. This depends on the availability of the website
+    start = 201
+    limit = 250 # page limit in url = Number of page to scape. This depends on the availability of the website
 
     for page_number in start..limit
       url = URI("https://www.zomato.com/sydney/restaurantes?page=#{page_number}")
@@ -57,7 +57,12 @@ class ZomatoScraper
 
   def self.get_reviews_count(agent)
     result = agent.search("[data-tab_type='reviews'] span").text.to_s.strip
-    return result.match(/\d+/)[0]
+
+    if result.match(/\d+/) && (result.match(/\d+/).any?
+      result.match(/\d+/)[0]
+    else
+      "0"
+   end
   end
 
   def self.get_address(agent)
@@ -79,21 +84,32 @@ class ZomatoScraper
     end
   end
 
+  # def self.get_price_range(agent)
+  #   array = []
+  #   main_cost = agent.search(".res-info-detail")
+  #   if main_cost.search('span')[2]
+  #     a = main_cost.search('span')[2].text.to_s.strip
+  #     array = a.split('.')
+  #   end
+  #   # if bug from zomato
+  #   if array.empty?
+  #     a = 0
+  #   elsif array[0].gsub(/\D/,'').nil?
+  #     a = 0
+  #   else
+  #     a = array[0].gsub(/\D/,'')
+  #   end
+
+  #   return a.to_i/2
+  # end
+
   def self.get_price_range(agent)
-    main_cost = agent.search(".res-info-detail")
-
-    a = main_cost.search('span')[2].text.to_s.strip
-    array = a.split('.')
-    # if bug from zomato
-    if array.empty?
-      a = 0
-    elsif array[0].gsub(/\D/,'').nil?
-      a = 0
-    else
-      a = array[0].gsub(/\D/,'')
-    end
-
-    return a.to_i/2
+    # get the text from the price html element
+    cost_element = agent.search('.res-info-detail span[aria-label]').text.to_s.strip
+    # get the cost from the text
+    cost = cost_element.match(/\d+/)
+    # if there is a cost convert it and divide by 2, else 0
+    cost && cost[0] != '' ? cost[0].to_f / 2 : 0
   end
 
   def self.get_rating(agent)
