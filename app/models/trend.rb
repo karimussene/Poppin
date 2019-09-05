@@ -1,11 +1,11 @@
 class Trend < ApplicationRecord
   belongs_to :city
-  belongs_to :cuisines
+  belongs_to :cuisine
 
-  validate :location, presence: true
-  validate :cuisine_trend, presence: true
-  validate :month, presence: true
-  validate :value, presence: true
-  validate :city, presence: true
-  validate :cuisines, presence: true
+  # # validates :location, presence: true
+  # # validates :cuisine_trend, presence: true
+  # validates :month, presence: true
+  # validates :value, presence: true
+  # validates :city, presence: true
+  # validates :cuisine, presence: true
 end
