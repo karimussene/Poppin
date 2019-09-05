@@ -33,52 +33,55 @@
             <input type="text" class="form-control search-bar-bar" placeholder="What city would you like to analyse?" aria-label="city" aria-describedby="basic-addon1" >
           </div>
           <!-- CARD SEASONBAR TITLE-->
-          <div >Season</div>
-          <!-- <div class="row">
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off" style="border-radius: 22px 0px 0px 22px;">
-              Jan
-            </button>
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Feb
-            </button>
+          <div>
+            <div class="home-rounded-card-header">Season</div>
 
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Mar
-            </button>
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Apr
-            </button>
-              <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              May
-            </button>
-              <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Jun
-            </button>
-              <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Jul
-            </button>
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Aug
-            </button>
+            <div class="d-flex">
 
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Sep
-            </button>
-            <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Oct
-            </button>
-              <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off">
-              Nov
-            </button>
-              <button type="button" class="btn season-toggle-button" data-toggle="button" aria-pressed="false" autocomplete="off" style="border-radius: 0px 22px 22px 0px;">
-              Dec
-            </button>
+              <div class="form-group" style="padding: 0; flex-grow: 1;">
+                <label for="inputState" class="color-disabled">Start of Season</label>
+                <select id="inputState" class="form-control color-enabled">
+                  <option selected></option>
+                  <option>January</option>
+                  <option>Febuary</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+              </div>
 
-      </div> -->
+              <div style="padding: 0 15px"></div>
+
+              <div class="form-group " style="padding: 0; flex-grow: 1;">
+                <label for="inputState" class="color-disabled">End of Season</label>
+                <select id="inputState" class="form-control">
+                  <option selected></option>
+                  <option>January</option>
+                  <option>Febuary</option>
+                  <option>March</option>
+                  <option>April</option>
+                  <option>May</option>
+                  <option>June</option>
+                  <option>July</option>
+                  <option>August</option>
+                  <option>September</option>
+                  <option>October</option>
+                  <option>November</option>
+                  <option>December</option>
+                </select>
+              </div>
+            </div>
+          </div>
           <!-- CARD BUTTON-->
-          <button class="btn btn-outline-mustard btn-lg">
-            <div class="mx-3">Explore</div>
-          </button>
+          <%= link_to 'Explore', cuisines_path, class: 'btn btn-outline-mustard btn-lg mt-4' %>
+            <div class="mx-3"></div>
         </div>
       </div>
     </div>
