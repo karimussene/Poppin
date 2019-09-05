@@ -58,7 +58,7 @@ class ZomatoScraper
   def self.get_reviews_count(agent)
     result = agent.search("[data-tab_type='reviews'] span").text.to_s.strip
 
-    if result.match(/\d+/) && result.match(/\d+/) == ""
+    if result.match(/\d+/) && result.match(/\d+/) != ""
       result.match(/\d+/)[0]
     else
       "0"
