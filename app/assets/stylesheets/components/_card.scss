@@ -1,0 +1,54 @@
+.img-square-card{
+  border-radius: 8px;
+  background: white;
+}
+
+.img-long-card{
+  flex-grow: 1;
+  border-radius: 8px;
+  background: white;
+  margin: 2px 2px 0px 2px;
+}
+
+.lg-container-card{
+  background: white;
+  flex-grow: 1;
+}
+
+// <------------------------------------------ HOME CARD
+.home-rounded-card{
+  padding: 0px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  margin-bottom: 8px;
+}
+
+.rectangle-mustard-card {
+  height: 30px;
+  width: 100%;
+  background-color: $mustard;
+  border-radius: 8px 8px 0px 0px;
+}
+
+
+.home-rounded-content {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+}
+
+.home-rounded-card-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 31px;
+  padding: 20px 20px;
+
+  color: #000000;
+}
+
+.home-rounded-card button{
+  margin: 0px 120px;
+}

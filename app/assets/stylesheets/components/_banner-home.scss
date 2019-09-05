@@ -1,0 +1,31 @@
+.banner-home {
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+}
+
+.header-banner-home{
+  color: white;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 52px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.text-banner-home{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 36px;
+  padding-bottom: 40px;
+  color: #FFFFFF;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+#text-banner-bold-home{
+  font-weight: 800;
+}

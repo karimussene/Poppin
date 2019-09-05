@@ -1,6 +1,45 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<h2 class="btn btn-yellow">hello</h2>
-<h2 class="btn btn-outline-mustard">hello</h2>
-<h2 class="btn btn-mustard btn-lg">hello</h2>
-<h2 class="btn btn-outline-yellow btn-sm">hello</h2>
+<!-- BANNER -->
+<div class="banner-home" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url(http://www.joinenjoy.com.ph/wp-content/uploads/2018/07/Insadong-Bimbibap-1280x580.jpg)">
+
+  <div class="container">
+    <!-- TITLE -->
+    <div class="row col col-lg-12">
+      <h1 class="header-banner-home">What’s Poppin?</h1>
+    </div>
+    <div class="row d-fle x justify-content-between">
+      <div class="col col-lg-6">
+        <!-- TEXT -->
+        <div class="text-banner-home">
+          Pop-up restaurant directed business app that  helps you analyse data step by step where to <strong id="text-banner-home-bold">poppin!</strong> Ready for the journey?
+        </div>
+        <!-- MAP WITH ICON -->
+        <div>
+          <%= show_svg('home-map.svg') %>
+        </div>
+      </div>
+      <!-- CARD -->
+      <div class="home-rounded-card col col-lg-6">
+        <!-- CARD MUSTARD LINE-->
+        <div class="rectangle-mustard-card"></div>
+        <!-- CARD CONTENT-->
+        <div class="home-rounded-content">
+          <!-- CARD SEARCHBAR TITLE-->
+          <div class="home-rounded-card-header">City</div>
+          <!-- CARD SEARCHBAR-->
+          <div class="input-group-prepend mb-3">
+            <span class="input-group-text" id="basic-addon1" style="background-color: #f5f5f5; border: 0px; border-radius: 20px 0px 0px 20px;">
+              <i class="fas fa-search text-secondary"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="What city would you like to analyse?" aria-label="Username" aria-describedby="basic-addon1" style="background-color: #f5f5f5; border: 0px; border-radius: 0px 20px 20px 0px;">
+          </div>
+          <!-- CARD SEASONBAR TITLE-->
+          <div class="home-rounded-card-header">Season</div>
+          <!-- CARD BUTTON-->
+          <button class="btn btn-outline-mustard btn-lg">
+            <div class="mx-3">Explore</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
