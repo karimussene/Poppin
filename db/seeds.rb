@@ -42,7 +42,7 @@ def load_restaurants_json(filename)
     city = restaurant_json["city"]
     cuisine_string = restaurant_json["cuisine_string"]
 
-    res = Restaurant.new(name: name, address: address, latitude: latitude, longitude: longitude, price_range: price_range, rating: rating)
+    res = Restaurant.new(name: name, address: address, attendance: attendance, latitude: latitude, longitude: longitude, price_range: price_range, rating: rating)
     res.city = City.where(name: city).first
     res.save!
 
@@ -96,10 +96,20 @@ def insert_trends_into_database(trends_data_file)
         cuisine: Cuisine.where(name: key[0]).first,
         moving_average: item['moving_average'],
         )
-      new_trend_record.save!
+      if ["2014","2015","2016","2017","2018","2019"].any? {|word| item['formattedTime'].include?(word)}
+        new_trend_record.save!
+
+      end
     end
   end
   puts "Created Trend Data for all cuisines with moving average"
 end
 
 insert_trends_into_database(trends_file)
+
+
+
+
+
+# Create trends
+
