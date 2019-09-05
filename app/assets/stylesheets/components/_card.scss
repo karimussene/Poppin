@@ -15,7 +15,7 @@
   flex-grow: 1;
 }
 
-// <------------------------------------------ HOME CARD
+// <------------------------------------------ HOME PAGE CARD
 .home-rounded-card{
   padding: 0px;
   border-radius: 8px;
@@ -45,10 +45,72 @@
   font-size: 24px;
   line-height: 31px;
   padding: 20px 20px;
-
   color: #000000;
 }
 
 .home-rounded-card button{
   margin: 0px 120px;
+}
+
+//<------------------------------------------ SMALL CARD
+.small-cuisine-card-image{
+  width: 145px;
+  height: 145px;
+  position: relative;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.small-cuisine-card-add-sign{
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  left: 121px;
+  top: -12px;
+  background-image:url(plus-sign.svg);
+}
+
+.small-cuisine-card-add-sign:hover{
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  left: 121px;
+  top: -12px;
+  background-image:url(plus-sign-hover.svg);
+}
+
+.small-cuisine-card-name{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 8px 0px;
+  color: #A5A5A5;
+}
+
+//<------------------------------------------ LONG CARD
+.cuisine-comparison-horizontal-card{
+  display: flex;
+}
+
+.cuisine-comparison-horizontal-card-image{
+  width: 145px;
+  height: 145px;
+  position: relative;
+  object-fit: cover;
+  border-right: solid;
+  border-right-color: #ffcc33;
+  border-right-width: 10px;
+}
+
+.cuisine-comparison-horizontal-card-text-buttons{
+padding: 22px;
+}
+
+.cuisine-comparison-horizontal-card-button{
+  margin: 0px 10px;
+}
+
+.cuisine-comparison-horizontal-card-button_array{
+  margin: 23px 0px 0px 0px;
 }
