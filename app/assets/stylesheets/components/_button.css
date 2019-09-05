@@ -47,9 +47,29 @@
   background-color: $mustard;
 }
 
+<<<<<<< HEAD
 .season-toggle-button{
   margin: 0px !important;
   background-color: #e8a323;
   border: 0px;
   border-radius: 0px;
+=======
+/*ICONS button - small cuisine card*/
+.small-cuisine-card-add-sign{
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  left: 121px;
+  top: -12px;
+  background-image:url(plus-sign.svg);
+}
+
+.small-cuisine-card-add-sign:hover{
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  left: 121px;
+  top: -12px;
+  background-image:url(plus-sign-hover.svg);
+>>>>>>> 663920991f73178b4fe9ec74cdfb8d53866cede9
 }

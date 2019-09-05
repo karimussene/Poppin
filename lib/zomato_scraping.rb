@@ -9,8 +9,8 @@ class ZomatoScraper
 
     agent = Mechanize.new # IH: simulate a new browser?
     agent.user_agent_alias = 'Mac Safari' # IH: user_agent_alias is part of the gem?
-    start = 201
-    limit = 250 # page limit in url = Number of page to scape. This depends on the availability of the website
+    start = 251
+    limit = 300 # page limit in url = Number of page to scape. This depends on the availability of the website
 
     for page_number in start..limit
       url = URI("https://www.zomato.com/sydney/restaurantes?page=#{page_number}")
@@ -58,11 +58,11 @@ class ZomatoScraper
   def self.get_reviews_count(agent)
     result = agent.search("[data-tab_type='reviews'] span").text.to_s.strip
 
-    if result.match(/\d+/) && (result.match(/\d+/).any?
+    if result.match(/\d+/) && result.match(/\d+/) != ""
       result.match(/\d+/)[0]
     else
       "0"
-   end
+    end
   end
 
   def self.get_address(agent)
