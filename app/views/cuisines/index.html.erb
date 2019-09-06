@@ -12,11 +12,12 @@
     </div>
   </div>
 
+
   <div class="mt-3 d-flex flex-wrap justify-content-between">
     <% @cuisines.each do |cuisine| %>
       <div data-id="<%= cuisine.id %>" class="hover-darker-cuisine-card cuisine-card mb-3" >
         <div class="small-cuisine-card-image">
-            <img src="https://blog.radissonblu.com/wp-content/uploads/2016/01/shutterstock_657175693.jpg" alt="Lebanese cuisine", class="small-cuisine-card-image">
+            <%= image_tag "#{cuisine.photo}", class:"small-cuisine-card-image", alt: "#{cuisine.name}" %>
             <div class="small-cuisine-card-add-sign">
             <p class="small-cuisine-card-name-white"> <%= cuisine.name %></p>
           </div>

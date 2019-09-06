@@ -1,1 +1,56 @@
-<h1>result page</h1>
+<div class="row">
+  <div class="col-2">
+  <!-- Cuisine not selected -->
+
+    <% @unselectedcuisines.each do |c| %>
+      <%= link_to c.name, add_favorite_cuisines_path(cuisine_id: c.id) %>
+    <% end %>
+  </div>
+
+  <div class="col-8">
+  <!-- displayed cuisines -->
+  <div class="row">
+    <% @favoritecuisines.each do |fc| %>
+      <div class="col-6">
+        <div class="card-product">
+          <%= image_tag fc.cuisine.photo %>
+          <div class="card-product-infos">
+            <h2><%= fc.cuisine.name %></h2>
+            <p class="card-product-attendance">
+              Attendance
+            </p>
+            <p class="card-product-rating">
+              Rating
+            </p>
+            <p class="card-product-price-range">
+              Price Range
+            </p>
+            <p class="card-product-no_restaurants">
+              No Rest...
+            </p>
+            <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
+              <i class="fa fa-trash" ></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+
+  </div>
+
+  <div class="col-2">
+<!-- cuisine for comparison -->
+
+    <% @comparisoncuisines.each do |fc| %>
+      <%= fc.cuisine.name %>
+      <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
+        <i class="fa fa-trash" ></i>
+        <% end %>
+    <% end %>
+  </div>
+</div>
+
+
