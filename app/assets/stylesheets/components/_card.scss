@@ -203,12 +203,22 @@ padding-right: 50px;
   margin-top: 8px;
 }
 
-// .card-product .card-product-infos {
-//   padding: 16px;
-// }
-
 .card-product-infos {
 padding-left:16px;
+}
 
+.icon-color-mustard{
+  color:#ffce3c;
+  text-decoration:none;
+}
+
+.icon-color-gray{
+  color:gray;
+  text-decoration:none;
+}
+
+.icon-color-gray:hover{
+  color:black;
+  text-decoration:none;
 }
 

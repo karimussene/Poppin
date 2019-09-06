@@ -22,28 +22,31 @@
         <div class="card-product">
           <%= image_tag fc.cuisine.photo %>
           <div class="card-product-infos">
-            <h2><%= fc.cuisine.name %></h2>
+            <h2>
+              <%= fc.cuisine.name %>
+              <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
+                <i class="fa fa-trash icon-color-gray" ></i>
+              <% end %>
+            </h2>
             <p class="card-product-attendance">
-              Attendance <%=  fc.cuisine.attendance(@city)%>
+              Attendance: <%=  fc.cuisine.attendance(@city).floor%>
             </p>
             <p class="card-product-rating">
-              Rating
-              <%= fc.cuisine.av_rating %>
+              Rating:
+              <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
             </p>
             <p class="card-product-price-range">
-              Price Range
+              Price:
               <%= fc.cuisine.av_price_range %> $
             </p>
             <p class="card-product-no_restaurants">
-              No restaurants
+              No restaurants:
               <%= fc.cuisine.no_restaurants %>
             </p>
-            <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
-              <i class="fa fa-trash" ></i>
-            <% end %>
+
             <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
-            <%= link_to map_path(cuisine_id: fc.cuisine.id) do %>
-              <i class="fa fa-glasses" ></i> Find location
+            <%= link_to map_path(cuisine_id: fc.cuisine.id), class:"small-cuisine-card-name-gray" do %>
+              <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
             <% end %>
           </div>
         </div>
