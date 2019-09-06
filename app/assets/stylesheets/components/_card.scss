@@ -62,6 +62,10 @@
 }
 
 //<------------------------------------------ FAV PAGE SMALL CARD
+.small-cuisine-card{
+  margin:5px 0px;
+}
+
 .hover-darker-cuisine-card img:hover{
  background:black;
  opacity: 0.5;
@@ -135,6 +139,22 @@
   color: #A5A5A5;
 }
 
+.small-cuisine-card-name-gray:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.small-cuisine-card-name-white{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  color: white;
+  position: absolute;
+  top: 0px;
+}
+
+
 //<------------------------------------------ LONG CARD
 .cuisine-comparison-horizontal-card{
   display: flex;
@@ -189,16 +209,17 @@ padding-right: 50px;
 // card in result page
 .card-product {
   overflow: hidden;
-  height: 120px;
+  height: 145px;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
+  margin:5px 0px;
 }
 
 .card-product img {
   height: 100%;
-  width: 120px;
+  width: 145px;
   object-fit: cover;
 }
 
@@ -216,7 +237,22 @@ padding-right: 50px;
   margin-top: 8px;
 }
 
-.card-product .card-product-infos {
-  padding: 16px;
+.card-product-infos {
+padding-left:16px;
+}
+
+.icon-color-mustard{
+  color:#ffce3c;
+  text-decoration:none;
+}
+
+.icon-color-gray{
+  color:gray;
+  text-decoration:none;
+}
+
+.icon-color-gray:hover{
+  color:black;
+  text-decoration:none;
 }
 

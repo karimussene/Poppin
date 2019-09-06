@@ -1,19 +1,60 @@
-<h1>Find location</h1>
+<div class="m-auto m-3">
+  <h2>See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %></h1>
 
-<p>
-  Attendance
-  <%= @cuisine.attendance(@city) %>
-</p>
+<!-- Selected food metrics -->
+  <p>
+    Attendance
+    <%= @cuisine.attendance(@city) %>
+  </p>
+  <p>
+    Rating
+    <%= @cuisine.av_rating %>
+  </p>
+  <p>
+    Attendance
+    <%= @cuisine.av_rating %>
+  </p>
+  <p>
+    Price range
+    <%= @cuisine.av_price_range %>
+  </p>
+  <p>
+    Number of restaurants
+    <%= @cuisine.no_restaurants %>
+  </p>
 
-<p>
-  map
-</p>
+<!-- Market metrics-->
+  <p>
+    Attendance
+    <%= Trend.attendance(@city) %>
+  </p>
+  <p>
+    Rating
+    <%= @city.av_rating %>
+  </p>
+  <p>
+    Price range
+    <%= @city.av_price_range %>
+  </p>
+  <p>
+    Number of restaurants
+    <%= @city.no_restaurants %>
+  </p>
 
-<div
-  id="map"
-  style="width: 100%;
-  height: 600px;"
-  data-markers="<%= @markers.to_json %>"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  <!-- Map -->
+
+  <div class="m-auto">
+    <div class="row">
+      <div class="col-6">
+        <div
+          id="map"
+          style="width: 100%;
+          height: 600px;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
