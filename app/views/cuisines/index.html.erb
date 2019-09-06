@@ -19,8 +19,9 @@
         <div class="small-cuisine-card-image">
           <%= image_tag "#{cuisine.photo}", class:"small-cuisine-card-image", alt: "#{cuisine.name}" %>
           <div class="to-select"></div>
-
-          <p class="small-cuisine-card-name-white"> <%= cuisine.name %></p>
+          <div class="d-flex justify-content-end">
+            <p class="small-cuisine-card-name-white"> <%= cuisine.name %></p>
+          </div>
         </div>
       </div>
     <% end %>
