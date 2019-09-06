@@ -9,8 +9,8 @@ class ZomatoScraper
 
     agent = Mechanize.new # IH: simulate a new browser?
     agent.user_agent_alias = 'Mac Safari' # IH: user_agent_alias is part of the gem?
-    start = 251
-    limit = 300 # page limit in url = Number of page to scape. This depends on the availability of the website
+    start = 351
+    limit = 400 # page limit in url = Number of page to scape. This depends on the availability of the website
 
     for page_number in start..limit
       url = URI("https://www.zomato.com/sydney/restaurantes?page=#{page_number}")
