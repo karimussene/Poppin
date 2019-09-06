@@ -144,13 +144,13 @@ end
 puts "Assign photo to cuisines-----------------------"
 
 
-Cuisine.all.each do |c|
-  if c.trends.sum(:moving_average) == 0
-    c.trends.destroy_all
-   p "destroyed"
-  end
-  p c.trends.sum(:moving_average)
-end
+# Cuisine.all.each do |c|
+#   if c.trends.sum(:moving_average) == 0
+#     c.trends.destroy_all
+#    p "destroyed"
+#   end
+#   p c.trends.sum(:moving_average)
+# end
 
 Cuisine.all.each do |c|
   if RestaurantCuisine.where(cuisine:c).first
