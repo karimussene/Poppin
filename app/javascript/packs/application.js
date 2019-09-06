@@ -6,3 +6,13 @@ import { initMapbox } from '../components/init_mapbox';
 
 selectFavoriteCuisine();
 initMapbox();
+
+
+
+const cuisinesIndex = document.querySelector(".cuisines.index");
+
+if(cuisinesIndex) {
+  const cardImage = document.querySelector(".small-cuisine-card-image");
+
+}
+
