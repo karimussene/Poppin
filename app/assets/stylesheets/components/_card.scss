@@ -62,6 +62,11 @@
 }
 
 //<------------------------------------------ SMALL CARD
+.small-cuisine-card-container {
+  height: calc(100vh - 78px);
+  overflow-y: scroll;
+}
+
 .small-cuisine-card{
   margin:5px 0px;
 }
