@@ -10,16 +10,24 @@ require 'json'
 require 'moving_avg'
 require 'pp'
 
-  puts "Destroy Restaurants ----------------------------"
-  Restaurant.destroy_all
-  puts "Destroy Trend ----------------------------------"
-  Trend.destroy_all
-  puts "Destroy Cuisines -------------------------------"
-  Cuisine.destroy_all
   puts "Destroy RestaurantCuisines ---------------------"
   RestaurantCuisine.destroy_all
   puts "Destroy FavoriteCuisines ---------------------"
   FavoriteCuisine.destroy_all
+  puts "Destroy Restaurants ----------------------------"
+  Restaurant.destroy_all
+
+  puts "Destroy Trend ----------------------------------"
+  Trend.destroy_all
+  puts "Destroy Cuisines -------------------------------"
+  Cuisine.destroy_all
+  puts "Destroy Cities -------------------------------"
+  City.destroy_all
+
+
+
+
+
 
   puts "Seed for Sydney --------------------------------"
   # zomato id for Sydney is 260; Lisbon is 82
@@ -124,7 +132,7 @@ end
 
 Trend.all.each do |t|
   cuisine_attendance = t.cuisine.restaurants.sum(:attendance)
-  if mov_av_sum(t.city,tcuisine) != 0
+  if mov_av_sum(t.city,t.cuisine) != 0
     ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
   else
     ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f

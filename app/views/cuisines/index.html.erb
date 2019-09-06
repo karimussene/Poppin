@@ -17,10 +17,10 @@
     <% @cuisines.each do |cuisine| %>
       <div data-id="<%= cuisine.id %>" class="hover-darker-cuisine-card cuisine-card mb-3" >
         <div class="small-cuisine-card-image">
-            <%= image_tag "#{cuisine.photo}", class:"small-cuisine-card-image", alt: "#{cuisine.name}" %>
-            <div class="small-cuisine-card-add-sign">
-            <p class="small-cuisine-card-name-white"> <%= cuisine.name %></p>
-          </div>
+          <%= image_tag "#{cuisine.photo}", class:"small-cuisine-card-image", alt: "#{cuisine.name}" %>
+          <div class="to-select"></div>
+
+          <p class="small-cuisine-card-name-white"> <%= cuisine.name %></p>
         </div>
       </div>
     <% end %>
