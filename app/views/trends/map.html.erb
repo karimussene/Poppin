@@ -1,45 +1,70 @@
 <div class="m-auto m-3">
   <h2>See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %></h1>
 
-<!-- Selected food metrics -->
-  <p>
-    Attendance
-    <%= @cuisine.attendance(@city) %>
-  </p>
-  <p>
-    Rating
-    <%= @cuisine.av_rating %>
-  </p>
-  <p>
-    Attendance
-    <%= @cuisine.av_rating %>
-  </p>
-  <p>
-    Price range
-    <%= @cuisine.av_price_range %>
-  </p>
-  <p>
-    Number of restaurants
-    <%= @cuisine.no_restaurants %>
-  </p>
+  <div class="row">
 
-<!-- Market metrics-->
-  <p>
-    Attendance
-    <%= Trend.attendance(@city) %>
-  </p>
-  <p>
-    Rating
-    <%= @city.av_rating %>
-  </p>
-  <p>
-    Price range
-    <%= @city.av_price_range %>
-  </p>
-  <p>
-    Number of restaurants
-    <%= @city.no_restaurants %>
-  </p>
+      <div class="col-6">
+        <div class="card-product-map">
+          <div class="card-product-map-img">
+            <%= image_tag @cuisine.photo %>
+          </div>
+          <!-- Column for Metrics -->
+          <div class="card-product-infos-map">
+            <h2>
+                Metrics
+            </h2>
+            <p class="card-product-attendance-map">
+              Attendance:
+            </p>
+            <p class="card-product-rating-map">
+              Rating:
+            </p>
+            <p class="card-product-price-range-map">
+              Price:
+            </p>
+            <p class="card-product-no_restaurants-map">
+              No restaurants:
+            </p>
+          </div>
+          <!-- column for Selected food -->
+          <div class="card-product-infos-map">
+            <h2>
+              <%= @cuisine.name %>
+            </h2>
+            <p class="card-product-attendance-map">
+              <%=  @cuisine.attendance(@city).floor%>
+            </p>
+            <p class="card-product-rating-map">
+              <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+            </p>
+            <p class="card-product-price-range-map">
+              <%= @cuisine.av_price_range %> $
+            </p>
+            <p class="card-product-no_restaurants-map">
+              <%= @cuisine.no_restaurants %>
+            </p>
+          </div>
+          <!-- column for City -->
+          <div class="card-product-infos-map">
+            <h2>
+              <%= City %>
+            </h2>
+            <p class="card-product-attendance-map">
+              <%= Trend.attendance(@city).floor%>
+            </p>
+            <p class="card-product-rating-map">
+              <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+            </p>
+            <p class="card-product-price-range-map">
+              <%= @city.av_price_range %> $
+            </p>
+            <p class="card-product-no_restaurants-map">
+              <%= @city.no_restaurants %>
+            </p>
+          </div>
+        </div>
+      </div>
+  </div>
 
   <!-- Map -->
 

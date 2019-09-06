@@ -114,7 +114,7 @@ def insert_trends_into_database(trends_data_file)
         cuisine: Cuisine.where(name: key[0]).first,
         moving_average: item['moving_average'].to_i,
         )
-      if ["2014","2015","2016","2017","2018","2019"].any? {|word| item['formattedTime'].include?(word)}
+      if ["2017","2018","2019"].any? {|word| item['formattedTime'].include?(word)}
         new_trend_record.save!
 
       end
@@ -143,6 +143,15 @@ Trend.all.each do |t|
 end
 
 puts "Assign photo to cuisines-----------------------"
+
+
+Cuisine.all.each do |c|
+  if c.trends.sum(:moving_average) == 0
+    c.trends.destroy_all
+   p "destroyed"
+  end
+  p c.trends.sum(:moving_average)
+end
 
 Cuisine.all.each do |c|
   if RestaurantCuisine.where(cuisine:c).first
