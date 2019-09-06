@@ -11,37 +11,36 @@ require 'json'
 require 'moving_avg'
 require 'pp'
 
-  puts "Destroy RestaurantCuisines ---------------------"
-  RestaurantCuisine.destroy_all
-  puts "Destroy FavoriteCuisines ---------------------"
-  FavoriteCuisine.destroy_all
-  puts "Destroy Restaurants ----------------------------"
-  Restaurant.destroy_all
-
-  puts "Destroy Trend ----------------------------------"
-  Trend.destroy_all
-  puts "Destroy Cuisines -------------------------------"
-  Cuisine.destroy_all
-  puts "Destroy Cities -------------------------------"
-  City.destroy_all
-
+puts "Destroy RestaurantCuisines ---------------------"
+RestaurantCuisine.destroy_all
+puts "Destroy FavoriteCuisines ---------------------"
+FavoriteCuisine.destroy_all
+puts "Destroy Restaurants ----------------------------"
+Restaurant.destroy_all
+puts "Destroy Trend ----------------------------------"
+Trend.destroy_all
+puts "Destroy Cuisines -------------------------------"
+Cuisine.destroy_all
+puts "Destroy Cities -------------------------------"
+City.destroy_all
 
 
 
 
 
-  puts "Seed for Sydney --------------------------------"
-  # zomato id for Sydney is 260; Lisbon is 82
 
-  puts "Create city instance for Sydney ----------------"
-  City.create(name: "Sydney")
-  zom_city_id = "260"
+puts "Seed for Sydney --------------------------------"
+# zomato id for Sydney is 260; Lisbon is 82
 
-  puts "Fetch cuisines from Zomato API ----------------"
-  cuisines = ZomatoApi.getcuisines(zom_city_id)
-  cuisines["cuisines"].each do |c|
-    Cuisine.create!(name: c["cuisine"]["cuisine_name"])
-  end
+puts "Create city instance for Sydney ----------------"
+City.create(name: "Sydney")
+zom_city_id = "260"
+
+puts "Fetch cuisines from Zomato API ----------------"
+cuisines = ZomatoApi.getcuisines(zom_city_id)
+cuisines["cuisines"].each do |c|
+  Cuisine.create!(name: c["cuisine"]["cuisine_name"])
+end
 
 def load_restaurants_json(filename)
   restaurants = JSON.parse(filename)
@@ -133,10 +132,10 @@ end
 
 Trend.all.each do |t|
   cuisine_attendance = t.cuisine.restaurants.sum(:attendance)
-  if mov_av_sum(t.city,t.cuisine) != 0
-    ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
+  if mov_av_sum(t.city, t.cuisine) != 0
+    ratio = t.moving_average / mov_av_sum(t.city, t.cuisine).to_f
   else
-    ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f
+    ratio = 1/Trend.where(city: t.city).where(cuisine: t.cuisine).count.to_f
   end
   t.scaled_attendance = cuisine_attendance * ratio
   t.save
