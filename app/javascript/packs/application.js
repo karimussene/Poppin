@@ -1,11 +1,8 @@
 import "bootstrap";
-import {selectFavoriteCuisine} from '../components/select_favorite_cuisine';
-selectFavoriteCuisine();
-
+import {selectFavoriteCuisine, selectedTick} from '../components/select_favorite_cuisine';
 
 const cuisinesIndex = document.querySelector(".cuisines.index");
-
 if(cuisinesIndex) {
-  const cardImage = document.querySelector(".small-cuisine-card-image");
-
+  selectFavoriteCuisine();
+  selectedTick();
 }

@@ -8,4 +8,20 @@ function selectFavoriteCuisine() {
   });
 }
 
-export {selectFavoriteCuisine}
+const selectedTick = () => {
+  let cardImages = document.getElementsByClassName("small-cuisine-card-image");
+
+  for (let i = 0; i < cardImages.length; i++) {
+    //console.log(cardImages[i]);
+
+    cardImages[i].addEventListener("click", (e) => {
+      let cardToSelect = e.currentTarget.nextElementSibling;
+      console.log("image clicked, nearest div: ", cardToSelect);
+      if(cardToSelect){
+        cardToSelect.classList.toggle("small-cuisine-card-select-sign");
+      }
+    });
+  };
+}
+
+export { selectFavoriteCuisine, selectedTick }
