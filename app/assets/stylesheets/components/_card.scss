@@ -212,7 +212,7 @@ padding-left: 50px;
 padding-right: 50px;
 }
 
-// card in result page
+// < ------------------------------------------- RESULTS PAGE CARD
 .card-product {
   overflow: hidden;
   height: 145px;
@@ -262,3 +262,53 @@ padding-left:16px;
   text-decoration:none;
 }
 
+// <--------------------------------------- MAP PAGE CARD
+
+.card-product-map {
+  overflow: hidden;
+  height: 145px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin:5px 0px;
+}
+
+.card-product-map img {
+  height: 100%;
+  width: 145px;
+  object-fit: cover;
+}
+
+.card-product-map h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product-map p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product-infos-map {
+padding-left:16px;
+}
+
+.icon-color-mustard-map{
+  color:#ffce3c;
+  text-decoration:none;
+}
+
+.icon-color-gray-map{
+  color:gray;
+  text-decoration:none;
+}
+
+.icon-color-gray-map:hover{
+  color:black;
+  text-decoration:none;
+}
