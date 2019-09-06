@@ -13,7 +13,8 @@
   <% @cuisines.each do |cuisine| %>
     <div data-id="<%= cuisine.id %>" class="cuisine-card" >
       <div class="small-cuisine-card-image">
-          <img src="https://blog.radissonblu.com/wp-content/uploads/2016/01/shutterstock_657175693.jpg" alt="Lebanese cuisine", class="small-cuisine-card-image">
+          <%= image_tag "#{cuisine.photo}", class:"small-cuisine-card-image", alt: "#{cuisine.name}" %>
+          <!-- <img src="https://blog.radissonblu.com/wp-content/uploads/2016/01/shutterstock_657175693.jpg" alt="Lebanese cuisine", class="small-cuisine-card-image"> -->
           <div class="small-cuisine-card-add-sign">
           </div>
       </div>

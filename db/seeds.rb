@@ -10,19 +10,25 @@ require 'json'
 require 'moving_avg'
 require 'pp'
 
-  puts "Destroy models ------"
-  RestaurantCuisine.destroy_all
-  Cuisine.destroy_all
+  puts "Destroy Restaurants ----------------------------"
   Restaurant.destroy_all
+  puts "Destroy Trend ----------------------------------"
+  Trend.destroy_all
+  puts "Destroy Cuisines -------------------------------"
+  Cuisine.destroy_all
+  puts "Destroy RestaurantCuisines ---------------------"
+  RestaurantCuisine.destroy_all
+  puts "Destroy FavoriteCuisines ---------------------"
+  FavoriteCuisine.destroy_all
 
-  puts "Seed for Sydney ------"
+  puts "Seed for Sydney --------------------------------"
   # zomato id for Sydney is 260; Lisbon is 82
 
-  puts "Create city instance for Sydney -----"
+  puts "Create city instance for Sydney ----------------"
   City.create(name: "Sydney")
   zom_city_id = "260"
 
-  puts "Fetch cuisines from Zomato API -----"
+  puts "Fetch cuisines from Zomato API ----------------"
   cuisines = ZomatoApi.getcuisines(zom_city_id)
   cuisines["cuisines"].each do |c|
     Cuisine.create!(name: c["cuisine"]["cuisine_name"])
@@ -34,15 +40,15 @@ def load_restaurants_json(filename)
 
     name = restaurant_json["name"]
     address = restaurant_json["address"]
-    attendance = restaurant_json["reviews"]
+    attendance = restaurant_json["reviews"].to_i
     latitude = restaurant_json["latitude"]
     longitude = restaurant_json["longitude"]
-    price_range = restaurant_json["price_range"]
-    rating = restaurant_json["rating"]
+    price_range = restaurant_json["price_range"].to_i
+    rating = restaurant_json["rating"].to_i
     city = restaurant_json["city"]
     cuisine_string = restaurant_json["cuisine_string"]
-
-    res = Restaurant.new(name: name, address: address, latitude: latitude, longitude: longitude, price_range: price_range, rating: rating)
+    photo = restaurant_json["photo"]
+    res = Restaurant.new(name: name, address: address, attendance: attendance, latitude: latitude, longitude: longitude, price_range: price_range, rating: rating,photo: photo)
     res.city = City.where(name: city).first
     res.save!
 
@@ -52,6 +58,7 @@ def load_restaurants_json(filename)
     end
   end
 end
+
 
 puts "Create restaurants from scraped Json files --------"
 
@@ -69,6 +76,8 @@ json_files = ['restaurants2019-09-04 16:36:57 +0100.json',
 json_files.each do |file|
   load_restaurants_json(File.read(file))
 end
+
+
 
 puts "Create trends from json files ---------------------"
 
@@ -92,14 +101,46 @@ def insert_trends_into_database(trends_data_file)
       new_trend_record = Trend.new(
         city: City.where(name: 'Sydney').first,
         month: item['formattedTime'],
-        value: item['value'][0],
+        value: item['value'][0].to_i,
         cuisine: Cuisine.where(name: key[0]).first,
-        moving_average: item['moving_average'],
+        moving_average: item['moving_average'].to_i,
         )
-      new_trend_record.save!
+      if ["2014","2015","2016","2017","2018","2019"].any? {|word| item['formattedTime'].include?(word)}
+        new_trend_record.save!
+
+      end
     end
   end
   puts "Created Trend Data for all cuisines with moving average"
 end
 
 insert_trends_into_database(trends_file)
+
+puts "create scaled attendance -----------------------"
+
+def mov_av_sum(city,cuisine)
+  Trend.where(city: city).where(cuisine:cuisine).sum(:moving_average)
+end
+
+Trend.all.each do |t|
+  cuisine_attendance = t.cuisine.restaurants.sum(:attendance)
+  if mov_av_sum(t.city,tcuisine) != 0
+    ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
+  else
+    ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f
+  end
+  t.scaled_attendance = cuisine_attendance * ratio
+  t.save
+end
+
+puts "Assign photo to cuisines-----------------------"
+
+Cuisine.all.each do |c|
+  if RestaurantCuisine.where(cuisine:c).first
+  c.photo = RestaurantCuisine.where(cuisine:c).first.restaurant.photo
+  c.save
+  end
+end
+
+
+
