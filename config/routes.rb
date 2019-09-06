@@ -14,6 +14,6 @@ Rails.application.routes.draw do
 
   get 'results', to:'trends#results'
   get 'comparison', to:'pages#comparison'
-  get 'map', to:'pages#map'
+  get 'map', to:'trends#map'
 
 end
