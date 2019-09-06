@@ -80,23 +80,33 @@
   background: black;
 }
 
+.small-cuisine-card-select-sign{
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 121px;
+  top: -12px;
+  background-image:url(selecticon.svg);
+}
+
 .small-cuisine-card-add-sign{
   position: absolute;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   left: 121px;
   top: -12px;
+  background-image:url(selecticon.svg);
 
 }
 
-.small-cuisine-card-add-sign:hover{
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  left: 121px;
-  top: -12px;
-  background-image:url(plus-sign-hover.svg);
-}
+// .small-cuisine-card-add-sign:hover{
+//   position: absolute;
+//   width: 36px;
+//   height: 36px;
+//   left: 121px;
+//   top: -12px;
+//   background-image:url(plus-sign-hover.svg);
+// }
 
 .small-cuisine-card-name-gray{
   font-family: Poppins;
@@ -117,8 +127,9 @@
   font-style: normal;
   font-weight: 900;
   font-size: 16px;
-  margin: 8px 0px;
   color: white;
+  position: absolute;
+  top: 0px;
 }
 
 //<------------------------------------------ LONG CARD
