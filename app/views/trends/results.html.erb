@@ -17,19 +17,26 @@
           <div class="card-product-infos">
             <h2><%= fc.cuisine.name %></h2>
             <p class="card-product-attendance">
-              Attendance
+              Attendance <%=  fc.cuisine.attendance(@city)%>
             </p>
             <p class="card-product-rating">
               Rating
+              <%= fc.cuisine.av_rating %>
             </p>
             <p class="card-product-price-range">
               Price Range
+              <%= fc.cuisine.av_price_range %> $
             </p>
             <p class="card-product-no_restaurants">
-              No Rest...
+              No restaurants
+              <%= fc.cuisine.no_restaurants %>
             </p>
             <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
               <i class="fa fa-trash" ></i>
+            <% end %>
+            <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
+            <%= link_to map_path(cuisine_id: fc.cuisine.id) do %>
+              <i class="fa fa-glasses" ></i> Find location
             <% end %>
           </div>
         </div>
