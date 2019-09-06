@@ -63,16 +63,6 @@
 
 //<------------------------------------------ FAV PAGE SMALL CARD
 
-
-.small-cuisine-card-container {
-  height: calc(100vh - 78px);
-  overflow-y: scroll;
-}
-
-.small-cuisine-card{
-  margin:5px 0px;
-}
-
 .hover-darker-cuisine-card img:hover{
  background:black;
  opacity: 0.5;
@@ -115,9 +105,18 @@
   color: white;
   position: absolute;
   bottom: 0px;
+  margin-top: 110px;
 }
 
 //<------------------------------------------ RESULTS PAGE SMALL CARD
+.small-cuisine-card-container {
+  height: calc(100vh - 78px);
+  overflow-y: scroll;
+}
+
+.small-cuisine-card{
+  margin:5px 0px;
+}
 .small-cuisine-card-add-sign{
   position: absolute;
   width: 30px;
