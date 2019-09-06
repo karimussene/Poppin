@@ -1,22 +1,26 @@
-<div class="row">
+<div class="d-flex">
 
-  <div class="col-2 small-cuisine-card-container">
+  <div class="lg-container-card col-2 small-cuisine-card-container">
   <!-- Cuisine not selected -->
+    <h1 class="home-rounded-card-header">Add to sort</h1>
     <% @unselectedcuisines.each do |c| %>
-      <div class="small-cuisine-card">
-        <div class="small-cuisine-card-image">
+      <div class="small-cuisine-card mb-5">
+        <div class="small-cuisine-card-image mx-auto">
           <%= image_tag c.photo, class:"small-cuisine-card-image" %>
           <div class="small-cuisine-card-add-sign"></div>
+          <%= link_to c.name, add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" %>
         </div>
         <!-- <p class="small-cuisine-card-name">lebanese</p> -->
-        <%= link_to c.name, add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" %>
       </div>
     <% end %>
   </div>
 
-  <div class="col-8">
+  <div class="col-10 no-margin-no-padding">
   <!-- displayed cuisines -->
-  <div class="row">
+  <div class="row rectangle-white-bar">
+
+  </div>
+  <div class="row p-4">
     <% @favoritecuisines.each do |fc| %>
       <div class="col-6">
         <div class="card-product">
@@ -28,21 +32,27 @@
                 <i class="fa fa-trash icon-color-gray" ></i>
               <% end %>
             </h2>
-            <p class="card-product-attendance">
-              Attendance: <%=  fc.cuisine.attendance(@city).floor%>
-            </p>
-            <p class="card-product-rating">
-              Rating:
-              <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
-            </p>
-            <p class="card-product-price-range">
-              Price:
-              <%= fc.cuisine.av_price_range %> $
-            </p>
-            <p class="card-product-no_restaurants">
-              No restaurants:
-              <%= fc.cuisine.no_restaurants %>
-            </p>
+            <div class="m-1 d-flex my-3">
+              <div class="">
+                <p class="card-product-attendance mr-5">
+                  Attendance: <%=  fc.cuisine.attendance(@city).floor%>
+                </p>
+                <p class="card-product-rating">
+                  Rating:
+                  <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
+                </p>
+              </div>
+              <div class="">
+                <p class="card-product-price-range mr-5">
+                  Price:
+                  <%= fc.cuisine.av_price_range %> $
+                </p>
+                <p class="card-product-no_restaurants">
+                  No restaurants:
+                  <%= fc.cuisine.no_restaurants %>
+                </p>
+              </div>
+            </div>
 
             <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
             <%= link_to map_path(cuisine_id: fc.cuisine.id), class:"small-cuisine-card-name-gray" do %>
