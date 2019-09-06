@@ -61,7 +61,9 @@
   margin: 0px 120px;
 }
 
-//<------------------------------------------ SMALL CARD
+//<------------------------------------------ FAV PAGE SMALL CARD
+
+
 .small-cuisine-card-container {
   height: calc(100vh - 78px);
   overflow-y: scroll;
@@ -85,6 +87,16 @@
   background: black;
 }
 
+.small-cuisine-card-image-darker{
+  width: 145px;
+  height: 145px;
+  position: relative;
+  object-fit: cover;
+  border-radius: 8px;
+  background: black;
+  opacity: 0.5;
+}
+
 .small-cuisine-card-select-sign{
   position: absolute;
   width: 30px;
@@ -94,24 +106,36 @@
   background-image:url(selecticon.svg);
 }
 
+.small-cuisine-card-name-white{
+  font-family: Poppins;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  color: white;
+  position: absolute;
+  bottom: 0px;
+}
+
+//<------------------------------------------ RESULTS PAGE SMALL CARD
 .small-cuisine-card-add-sign{
   position: absolute;
   width: 30px;
   height: 30px;
   left: 121px;
   top: -12px;
-  background-image:url(selecticon.svg);
+  background-image:url(plus-sign.svg);
 
 }
 
-// .small-cuisine-card-add-sign:hover{
-//   position: absolute;
-//   width: 36px;
-//   height: 36px;
-//   left: 121px;
-//   top: -12px;
-//   background-image:url(plus-sign-hover.svg);
-// }
+.small-cuisine-card-add-sign:hover{
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  left: 121px;
+  top: -12px;
+  background-image:url(plus-sign-hover.svg);
+}
 
 .small-cuisine-card-name-gray{
   font-family: Poppins;
@@ -136,6 +160,7 @@
   position: absolute;
   top: 0px;
 }
+
 
 //<------------------------------------------ LONG CARD
 .cuisine-comparison-horizontal-card{
