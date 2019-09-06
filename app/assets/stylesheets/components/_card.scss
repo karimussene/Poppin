@@ -12,7 +12,19 @@
 
 .lg-container-card{
   background: white;
-  flex-grow: 1;
+}
+
+.rectangle-white-bar {
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  margin-left: 2px;
+  margin-right: 0px;
+}
+
+.no-margin-no-padding{
+  margin: 0px;
+  padding: 0px;
 }
 
 // <------------------------------------------ HOME PAGE CARD
@@ -30,7 +42,6 @@
   background-color: $mustard;
   border-radius: 8px 8px 0px 0px;
 }
-
 
 .home-rounded-content {
   display: flex;
@@ -141,7 +152,7 @@
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  margin: 8px 0px;
+  margin: 8px 0px 8px 0px;
   color: #A5A5A5;
 }
 
@@ -217,10 +228,12 @@ padding-right: 50px;
   overflow: hidden;
   height: 145px;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   margin:5px 0px;
+
 }
 
 .card-product img {
@@ -271,6 +284,7 @@ padding-left:16px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin:5px 0px;
 }
 
@@ -295,7 +309,9 @@ padding-left:16px;
 }
 
 .card-product-infos-map {
-padding-left:16px;
+  // padding-left:5px;
+  padding-right: 60px;
+  margin-left: 0px;
 }
 
 .icon-color-mustard-map{

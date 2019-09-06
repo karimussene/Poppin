@@ -76,9 +76,7 @@ json_files = ['restaurants2019-09-04 16:36:57 +0100.json',
               'restaurants2019-09-04 17:11:30 +0100.json',
               'restaurants2019-09-04 17:20:11 +0100.json',
               'restaurants2019-09-04 18:31:27 +0100.json',
-              'restaurants2019-09-05 09:49:06 +0100.json',
-              'restaurants2019-09-05 10:07:43 +0100.json',
-              'restaurants2019-09-05 11:19:37 +0100.json'
+              'restaurants2019-09-05 09:49:06 +0100.json'
             ]
 
 json_files.each do |file|
