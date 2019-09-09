@@ -22,9 +22,12 @@
   margin-right: 0px;
 }
 
-.no-margin-no-padding{
+
+.css-behaving-of-scrowling{
   margin: 0px;
   padding: 0px;
+  max-height: calc(100vh - 78px);
+  overflow-y: scroll;
 }
 
 // <------------------------------------------ HOME PAGE CARD
@@ -147,12 +150,31 @@
   background-image: url(app/assets/images/plus-sign-hover.svg);
 }
 
+.small-cuisine-card-find-location{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #A5A5A5;
+}
+
+.small-cuisine-card-find-location:hover{
+  color: black;
+  text-decoration: none;
+}
+
+.border-bottom-line-add-card{
+  margin-bottom: 10px;
+  border-bottom: 0.3px solid #F4F4F4;
+  flex-grow: 1;
+  padding-bottom: 15px;
+}
+
 .small-cuisine-card-name-gray{
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  margin: 8px 0px 8px 0px;
   color: #A5A5A5;
 }
 
@@ -238,7 +260,6 @@ padding-right: 50px;
   overflow: hidden;
   height: 145px;
   background: white;
-  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -253,7 +274,7 @@ padding-right: 50px;
 }
 
 .card-product h2 {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0;
 }
