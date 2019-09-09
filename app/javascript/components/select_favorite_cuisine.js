@@ -9,16 +9,20 @@ function selectFavoriteCuisine() {
 }
 
 const selectedTick = () => {
-  let cardImages = document.getElementsByClassName("small-cuisine-card-image");
+  const cards = document.getElementsByClassName("hover-darker-cuisine-card");
 
-  for (let i = 0; i < cardImages.length; i++) {
-    //console.log(cardImages[i]);
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('mouseleave', (event) => {
+      cards[i].classList.remove('just-selected-card');
+    });
 
-    cardImages[i].addEventListener("click", (e) => {
-      let cardToSelect = e.currentTarget.nextElementSibling;
-      console.log("image clicked, nearest div: ", cardToSelect);
-      if(cardToSelect){
-        cardToSelect.classList.toggle("small-cuisine-card-select-sign");
+    cards[i].addEventListener('click', (event) => {
+      const cardToSelect = cards[i].getElementsByClassName('to-select')[0];
+      cards[i].classList.toggle('selected-card');
+      cards[i].classList.add('just-selected-card');
+
+      if (cardToSelect){
+        cardToSelect.classList.toggle('small-cuisine-card-select-sign');
       }
     });
   };
