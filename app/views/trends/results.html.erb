@@ -4,19 +4,24 @@
   <!-- Cuisine not selected -->
     <h1 class="home-rounded-card-header">Add to sort</h1>
     <% @unselectedcuisines.each do |c| %>
-      <div class="small-cuisine-card mb-4">
-        <div class="mx-auto d-flex">
-          <div>
-            <%= link_to c.name, add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" %>
-          </div>
+      <div class="small-cuisine-card mb-2 ">
+        <div class="mx-auto">
+            <div class="border-bottom-line-add-card">
+              <%= link_to add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" do %>
+                <span style="display:inline-block; width:18px; margin-right:5px">
+                  <%= show_svg('plus-icon.svg') %>
+                </span>
+                <%= c.name %>
+              <% end %>
+            </div>
         </div>
-        <!-- <p class="small-cuisine-card-name">lebanese</p> -->
       </div>
     <% end %>
   </div>
 
-  <div class="col-10 no-margin-no-padding">
+  <div class="col-10 css-behaving-of-scrowling">
   <!-- displayed cuisines -->
+
 
 
   <div class="row rectangle-white-bar">
@@ -89,31 +94,39 @@
                   Rating:
                   <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
                 </p>
-              </div>
-              <div class="">
-                <p class="card-product-price-range mr-5">
-                  Price:
-                  <%= fc.cuisine.av_price_range %> $
-                </p>
-                <p class="card-product-no_restaurants">
-                  No restaurants:
-                  <%= fc.cuisine.no_restaurants %>
-                </p>
-              </div>
-            </div>
 
-            <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
-            <%= link_to map_path(cuisine_id: fc.cuisine.id), class:"small-cuisine-card-name-gray" do %>
-              <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
-            <% end %>
+              </div>
+              <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
+              <%= link_to map_path(cuisine_id: fc.cuisine.id), class:"small-cuisine-card-find-location mt-1" do %>
+                <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
+              <% end %>
+              <div class="m-1 d-flex flex-grow-1 my-2">
+                <div>
+                  <p class="card-product-attendance mr-5">
+                    Attendance: <%=  fc.cuisine.attendance(@city).floor%>
+                  </p>
+                  <p class="card-product-rating">
+                    Rating:
+                    <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
+                  </p>
+                </div>
+                <div>
+                  <p class="card-product-price-range mr-5">
+                    Price:
+                    <%= fc.cuisine.av_price_range %> $
+                  </p>
+                  <p class="card-product-no_restaurants">
+                    No restaurants:
+                    <%= fc.cuisine.no_restaurants %>
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-
-
-
+      <% end %>
+    </div>
   </div>
 
   <div class="col-2">

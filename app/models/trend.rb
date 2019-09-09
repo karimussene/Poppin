@@ -1,6 +1,6 @@
 class Trend < ApplicationRecord
   belongs_to :city
-  belongs_to :cuisine
+  belongs_to :cuisine #, dependent: :destroy
 
   # # validates :location, presence: true
   # # validates :cuisine_trend, presence: true

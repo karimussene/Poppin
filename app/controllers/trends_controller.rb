@@ -52,6 +52,7 @@ class TrendsController < ApplicationController
   def map
     @cuisine = Cuisine.find(params[:cuisine_id])
     @restaurants = @cuisine.restaurants.where(city: @city)
+    @geojson = build_geojson
     @markers = @restaurants.map do |r|
       {
         lat: r.latitude,
@@ -59,8 +60,17 @@ class TrendsController < ApplicationController
       }
     end
   end
-private
+
+  private
+
   def fetch_city
     @city = City.where(name: "Sydney").first
+  end
+
+  def build_geojson
+    {
+      type: "FeatureCollection",
+      features: @restaurants.map(&:to_feature)
+    }
   end
 end
