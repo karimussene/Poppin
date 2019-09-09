@@ -11,37 +11,33 @@ require 'json'
 require 'moving_avg'
 require 'pp'
 
-  puts "Destroy RestaurantCuisines ---------------------"
-  RestaurantCuisine.destroy_all
-  puts "Destroy FavoriteCuisines ---------------------"
-  FavoriteCuisine.destroy_all
-  puts "Destroy Restaurants ----------------------------"
-  Restaurant.destroy_all
+puts "Destroy RestaurantCuisines #{Time.now}---------------------"
+RestaurantCuisine.destroy_all
+puts "Destroy FavoriteCuisines #{Time.now}---------------------"
+FavoriteCuisine.destroy_all
+puts "Destroy Restaurants #{Time.now}----------------------------"
+Restaurant.destroy_all
 
-  puts "Destroy Trend ----------------------------------"
-  Trend.destroy_all
-  puts "Destroy Cuisines -------------------------------"
-  Cuisine.destroy_all
-  puts "Destroy Cities -------------------------------"
-  City.destroy_all
+puts "Destroy Trend #{Time.now}----------------------------------"
+Trend.destroy_all
+puts "Destroy Cuisines #{Time.now}-------------------------------"
+Cuisine.destroy_all
+puts "Destroy Cities #{Time.now}-------------------------------"
+City.destroy_all
 
+puts "Seed for Sydney #{Time.now}--------------------------------"
+# zomato id for Sydney is 260; Lisbon is 82
 
+puts "Create city instance for Sydney #{Time.now}----------------"
+City.create(name: "Sydney")
+zom_city_id = "260"
 
+puts "Fetch cuisines from Zomato API #{Time.now}----------------"
+cuisines = ZomatoApi.getcuisines(zom_city_id)
 
-
-
-  puts "Seed for Sydney --------------------------------"
-  # zomato id for Sydney is 260; Lisbon is 82
-
-  puts "Create city instance for Sydney ----------------"
-  City.create(name: "Sydney")
-  zom_city_id = "260"
-
-  puts "Fetch cuisines from Zomato API ----------------"
-  cuisines = ZomatoApi.getcuisines(zom_city_id)
-  cuisines["cuisines"].each do |c|
-    Cuisine.create!(name: c["cuisine"]["cuisine_name"])
-  end
+cuisines["cuisines"].each do |c|
+  Cuisine.create!(name: c["cuisine"]["cuisine_name"])
+end
 
 def load_restaurants_json(filename)
   restaurants = JSON.parse(filename)
@@ -57,6 +53,7 @@ def load_restaurants_json(filename)
     city = restaurant_json["city"]
     cuisine_string = restaurant_json["cuisine_string"]
     photo = restaurant_json["photo"]
+
     res = Restaurant.new(name: name, address: address, attendance: attendance, latitude: latitude, longitude: longitude, price_range: price_range, rating: rating,photo: photo)
     res.city = City.where(name: city).first
     res.save!
@@ -68,9 +65,7 @@ def load_restaurants_json(filename)
   end
 end
 
-
-puts "Create restaurants from scraped Json files --------"
-
+puts "Create restaurants from scraped Json files #{Time.now}--------"
 
 json_files = ['restaurants2019-09-04 16:36:57 +0100.json',
               'restaurants2019-09-04 17:05:47 +0100.json',
@@ -84,9 +79,7 @@ json_files.each do |file|
   load_restaurants_json(File.read(file))
 end
 
-
-
-puts "Create trends from json files ---------------------"
+puts "Create trends from json files #{Time.now}---------------------"
 
 trends_file = 'db/trends_w_average_data.json'
 
@@ -112,24 +105,23 @@ def insert_trends_into_database(trends_data_file)
         cuisine: Cuisine.where(name: key[0]).first,
         moving_average: item['moving_average'].to_i,
         )
-      if ["2017","2018","2019"].any? {|word| item['formattedTime'].include?(word)}
+      if ["2016","2017","2018","2019"].any? {|word| new_trend_record.month.include?(word)}
         new_trend_record.save!
-
       end
     end
   end
-  puts "Created Trend Data for all cuisines with moving average"
 end
 
 insert_trends_into_database(trends_file)
 
-puts "create scaled attendance -----------------------"
+puts "Create scaled attendance #{Time.now}-----------------------"
 
+# Method for calculating scaled_attendance --------------
 def mov_av_sum(city,cuisine)
   Trend.where(city: city).where(cuisine:cuisine).sum(:moving_average)
 end
 
-Trend.all.each do |t|
+def scaling_attendance(t)
   cuisine_attendance = t.cuisine.restaurants.sum(:attendance)
   if mov_av_sum(t.city,t.cuisine) != 0
     ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
@@ -137,19 +129,25 @@ Trend.all.each do |t|
     ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f
   end
   t.scaled_attendance = cuisine_attendance * ratio
-  t.save
+end
+# End of method for calculating scaled attendance --------
+
+# Calculate scaled_attendance
+Trend.all.each do |t|
+  scaling_attendance(t)
+  t.save!
+end
+puts "Delete unwanted years #{Time.now}--------------------------"
+
+# choosing year of the trend to include in the database
+Trend.all.each do |t|
+  if ["2016","2017","2018","2019"].all? {|word| t.month.exclude?(word)} || t.cuisine.restaurants.count ==0
+    # Do not save Trends without restaurant.
+        t.destroy
+  end
 end
 
-puts "Assign photo to cuisines-----------------------"
-
-
-# Cuisine.all.each do |c|
-#   if c.trends.sum(:moving_average) == 0
-#     c.trends.destroy_all
-#    p "destroyed"
-#   end
-#   p c.trends.sum(:moving_average)
-# end
+puts "Assign photo to cuisines #{Time.now}-----------------------"
 
 Cuisine.all.each do |c|
   if RestaurantCuisine.where(cuisine:c).first
@@ -157,6 +155,4 @@ Cuisine.all.each do |c|
   c.save
   end
 end
-
-
 
