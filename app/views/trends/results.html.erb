@@ -4,11 +4,11 @@
   <!-- Cuisine not selected -->
     <h1 class="home-rounded-card-header">Add to sort</h1>
     <% @unselectedcuisines.each do |c| %>
-      <div class="small-cuisine-card mb-5">
-        <div class="small-cuisine-card-image mx-auto">
-          <%= image_tag c.photo, class:"small-cuisine-card-image" %>
-          <div class="small-cuisine-card-add-sign"></div>
-          <%= link_to c.name, add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" %>
+      <div class="small-cuisine-card mb-4">
+        <div class="mx-auto d-flex">
+          <div>
+            <%= link_to c.name, add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" %>
+          </div>
         </div>
         <!-- <p class="small-cuisine-card-name">lebanese</p> -->
       </div>

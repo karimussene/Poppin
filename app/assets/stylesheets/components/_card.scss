@@ -59,6 +59,7 @@
   color: #000000;
 }
 
+
 .color-disabled{
  color: gray;
 }
@@ -129,22 +130,15 @@
   margin:5px 0px;
 }
 .small-cuisine-card-add-sign{
-  position: absolute;
   width: 30px;
   height: 30px;
-  left: 121px;
-  top: -12px;
-  background-image:url(plus-sign.svg);
-
+  background-image:url(../images/plus-sign.svg);
 }
 
 .small-cuisine-card-add-sign:hover{
-  position: absolute;
   width: 36px;
   height: 36px;
-  left: 121px;
-  top: -12px;
-  background-image:url(plus-sign-hover.svg);
+  background-image: url(app/assets/images/plus-sign-hover.svg);
 }
 
 .small-cuisine-card-name-gray{
@@ -224,6 +218,16 @@ padding-right: 50px;
 }
 
 // < ------------------------------------------- RESULTS PAGE CARD
+.cuisine-card-name-gray{
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  margin: 8px 0px 8px 0px;
+  color: gray;
+  border-bottom: 1px solid red;
+}
+
 .card-product {
   overflow: hidden;
   height: 145px;
@@ -281,7 +285,8 @@ padding-left:16px;
   overflow: hidden;
   height: 145px;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 8px;
+  // box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -327,4 +332,13 @@ padding-left:16px;
 .icon-color-gray-map:hover{
   color:black;
   text-decoration:none;
+}
+
+.map-rounded-card-header {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 31px;
+  color: #000000;
 }
