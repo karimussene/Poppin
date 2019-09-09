@@ -21,6 +21,10 @@
   background-color: $mustard;
 }
 
+.btn-lg{
+  width:280px;
+}
+
 /*button 3 - btn-outline-yellow*/
 .btn-outline-yellow{
   color: $yellow;
