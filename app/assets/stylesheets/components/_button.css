@@ -21,8 +21,9 @@
   background-color: $mustard;
 }
 
-.btn-lg{
-  width:280px;
+.btn-lg-home{
+  width:200px;
+  margin: 0px 150px;
 }
 
 /*button 3 - btn-outline-yellow*/
