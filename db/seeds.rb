@@ -113,8 +113,10 @@ def insert_trends_into_database(trends_data_file)
         moving_average: item['moving_average'].to_i,
         )
       if ["2017","2018","2019"].any? {|word| item['formattedTime'].include?(word)}
-        new_trend_record.save!
 
+        if Cuisine.where(name: key[0]).first.restaurants.count != 0
+          new_trend_record.save!
+        end
       end
     end
   end
@@ -131,16 +133,33 @@ end
 
 Trend.all.each do |t|
   cuisine_attendance = t.cuisine.restaurants.sum(:attendance)
-  if mov_av_sum(t.city,t.cuisine) != 0
-    ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
+  no_restau = t.cuisine.restaurants.count
+  if no_restau.zero?
+    t.scaled_attendance = 0
   else
-    ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f
+    if mov_av_sum(t.city,t.cuisine) != 0
+        ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
+    else
+        ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f
+    end
+    t.scaled_attendance = cuisine_attendance * ratio / no_restau
+    t.save
   end
-  t.scaled_attendance = cuisine_attendance * ratio
-  t.save
 end
 
+
+
+
+
 puts "Assign photo to cuisines-----------------------"
+
+Cuisine.all.each do |c|
+  if RestaurantCuisine.where(cuisine:c).first
+  c.photo = RestaurantCuisine.where(cuisine:c).first.restaurant.photo
+  c.save
+  end
+end
+
 
 
 # Cuisine.all.each do |c|
@@ -151,12 +170,6 @@ puts "Assign photo to cuisines-----------------------"
 #   p c.trends.sum(:moving_average)
 # end
 
-Cuisine.all.each do |c|
-  if RestaurantCuisine.where(cuisine:c).first
-  c.photo = RestaurantCuisine.where(cuisine:c).first.restaurant.photo
-  c.save
-  end
-end
 
 
 

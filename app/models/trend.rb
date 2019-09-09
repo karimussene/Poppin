@@ -10,6 +10,6 @@ class Trend < ApplicationRecord
   # validates :cuisine, presence: true
 
   def self.attendance(city)
-    Trend.where(city_id: 1).sum(:moving_average).round(0) # to be changed
+    Trend.where(city_id: 1).sum(:scaled_attendance).round(0) # to be changed
   end
 end
