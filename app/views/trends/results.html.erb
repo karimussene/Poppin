@@ -17,7 +17,55 @@
 
   <div class="col-10 no-margin-no-padding">
   <!-- displayed cuisines -->
+
+
   <div class="row rectangle-white-bar">
+
+  <div></div>
+
+<!--   <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="name" checked>
+    <label class="form-check-label" for="inlineRadio1">Name</label>
+  </div> -->
+<%= form_tag results_path, method: :get do %>
+  <%= hidden_field_tag :query,
+    "name",
+    class: "form-control" %>
+    <%= submit_tag "Name" %>
+<% end %>
+
+<%= form_tag results_path, method: :get do %>
+    <%= hidden_field_tag :attendance,
+      "attendance",
+      class: "form-control" %>
+      <%= submit_tag "Attendance" %>
+<% end %>
+<%= form_tag results_path, method: :get do %>
+    <%= hidden_field_tag :metrics,
+      "av_rating",
+      class: "form-control" %>
+      <%= submit_tag "rating" %>
+<% end %>
+
+ <%= form_tag results_path, method: :get do %>
+    <%= hidden_field_tag :metrics,
+      "av_price_range",
+      class: "form-control" %>
+      <%= submit_tag "Price" %>
+<% end %>
+
+ <%= form_tag results_path, method: :get do %>
+    <%= hidden_field_tag :metrics,
+      "no_restaurants",
+      class: "form-control" %>
+      <%= submit_tag "No Restaurants" %>
+<% end %>
+
+  <%#= link_to results_path  do  %>
+    <%# name :query,
+    params[:query] %>
+  <%# end %>
+
 
   </div>
   <div class="row p-4">

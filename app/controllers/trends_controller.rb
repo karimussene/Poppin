@@ -1,9 +1,52 @@
 class TrendsController < ApplicationController
   before_action :fetch_city
   def results
-    @favoritecuisines = current_user.favorite_cuisines
-    @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-    @comparisoncuisines = @favoritecuisines.where(compare: true)
+
+    if params[:query].present?
+      @favoritecuisines = []
+      filter = params[:query].to_sym
+      @userfavorite = current_user.favorite_cuisines
+                                      .map(&:cuisine)
+                                      .sort_by(&filter)
+                                      # sort_by { |c| c.attendance(@city))}.reverse
+      @userfavorite.each do |fav|
+        @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
+      end
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+
+    elsif params[:metrics].present?
+      @favoritecuisines = []
+      filter = params[:metrics].to_sym
+      @userfavorite = current_user.favorite_cuisines
+                                      .map(&:cuisine)
+                                      .sort_by(&filter)
+                                      # sort_by { |c| c.attendance(@city))}.reverse
+      @userfavorite.each do |fav|
+        @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
+      end
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      @favoritecuisines.reverse!
+
+    elsif params[:attendance].present?
+      @favoritecuisines = []
+      filter = params[:attendance].to_sym
+      @userfavorite = current_user.favorite_cuisines
+                                      .map(&:cuisine)
+                                      .sort_by { |c| c.attendance(@city) }.reverse
+      @userfavorite.each do |fav|
+        @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
+      end
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      # @favoritecuisines.reverse!
+
+    else
+      @favoritecuisines = current_user.favorite_cuisines
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      @comparisoncuisines = @favoritecuisines.where(compare: true)
+    end
   end
 
   def map
