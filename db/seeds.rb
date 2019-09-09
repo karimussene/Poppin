@@ -123,10 +123,10 @@ end
 
 def scaling_attendance(t)
   cuisine_attendance = t.cuisine.restaurants.sum(:attendance)
-  if mov_av_sum(t.city,t.cuisine) != 0
-    ratio = t.moving_average / mov_av_sum(t.city,t.cuisine).to_f
+  if mov_av_sum(t.city, t.cuisine) != 0
+    ratio = t.moving_average / mov_av_sum(t.city, t.cuisine).to_f
   else
-    ratio = 1/Trend.where(city: t.city).where(cuisine:t.cuisine).count.to_f
+    ratio = 1/Trend.where(city: t.city).where(cuisine: t.cuisine).count.to_f
   end
   t.scaled_attendance = cuisine_attendance * ratio
 end

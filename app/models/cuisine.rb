@@ -1,9 +1,9 @@
 class Cuisine < ApplicationRecord
   has_many :restaurant_cuisines, dependent: :destroy
-  has_many :restaurants, through: :restaurant_cuisines
+  has_many :restaurants, through: :restaurant_cuisines, dependent: :destroy
 
   has_many :favorite_cuisines
-  has_many :trends#, optional: true
+  has_many :trends, dependent: :destroy
   # validates :name, presence: true
   # validates :photo, presence: true
 
