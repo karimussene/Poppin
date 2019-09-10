@@ -1,0 +1,9 @@
+<%= link_to "Back to Results", results_path %>
+
+<%= line_chart @cuisines_map.map { |cuisine|
+    {
+      name: cuisine[:name],
+      data: cuisine[:data]
+    }
+} %>
+
