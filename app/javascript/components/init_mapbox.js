@@ -16,7 +16,7 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10'
+      style: 'mapbox://styles/mapbox/dark-v10'
       // style: 'mapbox://styles/pdunleav/cjofefl7u3j3e2sp0ylex3cyb'
     });
 
@@ -58,11 +58,11 @@ const initMapbox = () => {
             'interpolate',
             ['linear'],
             ['heatmap-density'],
-            0, 'rgba(236,222,239,0)',
-            0.2, 'rgb(254,217,142)',
-            0.4, 'rgb(254,153,41)',
-            0.6, 'rgb(217,95,14)',
-            0.8, 'rgb(153,52,4)'
+             0, 'rgba(236,222,239,0)',
+             0.2, 'rgb(208,209,230)',
+             0.4, 'rgb(166,189,219)',
+             0.6, 'rgb(103,169,207)',
+             0.8, 'rgb(28,144,153)'
           ],
           // increase radius as zoom increases
           'heatmap-radius': {
@@ -94,23 +94,25 @@ const initMapbox = () => {
             type: 'exponential',
             stops: [
               [{ zoom: 15, value: 1 }, 5],
-              [{ zoom: 15, value: 1500 }, 10],
+              [{ zoom: 15, value: 800 }, 15],
+              [{ zoom: 15, value: 1500 }, 20],
               [{ zoom: 22, value: 1 }, 20],
-              [{ zoom: 22, value: 1500 }, 50],
+              [{ zoom: 22, value: 800}, 40],
+              [{ zoom: 22, value: 1500 }, 60],
             ]
           },
           'circle-color': {
             property: 'attendance',
             type: 'exponential',
             stops: [
-              [0, 'rgb(236,222,239)'],
-              [100, 'rgb(236,222,239)'],
-              [200, 'rgb(208,209,230)'],
-              [400, 'rgb(166,189,219)'],
-              [600, 'rgb(103,169,207)'],
-              [800, 'rgb(28,144,153)'],
-              [1000, 'rgb(0,109,44)']
-            ]
+               [0, 'rgba(236,222,239,0)'],
+               [200, 'rgb(236,222,239)'],
+               [400, 'rgb(208,209,230)'],
+               [600, 'rgb(166,189,219)'],
+               [800, 'rgb(103,169,207)'],
+               [1000, 'rgb(28,144,153)'],
+               [1500, 'rgb(1,108,89)']
+              ]
           },
           'circle-stroke-color': 'white',
           'circle-stroke-width': 1,

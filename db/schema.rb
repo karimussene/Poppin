@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_06_085753) do
+ActiveRecord::Schema.define(version: 2019_09_10_111839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2019_09_06_085753) do
     t.datetime "updated_at", null: false
     t.float "moving_average"
     t.float "scaled_attendance"
+    t.string "date"
     t.index ["city_id"], name: "index_trends_on_city_id"
     t.index ["cuisine_id"], name: "index_trends_on_cuisine_id"
   end

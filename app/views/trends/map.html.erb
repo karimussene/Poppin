@@ -31,7 +31,7 @@
                 <%= @cuisine.name %>
               </h2>
               <p class="card-product-attendance-map">
-                <%=  @cuisine.attendance(@city).floor%>
+                <%=  @cuisine.av_attendance(@city,@season).floor%>
               </p>
               <p class="card-product-rating-map">
                 <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
@@ -52,7 +52,7 @@
                 <%= Trend.attendance(@city).floor%>
               </p>
               <p class="card-product-rating-map">
-                <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+                <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>
               </p>
               <p class="card-product-price-range-map">
                 <%= @city.av_price_range %> $

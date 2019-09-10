@@ -24,6 +24,7 @@
   <!-- Show displayed cuisines and top orders buttons - 10/12 columns-->
   <div class="col-10 css-behaving-of-scrowling">
 
+
     <!-- buttons to order -->
     <div class="row rectangle-white-bar d-flex align-content-center">
       <%= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
@@ -43,7 +44,7 @@
       <% @favoritecuisines.each do |fc| %>
         <div class="card-product m-2">
 
-          <!-- Image more info -->
+          <!-- Image plus info -->
           <div class="d-flex">
 
             <!-- Image -->
@@ -64,6 +65,7 @@
                       <i class="fas fa-chart-area"></i> Compare
                     </div>
                   <% end %>
+
                 </div>
               </div>
 
@@ -80,7 +82,12 @@
                 <p><%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p>
               </div>
 
+
               <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
+
+              <%= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
+                <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
+              <% end %>
 
               <!-- Cuisine price-range 2/12 columns-->
               <div class="card-product-price-range">
@@ -122,8 +129,10 @@
         <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
           <i class="fa fa-trash" ></i>
         <% end %>
+
       <% end %>
       <%= link_to 'See Trend', comparison_path %>
+
 
     </div>
   </div>
