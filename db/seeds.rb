@@ -10,6 +10,7 @@ require "zomato_api.rb"
 require 'json'
 require 'moving_avg'
 require 'pp'
+require 'pry-byebug'
 
 puts "Destroy RestaurantCuisines #{Time.now}---------------------"
 RestaurantCuisine.destroy_all
@@ -88,6 +89,7 @@ def load_trends_json(trends_file, city)
   opened_file = File.open trends_file
   data = JSON.parse(File.read(opened_file))
   relevant_data = data[city]
+
   return relevant_data.flatten
 end
 
@@ -97,15 +99,19 @@ def insert_trends_into_database(trends_data_file)
     #iterate over all cuisines
     key = cuisine.keys # array with the name of this cuisine. Could be refactored
     cuisine.dig(key[0], 'timelineData').each do |item|
+      date = item['formattedTime']
+
       #iterate over the time series
       new_trend_record = Trend.new(
         city: City.where(name: 'Sydney').first,
-        month: item['formattedTime'],
+        month: date,
         value: item['value'][0].to_i,
         cuisine: Cuisine.where(name: key[0]).first,
         moving_average: item['moving_average'].to_i,
-        )
-      if ["2016","2017","2018","2019"].any? {|word| new_trend_record.month.include?(word)}
+        date: "#{date.split.last} #{Date::ABBR_MONTHNAMES.index(date.split.first)}"
+      )
+
+      if ['2016', '2017', '2018', '2019'].any? { |word| new_trend_record.month.include?(word) }
         new_trend_record.save!
       end
     end

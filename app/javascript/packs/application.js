@@ -4,6 +4,9 @@ import 'mapbox-gl/dist/mapbox-gl.css'; // <-- you need to uncomment the styleshe
 import { initMapbox } from '../components/init_mapbox';
 
 
+require("chartkick");
+require("chart.js");
+
 initMapbox();
 
 const cuisinesIndex = document.querySelector(".cuisines.index");

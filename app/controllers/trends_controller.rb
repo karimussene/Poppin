@@ -63,6 +63,19 @@ class TrendsController < ApplicationController
     end
   end
 
+  def graph
+
+    @favoritecuisines = current_user.favorite_cuisines.map(&:cuisine)
+    # selected_cuisines = Cuisine.where(id: [56, 60, 134])
+    # @cuisines_map = selected_cuisines.map do |cuisine|
+    @cuisines_map = @favoritecuisines.map do |cuisine|
+      {
+        name: cuisine.name,
+        data: cuisine.trend_data
+      }
+    end
+  end
+
   private
 
   def fetch_city
@@ -75,4 +88,5 @@ class TrendsController < ApplicationController
       features: @restaurants.map(&:to_feature)
     }
   end
+
 end

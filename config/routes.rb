@@ -9,11 +9,10 @@ Rails.application.routes.draw do
     end
     get 'compare'
     get 'uncompare'
-
   end
 
   get 'results', to:'trends#results'
   get 'comparison', to:'pages#comparison'
   get 'map', to:'trends#map'
-
+  get 'graph', to:'trends#graph'
 end
