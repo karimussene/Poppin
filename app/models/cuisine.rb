@@ -37,4 +37,8 @@ class Cuisine < ApplicationRecord
   def no_restaurants
     restaurants.count
   end
+
+  def trend_data
+    trends.order(:date).map { |trend| [trend.date, trend.moving_average.to_i] }
+  end
 end

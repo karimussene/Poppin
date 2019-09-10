@@ -22,6 +22,7 @@ gem 'pundit'
 gem 'moving_avg'
 gem 'rubyXL' # updload and export from Excel
 gem 'mechanize'
+gem 'chartkick'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -5,19 +5,21 @@ class TrendsController < ApplicationController
     @season = selected_season(session[:start_period], session[:end_period])
 
     if params[:query].present?
+      #  sort by name
       @favoritecuisines = []
       filter = params[:query].to_sym
       @userfavorite = current_user.favorite_cuisines
-                                      .map(&:cuisine)
+                                      .map(&:cuisine) # map(|cuisine| cuisine)
                                       .sort_by(&filter)
                                       # sort_by { |c| c.attendance(@city))}.reverse
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
 
     elsif params[:metrics].present?
+      # sort by all metrics which are numbers exept attendance
       @favoritecuisines = []
       filter = params[:metrics].to_sym
       @userfavorite = current_user.favorite_cuisines
@@ -27,28 +29,28 @@ class TrendsController < ApplicationController
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
       @favoritecuisines.reverse!
 
     elsif params[:attendance].present?
+      #  sort by attendance
       @favoritecuisines = []
-      filter = params[:attendance].to_sym
       @userfavorite = current_user.favorite_cuisines
                                       .map(&:cuisine)
                                       .sort_by { |c| c.attendance(@city) }.reverse
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
-      # @favoritecuisines.reverse!
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
 
     else
       @favoritecuisines = current_user.favorite_cuisines
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.where(compare: true)
     end
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.attendance(@city) }.reverse
+      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      @cuisines = Cuisine.all.sort_by { |c| c.attendance(@city) }.reverse
   end
 
   def map
@@ -59,6 +61,19 @@ class TrendsController < ApplicationController
       {
         lat: r.latitude,
         lng: r.longitude
+      }
+    end
+  end
+
+  def graph
+
+    @favoritecuisines = current_user.favorite_cuisines.map(&:cuisine)
+    # selected_cuisines = Cuisine.where(id: [56, 60, 134])
+    # @cuisines_map = selected_cuisines.map do |cuisine|
+    @cuisines_map = @favoritecuisines.map do |cuisine|
+      {
+        name: cuisine.name,
+        data: cuisine.trend_data
       }
     end
   end
@@ -75,21 +90,6 @@ class TrendsController < ApplicationController
       features: @restaurants.map(&:to_feature)
     }
   end
-
-  # def selected_season(start_period, end_period)
-  #   start_date = Date.parse(start_period)
-  #   if Date.parse(end_period) < start_date
-  #     end_date = Date.parse(end_period).next_year
-  #   else
-  #     end_date = Date.parse(end_period)
-  #   end
-  #   season_array = (start_date..end_date)
-  #   season_months = []
-  #   season_array.each do |date|
-  #     season_months << Date::ABBR_MONTHNAMES[date.month]
-  #   end
-  #   season_months.uniq { |month| month }
-  # end
 
   def selected_season(start_period, end_period)
     start = start_period.to_i
