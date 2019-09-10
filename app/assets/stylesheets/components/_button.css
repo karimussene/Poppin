@@ -16,6 +16,11 @@
   background-color: $yellow;
 }
 
+.btn-yellow-smaller{
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 .btn-yellow:hover{
   color: white;
   background-color: $mustard;

@@ -175,6 +175,7 @@
   padding-bottom: 15px;
 }
 
+
 .small-cuisine-card-name-gray{
   font-family: Poppins;
   font-style: normal;
@@ -262,19 +263,22 @@ padding-right: 50px;
 }
 
 .card-product {
-  overflow: hidden;
-  height: 145px;
+  // overflow: hidden;
+  height: 100px;
   background: white;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  margin:5px 0px;
-
+  // display: flex;
+  // align-items: center;
+  .border-right-line-add-card{
+    border-right: 0.3px solid #F4F4F4;
+    padding-right: 15px;
+  }
 }
 
 .card-product img {
-  height: 100%;
-  width: 145px;
+  border-radius:  8px 0px 0px 8px;
+  height: 100px ;
+  width: 100px;
   object-fit: cover;
 }
 
