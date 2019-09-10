@@ -12,6 +12,8 @@
                   <%= show_svg('plus-icon.svg') %>
                 </span>
                 <%= c.name %>
+                Ranking:
+                <%= @cuisines.find_index(c).to_i + 1 %>
               <% end %>
             </div>
         </div>
@@ -20,50 +22,24 @@
   </div>
 
   <div class="col-10 css-behaving-of-scrowling">
-  <!-- displayed cuisines -->
-
-
-
-  <div class="row rectangle-white-bar">
-
-    <%= form_tag results_path, method: :get do %>
-      <%= hidden_field_tag :query,
-        "name",
-        class: "form-control" %>
-        <%= submit_tag "Name" %>
-    <% end %>
-
-    <%= form_tag results_path, method: :get do %>
-        <%= hidden_field_tag :attendance,
-          "attendance",
-          class: "form-control" %>
-          <%= submit_tag "Attendance" %>
-    <% end %>
-    <%= form_tag results_path, method: :get do %>
-        <%= hidden_field_tag :metrics,
-          "av_rating",
-          class: "form-control" %>
-          <%= submit_tag "Rating" %>
-    <% end %>
-
-     <%= form_tag results_path, method: :get do %>
-        <%= hidden_field_tag :metrics,
-          "av_price_range",
-          class: "form-control" %>
-          <%= submit_tag "Price" %>
-    <% end %>
-
-     <%= form_tag results_path, method: :get do %>
-        <%= hidden_field_tag :metrics,
-          "no_restaurants",
-          class: "form-control" %>
-          <%= submit_tag "No Restaurants" %>
-    <% end %>
 
     <%= link_to "Attendance Graphs", graph_path %>
 
+  <!-- displayed cuisines -->
+  <div class="row rectangle-white-bar d-flex align-content-center">
+    <%= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
+      class: classes_for_menu('name') %>
+    <%= link_to 'Attendance', results_path(selected_filter: 'attendance', attendance: true),
+      class: classes_for_menu('attendance') %>
+    <%= link_to 'Rating', results_path(selected_filter: 'rating', metrics: 'av_rating'),
+      class: classes_for_menu('rating') %>
+    <%= link_to 'Price', results_path(selected_filter: 'price', metrics: 'av_price_range'),
+      class: classes_for_menu('price') %>
+    <%= link_to 'No. Restaurants', results_path(selected_filter: 'number', metrics: 'no_restaurants'),
+      class: classes_for_menu('number') %>
   </div>
 
+  <!-- displayed Favorite Cuisine -->
   <div class="row p-4">
     <% @favoritecuisines.each do |fc| %>
       <div class="col-6">
@@ -87,19 +63,8 @@
                 </p>
               </div>
               <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
-              <%= link_to map_path(cuisine_id: fc.cuisine.id), class:"small-cuisine-card-find-location mt-1" do %>
-                <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
-              <% end %>
+
               <div class="m-1 d-flex flex-grow-1 my-2">
-                <div>
-                  <p class="card-product-attendance mr-5">
-                    Attendance: <%=  fc.cuisine.attendance(@city).floor%>
-                  </p>
-                  <p class="card-product-rating">
-                    Rating:
-                    <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
-                  </p>
-                </div>
                 <div>
                   <p class="card-product-price-range mr-5">
                     Price:
@@ -112,6 +77,26 @@
                 </div>
               </div>
 
+              <div class="m-1 d-flex flex-grow-1 my-2">
+                <div>
+                  <p class="card-product-price-range mr-5">
+                    Ranking:
+                    <%= @cuisines.find_index(fc.cuisine).to_i + 1 %>
+                  </p>
+
+                </div>
+              </div>
+
+              <%= link_to favorite_cuisine_compare_path(favorite_cuisine_id: fc.id) do %>
+                <i class="fas fa-chart-area"></i>
+              <% end %>
+
+              <%= link_to map_path(cuisine_id: fc.cuisine.id) do %>
+                <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
+              <% end %>
+
+
+
             </div>
           </div>
         </div>
@@ -119,8 +104,9 @@
     <% end %>
   </div>
 
+
   <div class="col-2">
-<!-- cuisine for comparison -->
+  <!-- cuisine for comparison -->
 
     <% @comparisoncuisines.each do |fc| %>
       <%= fc.cuisine.name %>
@@ -128,6 +114,8 @@
         <i class="fa fa-trash" ></i>
         <% end %>
     <% end %>
+    <%= link_to 'See Trend', comparison_path %>
+
   </div>
 </div>
 

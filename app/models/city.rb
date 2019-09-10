@@ -5,7 +5,7 @@ class City < ApplicationRecord
   # validates :photo, presence: true
 
   def attendance
-    Trends.where(city_id: 1).sum(:moving_average) # to be changed
+    Trends.where(city_id: 1).sum(:scaled_attendance)# to be changed
   end
   def av_rating
     if restaurants.count != 0

@@ -4,7 +4,7 @@
   border-radius: 50px;
 }
 
-.btn-mustard:hover{
+.btn-mustard:hover, .btn-mustard-selected {
   color: white;
   background-color: $mustard;
 }
