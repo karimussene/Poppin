@@ -11,7 +11,7 @@ class Cuisine < ApplicationRecord
     Cuisine.all.where.not(photo: nil).order(:name)
   end
   def attendance(city)
-    trends.where(city: city).sum(:moving_average) # to be changed
+    trends.where(city: city).sum(:scaled_attendance) # to be changed
   end
   def av_rating
     if restaurants.count != 0
