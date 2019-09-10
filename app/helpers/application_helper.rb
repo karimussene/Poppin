@@ -10,4 +10,10 @@ module ApplicationHelper
 
     options_for_select(months_array)
   end
+
+  def classes_for_menu(name)
+    classes = %w[btn btn-sm btn-mustard ml-3]
+    classes << 'btn-mustard-selected' if params[:selected_filter] == name
+    classes.join(' ')
+  end
 end
