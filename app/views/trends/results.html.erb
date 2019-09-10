@@ -40,7 +40,7 @@
   <!-- displayed Favorite Cuisine -->
   <div class="row p-4">
     <% @favoritecuisines.each do |fc| %>
-      <div class="col-6">
+      <div class="col-8">
         <div class="card-product">
           <%= image_tag fc.cuisine.photo %>
           <div class="card-product-infos">
@@ -53,7 +53,7 @@
             <div class="m-1 d-flex my-3">
               <div class="">
                 <p class="card-product-attendance mr-5">
-                  Attendance: <%=  fc.cuisine.attendance(@city).floor%>
+                  Attendance: <%=  (fc.cuisine.attendance(@city)).floor%>
                 </p>
                 <p class="card-product-rating">
                   Rating:
