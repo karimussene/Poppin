@@ -31,7 +31,7 @@
                 <%= @cuisine.name %>
               </h2>
               <p class="card-product-attendance-map">
-                <%=  @cuisine.attendance(@city).floor%>
+                <%=  @cuisine.av_attendance(@city,@season).floor%>
               </p>
               <p class="card-product-rating-map">
                 <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>

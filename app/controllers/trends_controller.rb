@@ -38,7 +38,7 @@ class TrendsController < ApplicationController
       @favoritecuisines = []
       @userfavorite = current_user.favorite_cuisines
                                       .map(&:cuisine)
-                                      .sort_by { |c| c.attendance(@city) }.reverse
+                                      .sort_by { |c| c.av_attendance(@city,@season) }.reverse
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
@@ -48,13 +48,14 @@ class TrendsController < ApplicationController
     else
       @favoritecuisines = current_user.favorite_cuisines
     end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.attendance(@city) }.reverse
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.av_attendance(@city, @season) }.reverse
       @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
-      @cuisines = Cuisine.all.sort_by { |c| c.attendance(@city) }.reverse
+      @cuisines = Cuisine.all.sort_by { |c| c.av_attendance(@city, @season) }.reverse
   end
 
   def map
     @cuisine = Cuisine.find(params[:cuisine_id])
+    @season = params[:season]
     @restaurants = @cuisine.restaurants.where(city: @city)
     @geojson = build_geojson
     @markers = @restaurants.map do |r|
