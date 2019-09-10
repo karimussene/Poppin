@@ -2,6 +2,8 @@ class TrendsController < ApplicationController
   before_action :fetch_city
   def results
 
+    @season = selected_season(session[:start_period], session[:end_period])
+
     if params[:query].present?
       #  sort by name
       @favoritecuisines = []
@@ -89,4 +91,16 @@ class TrendsController < ApplicationController
     }
   end
 
+  def selected_season(start_period, end_period)
+    start = start_period.to_i
+    finish = end_period.to_i
+    if finish < start
+      season_months = (start..12).to_set.merge(1..finish)
+    else
+      season_months = (start..finish)
+    end
+    season_months.map do |month_number|
+      Date::ABBR_MONTHNAMES[month_number]
+    end
+  end
 end

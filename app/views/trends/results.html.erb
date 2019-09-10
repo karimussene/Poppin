@@ -55,7 +55,7 @@
             <div class="m-1 d-flex my-3">
               <div class="">
                 <p class="card-product-attendance mr-5">
-                  Attendance: <%=  fc.cuisine.attendance(@city).floor%>
+                  Attendance: <%=  fc.cuisine.av_attendance(@city, @season).floor %>
                 </p>
                 <p class="card-product-rating">
                   Rating:
