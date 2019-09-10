@@ -31,7 +31,6 @@ class TrendsController < ApplicationController
 
     elsif params[:attendance].present?
       @favoritecuisines = []
-      filter = params[:attendance].to_sym
       @userfavorite = current_user.favorite_cuisines
                                       .map(&:cuisine)
                                       .sort_by { |c| c.attendance(@city) }.reverse
