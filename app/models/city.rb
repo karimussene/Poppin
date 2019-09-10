@@ -4,9 +4,14 @@ class City < ApplicationRecord
   validates :name, presence: true
   # validates :photo, presence: true
 
-  def attendance
-    Trends.where(city_id: 1).sum(:moving_average) # to be changed
+  def av_attendance(season)
+    attendance = 0
+    season.each do |month_name|
+      attendance += Trend.where("month like ?", "#{month_name}%").sum(:scaled_attendance)
+    end
+    average_performance = attendance / restaurants.count
   end
+
   def av_rating
     if restaurants.count != 0
       restaurants.sum(:rating)/restaurants.count.round(2)
