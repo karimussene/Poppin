@@ -43,6 +43,6 @@ class Cuisine < ApplicationRecord
   end
 
   def trend_data
-    trends.order(:date).map { |trend| [trend.date, trend.moving_average.to_i] }
+    trends.order(:date).map { |trend| [trend.date, trend.scaled_attendance.to_i] }
   end
 end

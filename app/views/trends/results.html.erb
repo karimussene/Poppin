@@ -10,8 +10,8 @@
 
 <div class="d-flex">
 
-  <div class="lg-container-card col-2 small-cuisine-card-container">
-  <!-- Cuisine not selected -->
+  <!-- Cuisine not selected side menu 2/12 columns-->
+  <div class="col-2 lg-container-card small-cuisine-card-container">
     <h1 class="home-rounded-card-header">Add to sort</h1>
     <% @unselectedcuisines.each do |c| %>
       <div class="small-cuisine-card mb-2 ">
@@ -31,102 +31,122 @@
     <% end %>
   </div>
 
+  <!-- Show displayed cuisines and top orders buttons - 10/12 columns-->
   <div class="col-10 css-behaving-of-scrowling">
 
-    <%= link_to "Attendance Graphs", graph_path %>
 
-  <!-- displayed cuisines -->
-  <div class="row rectangle-white-bar d-flex align-content-center">
-    <%= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
-      class: classes_for_menu('name') %>
-    <%= link_to 'Attendance', results_path(selected_filter: 'attendance', attendance: true),
-      class: classes_for_menu('attendance') %>
-    <%= link_to 'Rating', results_path(selected_filter: 'rating', metrics: 'av_rating'),
-      class: classes_for_menu('rating') %>
-    <%= link_to 'Price', results_path(selected_filter: 'price', metrics: 'av_price_range'),
-      class: classes_for_menu('price') %>
-    <%= link_to 'No. Restaurants', results_path(selected_filter: 'number', metrics: 'no_restaurants'),
-      class: classes_for_menu('number') %>
-  </div>
+    <!-- buttons to order -->
+    <div class="row rectangle-white-bar d-flex align-content-center">
+      <%= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
+        class: classes_for_menu('name') %>
+      <%= link_to 'Attendance', results_path(selected_filter: 'attendance', attendance: true),
+        class: classes_for_menu('attendance') %>
+      <%= link_to 'Rating', results_path(selected_filter: 'rating', metrics: 'av_rating'),
+        class: classes_for_menu('rating') %>
+      <%= link_to 'Price', results_path(selected_filter: 'price', metrics: 'av_price_range'),
+        class: classes_for_menu('price') %>
+      <%= link_to 'No. Restaurants', results_path(selected_filter: 'number', metrics: 'no_restaurants'),
+        class: classes_for_menu('number') %>
+    </div>
 
-  <!-- displayed Favorite Cuisine -->
-  <div class="row p-4">
-    <% @favoritecuisines.each do |fc| %>
-      <div class="col-10">
-        <div class="card-product">
-          <%= image_tag fc.cuisine.photo %>
-          <div class="card-product-infos">
-            <h2>
-              <%= fc.cuisine.name %>
-              <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
-                <i class="fa fa-trash icon-color-gray" ></i>
-              <% end %>
-            </h2>
-            <div class="m-1 d-flex my-3">
-              <div class="">
-                <p class="card-product-attendance mr-5">
-                  Attendance: <%=  fc.cuisine.av_attendance(@city, @season).floor %>
-                </p>
-                <p class="card-product-rating">
-                  Rating:
-                  <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %>
-                </p>
+    <div class="m-2 pt-1">
+      <!-- Card Product -->
+      <% @favoritecuisines.each do |fc| %>
+        <div class="card-product m-2">
+
+          <!-- Image plus info -->
+          <div class="d-flex">
+
+            <!-- Image -->
+            <%= image_tag fc.cuisine.photo %>
+            <!-- Info -->
+            <div class="d-flex flex-grow-1 d-flex justify-content-between p-3 mx-2">
+              <!-- Cuisine name 2/12 columns-->
+              <div class="border-right-line-add-card">
+                <h2 class="mb-3"><%= fc.cuisine.name %></h2>
+                <div class="d-flex">
+                  <%= link_to map_path(cuisine_id: fc.cuisine.id) do %>
+                    <div class="btn btn-outline-yellow btn-yellow-smaller mr-2">
+                      <i class="fas fa-map-marker-alt"></i> Location
+                    </div>
+                  <% end %>
+                  <%= link_to favorite_cuisine_compare_path(favorite_cuisine_id: fc.id) do %>
+                    <div class="btn btn-outline-yellow btn-yellow-smaller">
+                      <i class="fas fa-chart-area"></i> Compare
+                    </div>
+                  <% end %>
+
+                </div>
               </div>
+
+
+              <!-- Cuisine attendance 2/12 columns-->
+              <div class="card-product-attendance">
+                <p>Attendance</p>
+                <p><%=  fc.cuisine.attendance(@city).floor%></p>
+              </div>
+
+              <!-- Cuisine rating 2/12 columns-->
+              <div class="card-product-rating">
+                <p>Rating</p>
+                <p><%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p>
+              </div>
+
+
               <!-- IH comment:  passing the cuisine_id which will be used in the map view -->
-
-              <div class="m-1 d-flex flex-grow-1 my-2">
-                <div>
-                  <p class="card-product-price-range mr-5">
-                    Price:
-                    <%= fc.cuisine.av_price_range %> $
-                  </p>
-                  <p class="card-product-no_restaurants">
-                    No restaurants:
-                    <%= fc.cuisine.no_restaurants %>
-                  </p>
-                </div>
-              </div>
-
-              <div class="m-1 d-flex flex-grow-1 my-2">
-                <div>
-                  <p class="card-product-price-range mr-5">
-                    Ranking:
-                    <%= @cuisines.find_index(fc.cuisine).to_i + 1 %>
-                  </p>
-
-                </div>
-              </div>
-
-              <%= link_to favorite_cuisine_compare_path(favorite_cuisine_id: fc.id) do %>
-                <i class="fas fa-chart-area"></i>
-              <% end %>
 
               <%= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
                 <i class="fas fa-map-marker-alt icon-color-mustard"></i> Find location
               <% end %>
 
+              <!-- Cuisine price-range 2/12 columns-->
+              <div class="card-product-price-range">
+                <p>Price</p>
+                <p><%= fc.cuisine.av_price_range %> $</p>
+              </div>
 
+              <!-- Cuisine no. restaurants 2/12 columns-->
+              <div class="card-product-no_restaurants">
+                <p>No. restaurants</p>
+                <p><%= fc.cuisine.no_restaurants %></p>
+              </div>
 
+              <!-- Cuisine ranking 2/12 columns-->
+              <div class="card-product-price-range">
+                <p>Ranking</p>
+                <p><%= @cuisines.find_index(fc.cuisine).to_i + 1 %></p>
+              </div>
+
+              <!-- Delete info -->
+              <div class="flex-shrink-1 ">
+                <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
+                  <i class="fa fa-trash icon-color-gray" ></i>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
 
-  <div class="col-2">
-  <!-- cuisine for comparison -->
 
-    <% @comparisoncuisines.each do |fc| %>
-      <%= fc.cuisine.name %>
-      <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
-        <i class="fa fa-trash" ></i>
+    <div class="">
+      <!-- cuisine for comparison -->
+
+      <% @comparisoncuisines.each do |fc| %>
+        <%= fc.cuisine.name %>
+        <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
+          <i class="fa fa-trash" ></i>
         <% end %>
-    <% end %>
-    <%#= link_to 'See Trend', graph_path(graph_cuisines: @comparisoncuisines.map(&:cuisine_id).join("-")) %>
-    <%= link_to 'See Trend', graph_path %>
 
+    <%#= link_to 'See Trend', graph_path(graph_cuisines: @comparisoncuisines.map(&:cuisine_id).join("-")) %>
+
+      <% end %>
+      <%= link_to 'See Trend', comparison_path %>
+
+
+    </div>
   </div>
 </div>
 

@@ -10,7 +10,6 @@ require "zomato_api.rb"
 require 'json'
 require 'moving_avg'
 require 'pp'
-require 'pry-byebug'
 
 puts "Destroy RestaurantCuisines #{Time.now}---------------------"
 RestaurantCuisine.destroy_all
