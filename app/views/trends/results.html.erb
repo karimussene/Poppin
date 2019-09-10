@@ -1,3 +1,13 @@
+<div class="contain-page">
+  <div class="containLoader">
+    <div class="loadingBar-area">
+      <div class="loadingBar">
+        <div class="gradient"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="d-flex">
 
   <div class="lg-container-card col-2 small-cuisine-card-container">
@@ -114,6 +124,7 @@
         <i class="fa fa-trash" ></i>
         <% end %>
     <% end %>
+    <%#= link_to 'See Trend', graph_path(graph_cuisines: @comparisoncuisines.map(&:cuisine_id).join("-")) %>
     <%= link_to 'See Trend', graph_path %>
 
   </div>
