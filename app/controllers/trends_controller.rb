@@ -3,19 +3,21 @@ class TrendsController < ApplicationController
   def results
 
     if params[:query].present?
+      #  sort by name
       @favoritecuisines = []
       filter = params[:query].to_sym
       @userfavorite = current_user.favorite_cuisines
-                                      .map(&:cuisine)
+                                      .map(&:cuisine) # map(|cuisine| cuisine)
                                       .sort_by(&filter)
                                       # sort_by { |c| c.attendance(@city))}.reverse
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
 
     elsif params[:metrics].present?
+      # sort by all metrics which are numbers exept attendance
       @favoritecuisines = []
       filter = params[:metrics].to_sym
       @userfavorite = current_user.favorite_cuisines
@@ -25,11 +27,12 @@ class TrendsController < ApplicationController
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
       @favoritecuisines.reverse!
 
     elsif params[:attendance].present?
+      #  sort by attendance
       @favoritecuisines = []
       @userfavorite = current_user.favorite_cuisines
                                       .map(&:cuisine)
@@ -37,15 +40,15 @@ class TrendsController < ApplicationController
       @userfavorite.each do |fav|
         @favoritecuisines << current_user.favorite_cuisines.where(cuisine_id: fav.id).first
       end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
-      # @favoritecuisines.reverse!
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
+      # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
 
     else
       @favoritecuisines = current_user.favorite_cuisines
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
-      @comparisoncuisines = @favoritecuisines.where(compare: true)
     end
+      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.attendance(@city) }.reverse
+      @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+      @cuisines = Cuisine.all.sort_by { |c| c.attendance(@city) }.reverse
   end
 
   def map
