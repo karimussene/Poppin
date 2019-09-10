@@ -49,7 +49,7 @@
                 <%= City %>
               </h2>
               <p class="card-product-attendance-map">
-                <%= Trend.attendance(@city).floor%>
+                <%= @city.av_attendance(@season).floor%>
               </p>
               <p class="card-product-rating-map">
                 <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>

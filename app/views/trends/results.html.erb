@@ -1,3 +1,13 @@
+<div class="contain-page">
+  <div class="containLoader">
+    <div class="loadingBar-area">
+      <div class="loadingBar">
+        <div class="gradient"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="d-flex">
 
   <!-- Cuisine not selected side menu 2/12 columns-->
@@ -129,6 +139,8 @@
         <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
           <i class="fa fa-trash" ></i>
         <% end %>
+
+    <%#= link_to 'See Trend', graph_path(graph_cuisines: @comparisoncuisines.map(&:cuisine_id).join("-")) %>
 
       <% end %>
       <%= link_to 'See Trend', comparison_path %>
