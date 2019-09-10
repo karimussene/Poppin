@@ -18,7 +18,11 @@ class Cuisine < ApplicationRecord
     season.each do |month_name|
       attendance += trends.where("month like ?", "#{month_name}%").sum(:scaled_attendance)
     end
-    average_attendance = attendance / restaurants.count
+    if restaurants.count == 0
+      average_attendance = 0
+    else
+      average_attendance = attendance / restaurants.count
+    end
     return average_attendance
   end
 
