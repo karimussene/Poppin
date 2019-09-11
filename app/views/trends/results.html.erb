@@ -87,7 +87,8 @@
               <!-- Cuisine rating 2/12 columns-->
               <div class="card-product-rating">
                 <p>Rating</p>
-                <p><%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p>
+                <!-- <p><%#=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p> -->
+                <p><%=fc.cuisine.av_rating.to_f %></p>
               </div>
 
 
