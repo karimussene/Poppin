@@ -4,7 +4,7 @@
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
+  /*.rails-default-error-page {
     background-color: #EFEFEF;
     color: #2E2F30;
     text-align: center;
@@ -50,17 +50,19 @@
     border-top-color: #DADADA;
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+  }*/
   </style>
 </head>
 
 <body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
+  <div class="dialog" style="margin: auto; text-align: center; font-family: Poppins; font-style: normal; font-weight: 500;">
     <div>
-      <h1>We're sorry, but something went wrong.</h1>
+      <h1>Woops it seams like the PopPin server is down! Sorry about that.</h1>
+      <h2>If you are the application owner check the logs for more information.</p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <div>
+      <img src="500.svg" alt="500 image" style="width: 500px">
+    </div>
   </div>
 </body>
 </html>

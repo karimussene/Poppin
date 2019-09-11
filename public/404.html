@@ -4,7 +4,7 @@
   <title>The page you were looking for doesn't exist (404)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
+  /*.rails-default-error-page {
     background-color: #EFEFEF;
     color: #2E2F30;
     text-align: center;
@@ -50,18 +50,25 @@
     border-top-color: #DADADA;
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  }*/
+
+  .h1{
+
   }
   </style>
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
+  <div class="dialog" style="margin: auto; text-align: center; font-family: Poppins; font-style: normal; font-weight: 500;">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      <h1>Woops it seams like you PopPin in the wrong page.</h1>
+      <h2>You may have mistyped the address or the page may have moved.</p>
+      <h2>don't worry... <a href="/">here</a> here to go back to the home page</p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
+    <div>
+      <img src="404.svg" alt="404 image" style="width: 500px">
+    </div>
   </div>
 </body>
 </html>
