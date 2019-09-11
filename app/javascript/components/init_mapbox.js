@@ -1,5 +1,4 @@
 import mapboxgl from 'mapbox-gl';
-import 'mapbox-gl/dist/mapbox-gl.css';
 
 const fitMapToMarkers = (map, features) => {
   const bounds = new mapboxgl.LngLatBounds();
@@ -22,6 +21,7 @@ const initMapbox = () => {
 
   map.on('load', function() {
       const restaurants = JSON.parse(mapElement.dataset.restaurants);
+      console.log(restaurants)
       map.addSource('restaurants', {
         type: 'geojson',
         data: restaurants,
@@ -43,14 +43,18 @@ const initMapbox = () => {
             type: 'exponential',
             stops: [
               [1, 0],
-              [1500, 1]
+              [200, 0.33],
+              [400, 0.66],
+              [600, 1]
+              // [800, 0.8],
+              // [1000, 1]
             ]
           },
           // increase intensity as zoom level increases
           'heatmap-intensity': {
             stops: [
-              [11, 1],
-              [15, 3]
+              [11, 3],
+              [15, 6]
             ]
           },
           // assign color values be applied to points depending on their density
@@ -59,16 +63,16 @@ const initMapbox = () => {
             ['linear'],
             ['heatmap-density'],
              0, 'rgba(236,222,239,0)',
-             0.2, 'rgb(208,209,230)',
-             0.4, 'rgb(166,189,219)',
-             0.6, 'rgb(103,169,207)',
-             0.8, 'rgb(28,144,153)'
+             0.25, 'rgb(255,237,181)',
+             0.5, 'rgb(255,223,128)',
+             0.75, 'rgb(255,236,92)',
+             1, 'rgb(255,204,51)'
           ],
           // increase radius as zoom increases
           'heatmap-radius': {
             stops: [
-              [11, 15],
-              [15, 20]
+              [11, 20],
+              [15, 30]
             ]
           },
           // decrease opacity to transition into the circle layer
@@ -94,11 +98,15 @@ const initMapbox = () => {
             type: 'exponential',
             stops: [
               [{ zoom: 15, value: 1 }, 5],
-              [{ zoom: 15, value: 800 }, 15],
-              [{ zoom: 15, value: 1500 }, 20],
-              [{ zoom: 22, value: 1 }, 20],
-              [{ zoom: 22, value: 800}, 40],
-              [{ zoom: 22, value: 1500 }, 60],
+              [{ zoom: 15, value: 200 }, 10],
+              [{ zoom: 15, value: 400 }, 15],
+              [{ zoom: 15, value: 600 }, 20],
+              [{ zoom: 15, value: 800 }, 25],
+              // [{ zoom: 22, value: 1 }, 20],
+              // [{ zoom: 22, value: 200 }, 30],
+              // [{ zoom: 22, value: 400 }, 40],
+              // [{ zoom: 22, value: 600}, 50],
+              // [{ zoom: 22, value: 800 }, 60]
             ]
           },
           'circle-color': {
@@ -106,12 +114,10 @@ const initMapbox = () => {
             type: 'exponential',
             stops: [
                [0, 'rgba(236,222,239,0)'],
-               [200, 'rgb(236,222,239)'],
-               [400, 'rgb(208,209,230)'],
-               [600, 'rgb(166,189,219)'],
-               [800, 'rgb(103,169,207)'],
-               [1000, 'rgb(28,144,153)'],
-               [1500, 'rgb(1,108,89)']
+               [250, 'rgb(255,237,181)'],
+               [500, 'rgb(255,223,128)'],
+               [750, 'rgb(255,236,92)'],
+               [1000, 'rgb(255,204,51)']
               ]
           },
           'circle-stroke-color': 'white',

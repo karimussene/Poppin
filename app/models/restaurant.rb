@@ -17,6 +17,7 @@ class Restaurant < ApplicationRecord
       "properties": {
         "restaurant_id": id,
         "name": name,
+        "attendance": attendance
         # "info_window": ApplicationController.new.render_to_string(
         #   partial: "restaurants/infowindow",
         #   locals: { restaurant: self }
