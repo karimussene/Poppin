@@ -9,6 +9,19 @@
   padding: 0px;
 }
 
+.rectangle-white {
+  max-height: calc(100vh - 70px);
+  width: 100%;
+  background-color: white;
+}
+
+.rectangle-light-gray {
+  max-height: calc(100vh - 350px);
+  width: 100%;
+  background-color: #F5F5F5;
+  overflow: scroll;
+}
+
 // <------------------------------------------ REUSABLE PAGES TOP TEXT
 .top-header-page-black{
   color: black;
