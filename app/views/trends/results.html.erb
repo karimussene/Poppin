@@ -35,7 +35,9 @@
   <div class="col-10 css-behaving-of-scrowling">
     <!-- buttons to order -->
     <div class="row rectangle-white-bar d-flex align-content-center">
-      <p>Name</p>
+      <%#= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
+        class: classes_for_menu('name') %>
+        <p mb-0> Sort by <i class="fas fa-filter"></i></p>
       <%= link_to 'Attendance', results_path(selected_filter: 'attendance', attendance: true),
         class: classes_for_menu('attendance') %>
       <%= link_to 'Rating', results_path(selected_filter: 'rating', metrics: 'av_rating'),
@@ -142,10 +144,9 @@
 
       <% end %>
       <%= link_to 'See Trend', graph_path %>
-      <p>
 
-        <%= @cuisines.first(14).sum  /14 %>
-      </p>
+        <%#= @cuisines.first(14).sum  /14 %>
+
 
     </div>
   </div>
