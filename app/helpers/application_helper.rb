@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def classes_for_menu(name)
     classes = %w[btn btn-sm btn-mustard ml-3]
-    classes << 'btn-mustard-selected' if params[:selected_filter] == name
+    classes << 'btn-mustard-selected' if params[:selected_filter] == name || name == "attendance" && params[:selected_filter].nil?
     classes.join(' ')
   end
 end
