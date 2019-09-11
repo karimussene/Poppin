@@ -1,7 +1,7 @@
 <div class="container d-flex justify-content-center">
   <div class="loginsignup-rounded-card col col-lg-6">
     <div class="rectangle-mustard-card"></div>
-    <div class="home-rounded-content">
+    <div class="home-rounded-content mx-5 my-3">
       <h1 class="loginsignup-rounded-card-header">Log in</h1>
 
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
@@ -16,12 +16,15 @@
           <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
         </div>
 
-        <div class="form-actions mb-3">
-          <%= f.button :submit, "Log in", class: "btn-lg btn-outline-mustard loginsignup-rounded-card-text-buttons mb-3 mr-2" %>
-          <% end %>
+        <div class="form-actions mb-3 ">
+          <%= f.button :submit, "Log in", class: "btn-lg btn-outline-mustard loginsignup-rounded-card-text-buttons btn-block mb-4 py-2" %>
+          <div class="mb-2"><%= link_to "Not a member yet? Sign up", new_registration_path(resource_name), class: "small-cuisine-card-name" %><br /></div>
+          <div><%= link_to "Forgot your password?", new_password_path(resource_name), class: "small-cuisine-card-name" %><br /></div>
 
-          <%= render "devise/shared/links" %>
+
+
         </div>
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="container d-flex justify-content-center">
   <div class="loginsignup-rounded-card col col-lg-6">
     <div class="rectangle-mustard-card"></div>
-    <div class="home-rounded-content">
+    <div class="home-rounded-content mx-5 my-3">
       <h1 class="loginsignup-rounded-card-header">Sign up</h1>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -21,11 +21,11 @@
         </div>
 
         <div class="form-actions mb-3">
-          <%= f.button :submit, "Sign up", class: "btn-lg btn-outline-mustard loginsignup-rounded-card-text-buttons mb-3 mr-2" %>
+          <%= f.button :submit, "Sign up", class: "btn-lg btn-outline-mustard loginsignup-rounded-card-text-buttons btn-block mb-4 py-2" %>
           <% end %>
 
-          <%= render "devise/shared/links" %>
         </div>
+          <%= render "devise/shared/links" %>
     </div>
   </div>
 </div>
