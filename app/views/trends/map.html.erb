@@ -79,5 +79,12 @@
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
+  <div>
+    <p>
+      <% @cuisine_rating_array.each do |r| %>
+      <%= r %>
 
+      <% end %>
+    </p>
+  </div>
 </div>
