@@ -7,7 +7,7 @@
       <%= form_for current_user, url: favorite_cuisines_path, method: :post do |f| %>
 
         <%= f.collection_check_boxes :cuisine_ids , @cuisines, :id, :name, item_label_class: 'my-custom-class'   %>
-        <%= f.submit 'Submit', class: "btn btn-lg btn-yellow px-4" %>
+        <%= f.submit 'Submit >', class: "btn btn-lg btn-yellow btn-position-sticky" %>
       <% end %>
     </div>
   </div>
