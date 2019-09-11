@@ -50,7 +50,9 @@ class TrendsController < ApplicationController
     end
       @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.av_attendance(@city, @season) }.reverse
       @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
+
       @cuisines = Cuisine.all.sort_by { |c| c.av_attendance(@city, @season) }.reverse
+
   end
 
   def map
@@ -64,6 +66,7 @@ class TrendsController < ApplicationController
         lng: r.longitude
       }
     end
+
   end
 
   def graph
@@ -104,5 +107,21 @@ class TrendsController < ApplicationController
     season_months.map do |month_number|
       Date::ABBR_MONTHNAMES[month_number]
     end
+  end
+
+  def attendance_score
+    @cuisines = Cuisine.all.sort_by { |c| c.av_attendance(@city, @season) }.reverse
+    @attendance_array = @cuisine.map {|c| c.av_attendance(@city, @season)}
+  end
+
+  def rating_score
+    @cuisines = Cuisine.all.sort_by { |c| c.av_attendance(@city, @season) }.reverse
+    @attendance_array = @cuisine.map {|c| c.av_attendance(@city, @season)}
+  end
+  def competition_score
+
+  end
+  def trend
+
   end
 end
