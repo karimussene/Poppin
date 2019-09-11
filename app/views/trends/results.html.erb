@@ -116,8 +116,8 @@
 
               <!-- Delete info -->
               <div class="flex-shrink-1 ">
-                <%= link_to favorite_cuisine_path(fc.id), method: :delete do %>
-                  <i class="fa fa-trash icon-color-gray" ></i>
+                <%= link_to favorite_cuisine_path(fc.id), method: :delete, class: "cuisine-comparison-horizontal-card-button_delete" do %>
+                  <div></div>
                 <% end %>
               </div>
             </div>

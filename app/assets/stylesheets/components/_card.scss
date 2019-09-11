@@ -143,6 +143,7 @@
 .small-cuisine-card{
   margin:5px 0px;
 }
+
 .small-cuisine-card-add-sign{
   width: 30px;
   height: 30px;
@@ -225,6 +226,17 @@ padding: 22px;
 
 .cuisine-comparison-horizontal-card-button_array{
   margin: 23px 0px 0px 0px;
+}
+
+.cuisine-comparison-horizontal-card-button_delete {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: asset-url('deleteicon_gray.svg');
+}
+
+.cuisine-comparison-horizontal-card-button_delete:hover{
+  background-image: asset-url('deleteicon.svg');
 }
 
 // <------------------------------------------ LOGIN SIGNUP PAGE CARD
