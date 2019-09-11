@@ -7,15 +7,13 @@
     <meta name="PopPin"/>
     <meta description="PopPin is the perfect tool to assist you in chosing the perfect location for your new restaurant, based on best data available out there. Try it now!"/>
     <%= favicon_link_tag 'PopPin_favicon_60x60.png' %>
-    <meta property="og:image" content=<%= image_url "Poppin_fb_cover_img.png" %>/>
 
-    <!-- Schema.org for Google -->
-    <meta itemprop="image" content="image.img">
-    <!-- Open Graph general (Facebook, Pinterest & Google+) -->
-    <meta name="og:image" content=<%= image_tag("Poppin_fb_cover_img.png") %>>
-    <meta name="og:site_name" content="PopPin">
-    <meta name="og:locale" content="EU">
-    <meta name="og:type" content="website">
+    <meta property="og:title" content="<%= meta_title %>" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= request.original_url %>" />
+    <meta property="og:image" content="<%= meta_image %>" />
+    <meta property="og:description" content="<%= meta_description %>" />
+    <meta property="og:site_name" content="<%= meta_title %>" />
 
     <!-- ---------------------------------------------------------------------- -->
     <%= csrf_meta_tags %>
