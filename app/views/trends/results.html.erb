@@ -21,9 +21,7 @@
                 <span style="display:inline-block; width:18px; margin-right:5px">
                   <%= show_svg('plus-icon.svg') %>
                 </span>
-                <%= c.name %>
-                Ranking:
-                <%= @cuisines.find_index(c).to_i + 1 %>
+                <%= @cuisines.find_index(c).to_i + 1 %> | <%= c.name %>
               <% end %>
             </div>
         </div>
@@ -64,7 +62,7 @@
                 <h2 class="mb-3"><%= fc.cuisine.name %></h2>
                 <div class="d-flex">
                   <%= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
-                    <div class="btn btn-outline-yellow btn-yellow-smaller mr-2">
+                    <div class="btn btn-outline-yellow btn-yellow-smaller px-4">
                       <i class="fas fa-map-marker-alt"></i> Location
                     </div>
                   <% end %>
@@ -127,25 +125,21 @@
       <% end %>
     </div>
 
-
-
     <div class="">
       <!-- cuisine for comparison -->
-
       <% @comparisoncuisines.each do |fc| %>
         <%= fc.cuisine.name %>
         <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
           <i class="fa fa-trash" ></i>
         <% end %>
-
-    <%#= link_to 'See Trend', graph_path(graph_cuisines: @comparisoncuisines.map(&:cuisine_id).join("-")) %>
-
       <% end %>
-      <%= link_to 'See Trend', graph_path %>
-
-
     </div>
+
+
   </div>
+  <%= link_to graph_path, class: 'btn btn-lg btn-yellow btn-position-absolute' do%>
+    <i class="fas fa-chart-area"></i> Compare
+  <% end %>
 </div>
 
 
