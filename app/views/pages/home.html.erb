@@ -48,19 +48,20 @@
               <div class="row">
                 <div class="col-6">
                   <div class="form-group">
-                    <%= label_tag :start_period, params[:start_period], class: "color-disabled" %>
-                    <%= select_tag :start_period, month_options, class: "form-control " %>
+                    <%#= label_tag :start_period, params[:start_period], class: "color-disabled" %>
+                    <%= select_tag :start_period, month_options, prompt: "Start period", class: "form-control " %>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
-                    <%= label_tag :end_period, params[:end_period], class: "color-disabled" %>
-                    <%= select_tag :end_period, month_options, class:"form-control" %>
+                    <%#= label_tag :end_period, params[:end_period], class: "color-disabled" %>
+                    <%= select_tag :end_period, month_options, prompt: "End period", class:"form-control" %>
                   </div>
                 </div>
               </div>
-
-              <%= submit_tag 'Explore', class: 'btn btn-outline-mustard btn-lg-home mt-4' %>
+              <div class="d-flex justify-content-center">
+                <%= submit_tag 'Explore', class: 'btn btn-lg btn-outline-mustard btn-lg-home' %>
+            </div>
             <% end %>
         </div>
       </div>
