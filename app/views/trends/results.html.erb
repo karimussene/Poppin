@@ -12,7 +12,7 @@
 
   <!-- Cuisine not selected side menu 2/12 columns-->
   <div class="col-2 lg-container-card small-cuisine-card-container">
-    <h1 class="home-rounded-card-header"><%= @city.name %> Top cuisines</h1>
+    <h2 class="home-rounded-card-header">Top cuisines ranking: </h2>
     <% @unselectedcuisines.each do |c| %>
       <div class="small-cuisine-card mb-2 ">
         <div class="mx-auto">
@@ -32,10 +32,11 @@
   <!-- Show displayed cuisines and top orders buttons - 10/12 columns-->
   <div class="col-10 css-behaving-of-scrowling">
     <!-- buttons to order -->
-    <div class="row rectangle-white-bar d-flex align-content-center">
+    <div class="row rectangle-white-bar d-flex align-content-center px-3">
       <%#= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
         class: classes_for_menu('name') %>
-      <div > Sort by <i class="fas fa-filter"></i>:</div>
+
+      <div style ="padding-top: 4px"> Sort by :</div>
       <%= link_to 'Attendance', results_path(selected_filter: 'attendance', attendance: true),
         class: classes_for_menu('attendance') %>
       <%= link_to 'Rating', results_path(selected_filter: 'rating', metrics: 'av_rating'),
@@ -44,9 +45,13 @@
         class: classes_for_menu('price') %>
       <%= link_to 'No. Restaurants', results_path(selected_filter: 'number', metrics: 'no_restaurants'),
         class: classes_for_menu('number') %>
+
     </div>
 
     <div class="m-2 pt-1">
+      <div class="text my-4  mx-2">
+        <h4>Select your favourite cuisines in <%= @city.name %> and check out the trends: </h4>
+      </div>
       <!-- Card Product -->
       <% @favoritecuisines.each do |fc| %>
         <div class="card-product m-2">
@@ -62,9 +67,13 @@
               <div class="border-right-line-add-card">
                 <h2 class="mb-3"><%= fc.cuisine.name %></h2>
                 <div class="d-flex">
+                  <%= link_to graph_path, class: 'btn btn-sm btn-outline-yellow ml-auto mr-3 px-4' do%>
+                    <i class="fas fa-chart-area"></i> Trends
+                  <% end %>
+
                   <%= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
-                    <div class="btn btn-outline-yellow btn-yellow-smaller px-4">
-                      <i class="fas fa-map-marker-alt"></i> Location
+                    <div class="btn btn-yellow btn-yellow-smaller px-4">
+                      <i class="fas fa-map-marker-alt"></i> Select cuisine
                     </div>
                   <% end %>
                   <%#= link_to favorite_cuisine_compare_path(favorite_cuisine_id: fc.id) do %>
@@ -79,20 +88,20 @@
               <!-- Cuisine ranking 2/12 columns-->
               <div class="card-product-price-range">
                 <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
-                <p><%= @cuisines.find_index(fc.cuisine).to_i + 1 %></p>
+                <p># <%= @cuisines.find_index(fc.cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
               </div>
 
               <!-- Cuisine attendance 2/12 columns-->
               <div class="card-product-attendance">
-                <p title="Average people by restaurant every month">Attendance <i class="far fa-question-circle"></i></p>
-                <p><%=  fc.cuisine.av_attendance(@city,@season).floor%></p>
+                <p title="Average people by restaurant every month"> Av. Attendance <i class="far fa-question-circle"></i></p>
+                <p><%=  fc.cuisine.av_attendance(@city,@season).floor%> people/mth</p>
               </div>
 
               <!-- Cuisine rating 2/12 columns-->
               <div class="card-product-rating">
                 <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
                 <!-- <p><%#=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p> -->
-                <p><%=fc.cuisine.av_rating.to_f %> <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating.to_f %></p>
+                <p><%=fc.cuisine.av_rating.to_f %> / 5</p>
               </div>
 
 
@@ -140,9 +149,7 @@
 
 
   </div>
-  <%= link_to graph_path, class: 'btn btn-lg btn-yellow btn-position-absolute' do%>
-    <i class="fas fa-chart-area"></i> Compare
-  <% end %>
+
 </div>
 
 
