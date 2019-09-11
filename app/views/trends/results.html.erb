@@ -12,7 +12,7 @@
 
   <!-- Cuisine not selected side menu 2/12 columns-->
   <div class="col-2 lg-container-card small-cuisine-card-container">
-    <h1 class="home-rounded-card-header">Add to sort</h1>
+    <h1 class="home-rounded-card-header"><%= @city.name %> Top cuisines</h1>
     <% @unselectedcuisines.each do |c| %>
       <div class="small-cuisine-card mb-2 ">
         <div class="mx-auto">
@@ -21,9 +21,7 @@
                 <span style="display:inline-block; width:18px; margin-right:5px">
                   <%= show_svg('plus-icon.svg') %>
                 </span>
-                <%= c.name %>
-                Ranking:
-                <%= @cuisines.find_index(c).to_i + 1 %>
+                <%= @cuisines.find_index(c).to_i + 1 %> | <%= c.name %>
               <% end %>
             </div>
         </div>
@@ -35,8 +33,9 @@
   <div class="col-10 css-behaving-of-scrowling">
     <!-- buttons to order -->
     <div class="row rectangle-white-bar d-flex align-content-center">
-      <%= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
+      <%#= link_to 'Name', results_path(selected_filter: 'name', query: 'name'),
         class: classes_for_menu('name') %>
+      <div > Sort by <i class="fas fa-filter"></i>:</div>
       <%= link_to 'Attendance', results_path(selected_filter: 'attendance', attendance: true),
         class: classes_for_menu('attendance') %>
       <%= link_to 'Rating', results_path(selected_filter: 'rating', metrics: 'av_rating'),
@@ -64,7 +63,7 @@
                 <h2 class="mb-3"><%= fc.cuisine.name %></h2>
                 <div class="d-flex">
                   <%= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
-                    <div class="btn btn-outline-yellow btn-yellow-smaller mr-2">
+                    <div class="btn btn-outline-yellow btn-yellow-smaller px-4">
                       <i class="fas fa-map-marker-alt"></i> Location
                     </div>
                   <% end %>
@@ -77,17 +76,23 @@
                 </div>
               </div>
 
+              <!-- Cuisine ranking 2/12 columns-->
+              <div class="card-product-price-range">
+                <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
+                <p><%= @cuisines.find_index(fc.cuisine).to_i + 1 %></p>
+              </div>
 
               <!-- Cuisine attendance 2/12 columns-->
               <div class="card-product-attendance">
-                <p>Attendance</p>
+                <p title="Average people by restaurant every month">Attendance <i class="far fa-question-circle"></i></p>
                 <p><%=  fc.cuisine.av_attendance(@city,@season).floor%></p>
               </div>
 
               <!-- Cuisine rating 2/12 columns-->
               <div class="card-product-rating">
-                <p>Rating</p>
-                <p><%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p>
+                <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
+                <!-- <p><%#=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p> -->
+                <p><%=fc.cuisine.av_rating.to_f %> <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating.to_f %></p>
               </div>
 
 
@@ -99,20 +104,14 @@
 
               <!-- Cuisine price-range 2/12 columns-->
               <div class="card-product-price-range">
-                <p>Price</p>
+                <p title = "Average money spend by customer per visit">Price <i class="far fa-question-circle"></i></p>
                 <p><%= fc.cuisine.av_price_range %> $</p>
               </div>
 
               <!-- Cuisine no. restaurants 2/12 columns-->
               <div class="card-product-no_restaurants">
-                <p>No. restaurants</p>
+                <p title="No restaurants of this cuisine in the city">No. restaurants <i class="far fa-question-circle"></i></p>
                 <p><%= fc.cuisine.no_restaurants %></p>
-              </div>
-
-              <!-- Cuisine ranking 2/12 columns-->
-              <div class="card-product-price-range">
-                <p>Ranking</p>
-                <p><%= @cuisines.find_index(fc.cuisine).to_i + 1 %></p>
               </div>
 
               <!-- Delete info -->
@@ -127,25 +126,23 @@
       <% end %>
     </div>
 
-
-
     <div class="">
       <!-- cuisine for comparison -->
-
       <% @comparisoncuisines.each do |fc| %>
         <%= fc.cuisine.name %>
         <%= link_to favorite_cuisine_uncompare_path(fc.id) do %>
           <i class="fa fa-trash" ></i>
         <% end %>
-
-    <%#= link_to 'See Trend', graph_path(graph_cuisines: @comparisoncuisines.map(&:cuisine_id).join("-")) %>
-
       <% end %>
-      <%= link_to 'See Trend', graph_path %>
-
-
     </div>
+
+        <%#= @cuisines.first(14).sum  /14 %>
+
+
   </div>
+  <%= link_to graph_path, class: 'btn btn-lg btn-yellow btn-position-absolute' do%>
+    <i class="fas fa-chart-area"></i> Compare
+  <% end %>
 </div>
 
 

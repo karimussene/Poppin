@@ -28,13 +28,13 @@ class Cuisine < ApplicationRecord
 
   def av_rating
     if restaurants.count != 0
-      restaurants.sum(:rating)/restaurants.count.round(2)
+      (restaurants.sum(:rating)/restaurants.count.to_f).round(2)
     end
   end
 
   def av_price_range
     if restaurants.count != 0
-      restaurants.sum(:price_range)/restaurants.count.to_f.round(0)
+      (restaurants.sum(:price_range)/restaurants.count.to_f).round(0)
     end
   end
 

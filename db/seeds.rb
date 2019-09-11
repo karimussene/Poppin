@@ -152,6 +152,15 @@ Trend.all.each do |t|
   end
 end
 
+
+puts 'Destroy cuisine with less than 10 restaurants'
+
+Cuisine.all.each {|c| c.destroy if c.restaurants.count < 10}
+
+puts "Destroy cuisine with no attendance"
+Cuisine.all.each {|c| c.destroy if c.restaurants.sum(:attendance) == 0}
+
+
 puts "Assign photo to cuisines #{Time.now}-----------------------"
 
 Cuisine.all.each do |c|

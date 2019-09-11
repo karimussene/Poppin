@@ -33,7 +33,7 @@ class TrendsController < ApplicationController
       # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
       @favoritecuisines.reverse!
 
-    elsif params[:attendance].present?
+    else params[:attendance].present?
       #  sort by attendance
       @favoritecuisines = []
       @userfavorite = current_user.favorite_cuisines
@@ -45,8 +45,8 @@ class TrendsController < ApplicationController
       # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id))
       # @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
 
-    else
-      @favoritecuisines = current_user.favorite_cuisines
+    # else
+    #   @favoritecuisines = current_user.favorite_cuisines
     end
       @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.av_attendance(@city, @season) }.reverse
       @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
