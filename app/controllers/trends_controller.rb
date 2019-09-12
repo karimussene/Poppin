@@ -1,11 +1,11 @@
 class TrendsController < ApplicationController
   before_action :fetch_city
-  # before_action :attendance_array, only: [:map]
+  before_action :threshold
+  before_action :attendance_array, only: [:map]
   before_action :rating_array, only: [:map]
   before_action :price_array, only: [:map]
   before_action :competitors_array, only: [:map]
   before_action :trend_indication, only: [:map]
-  before_action :threshold, only: [:map]
   def results
 
     @season = selected_season(session[:start_period], session[:end_period])
@@ -54,7 +54,8 @@ class TrendsController < ApplicationController
     # else
     #   @favoritecuisines = current_user.favorite_cuisines
     end
-      @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.av_attendance(@city, @season) }.reverse
+      # @unselectedcuisines = Cuisine.with_photo.where.not(id: @favoritecuisines.pluck(:cuisine_id)).sort_by { |c| c.av_attendance(@city, @season) }.reverse
+      @unselectedcuisines = Cuisine.with_photo.sort_by { |c| c.av_attendance(@city, @season) }.reverse
       @comparisoncuisines = @favoritecuisines.select { |fav| fav.compare == true }
       @cuisines = Cuisine.all.sort_by { |c| c.av_attendance(@city, @season) }.reverse
   end
@@ -114,28 +115,36 @@ class TrendsController < ApplicationController
 
   def attendance_array
     @season = params[:season]
-    @cuisines_sorted_by_attendance = Cuisine.all.sort_by { |c| c.av_attendance(@city, @season) }.reverse
-    @cuisine_attendance_array = Cuisine.all.map { |c| c.av_attendance(@city, @season) }.reverse
+    @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
+    @cuisine_attendance_array = @cuisines_sorted_by_attendance.map { |c| c.av_attendance(@city, @season) }
+    @threshold_attendance_top = @cuisine_attendance_array[@high_percentile_index]
+    @threshold_attendance_bottom = @cuisine_attendance_array[@low_percentile_index]
   end
 
   def rating_array
-    @cuisines_sorted_by_rating = Cuisine.all.sort_by { |c| c.av_rating }.reverse
-    @cuisine_rating_array = Cuisine.all.map { |c| c.av_rating }.reverse
+    @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
+    @cuisine_rating_array = @cuisines_sorted_by_attendance.map { |c| c.av_rating }
+    @average_top_rating = @cuisine_rating_array.first(@high_percentile_index).sum/@high_percentile_index
+    @average_mid_rating = @cuisine_rating_array.first(@low_percentile_index).sum/@low_percentile_index
   end
   def competitors_array
-    @cuisines_sorted_by_no_competitors = Cuisine.all.sort_by { |c| c.no_restaurants }
-    @cuisine_no_competitors_array = Cuisine.all.map { |c| c.no_restaurants }
+    @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
+    @cuisine_no_competitors_array = @cuisines_sorted_by_attendance.map {|c| c.no_restaurants}
+    @average_top_competitors = @cuisine_no_competitors_array.first(@high_percentile_index).sum/@high_percentile_index
+    @average_mid_competitors = @cuisine_no_competitors_array.first(@low_percentile_index).sum/@low_percentile_index
   end
   def price_array
-    @cuisines_sorted_by_rating = Cuisine.all.sort_by { |c| c.av_price_range }
-    @cuisine_competitors_array = Cuisine.all.map { |c| c.av_price_range }
+    @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
+    @cuisine_price_array = @cuisines_sorted_by_attendance.map { |c| c.av_price_range }
+    @average_top_price = @cuisine_price_array.first(@high_percentile_index).sum/@high_percentile_index
+    @average_mid_price = @cuisine_price_array.first(@low_percentile_index).sum/@low_percentile_index
   end
   def trend_indication
     @av_trend_current_year = Trend.all.where(cuisine_id: params[:cuisine_id]).where("month like ?","%#{Time.now.year}%").sum(:scaled_attendance)/9
     @av_trend_previous_year = Trend.all.where(cuisine_id: params[:cuisine_id]).where("month like ?","%#{Time.now.year - 1}%").sum(:scaled_attendance)/12
   end
   def threshold
-    @high_percentile_index = Cuisine.all.count/4
-    @low_percentile_index = Cuisine.all.count/4*2
+    @high_percentile_index = Cuisine.all.count/3.to_i-1
+    @low_percentile_index = Cuisine.all.count/4*3.to_i-1
   end
 end

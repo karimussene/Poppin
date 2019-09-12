@@ -79,12 +79,57 @@
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
-  <div>
+
+</div>
+<div>
     <p>
+      attendance
+      <% @cuisine_attendance_array.each do |r| %>
+      <%= r %>
+      <% end %>
+      <br>
+      range attendance
+      <%= @threshold_attendance_top %>
+      <%= @threshold_attendance_bottom %>
+      <br>
+
+       rating
       <% @cuisine_rating_array.each do |r| %>
       <%= r %>
-
       <% end %>
+      <br>
+      range rating
+      <%= @threshold_rating_top %>
+      <%= @threshold_rating_bottom %>
+      average
+      <%= @average_top_rating %>
+      <%= @average_mid_rating %>
+      <br>
+
+      competitors
+      <% @cuisine_no_competitors_array.each do |r| %>
+      <%= r %>
+      <% end %>
+      <br>
+      Range competitors
+      <%= @threshold_competitor_top %>
+      <%= @threshold_competitor_bottom %>
+
+      average
+      <%= @average_top_competitors %>
+      <%= @average_mid_competitors %>
+      <br>
+
+      price
+      <% @cuisine_price_array.each do |r| %>
+      <%= r %>
+      <% end %>
+      <br>
+      Average c
+      <%= @average_top_price %>
+      <%= @average_mid_price %>
+      <br>
+
+
     </p>
   </div>
-</div>

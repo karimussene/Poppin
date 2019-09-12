@@ -61,6 +61,16 @@
   color: #000000;
 }
 
+.results-rounded-card-header{
+  font-family: Poppins;
+  font-style: small;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 31px;
+  padding: 15px 15px;
+  color: #000000;
+}
+
 
 .color-disabled{
  color: gray;
@@ -294,7 +304,7 @@ padding-right: 50px;
   opacity: .7;
   margin-bottom: 0;
   margin-top: 8px;
-  cursor: pointer;
+
 }
 
 .card-product-infos {
@@ -315,7 +325,11 @@ padding-left:16px;
   color:black;
   text-decoration:none;
 }
-
+.card-product-metric-title{
+  border-bottom: 1px dotted #000;
+  text-decoration: none;
+  cursor: help;
+}
 // <--------------------------------------- MAP PAGE CARD
 
 .card-product-map {
