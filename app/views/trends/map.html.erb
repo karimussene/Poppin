@@ -37,7 +37,7 @@
             <%=  @cuisine.av_attendance(@city,@season).floor%>
           </p>
           <p class="card-product-rating-map">
-            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+            <%=@cuisine.av_rating.round(2) %>
           </p>
           <p class="card-product-price-range-map">
             <%= @cuisine.av_price_range %> $
@@ -46,25 +46,44 @@
             <%= @cuisine.no_restaurants %>
           </p>
         </div>
-
+        <!-- column for top range cuisine in the City -->
         <div class="card-product-infos-map">
           <h2>
-            <%= City %>
+            Top range Cuisines
           </h2>
           <p class="card-product-attendance-map">
-            <%= @city.av_attendance(@season).floor%>
+            <%= @threshold_attendance_top.floor %>
           </p>
           <p class="card-product-rating-map">
-            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>
+            <%= @average_top_rating.round(2) %>
           </p>
           <p class="card-product-price-range-map">
-            <%= @city.av_price_range %> $
+            <%= @average_top_price %> $
           </p>
           <p class="card-product-no_restaurants-map">
-            <%= @city.no_restaurants %>
+            <%= @average_top_competitors %>
+          </p>
+        </div>
+        <!-- column for mid range cuisine in the City -->
+        <div class="card-product-infos-map">
+          <h2>
+            Mid range Cuisines
+          </h2>
+          <p class="card-product-attendance-map">
+            <%= @threshold_attendance_bottom.floor %>
+          </p>
+          <p class="card-product-rating-map">
+            <%= @average_mid_rating.round(2) %>
+          </p>
+          <p class="card-product-price-range-map">
+            <%= @average_mid_price %> $
+          </p>
+          <p class="card-product-no_restaurants-map">
+            <%= @average_mid_competitors %>
           </p>
         </div>
       </div>
+      <!-- additionnale metrics and comments -->
 
       <div class="mt-4">
         <%= render 'shared/favorite_button', cuisine: @cuisine %>
