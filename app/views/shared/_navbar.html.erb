@@ -14,15 +14,15 @@
       <%= link_to "Contact", "#", class: "nav-link-font"%>
     </div>
 
-    <% if user_signed_in? %>
-      <%= link_to 'Favourites', matches_path, class: 'nav-link-font' %>
-      <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "nav-link-font" %>
-      <!-- LOGIN SIGNIN -->
-    <% else %>
-      <div class="nav-links">
-        <%= link_to "Log in", new_user_session_path, class: "nav-link-font"%>
-        <%= link_to "Sign up", new_user_registration_path, class: "nav-link-font"%>
-      </div>
-    <% end %>
+    <div class="nav-links">
+      <% if user_signed_in? %>
+        <%= link_to 'Favorites', matches_path, class: 'nav-link-font' %>
+        <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: "nav-link-font" %>
+        <!-- LOGIN SIGNIN -->
+      <% else %>
+          <%= link_to "Log in", new_user_session_path, class: "nav-link-font"%>
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link-font"%>
+      <% end %>
+    </div>
   </div>
 </nav>
