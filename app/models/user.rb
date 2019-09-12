@@ -6,7 +6,10 @@ class User < ApplicationRecord
 
   has_many :favorite_cuisines
   has_many :cuisines, through: :favorite_cuisines
+  has_many :matches
+  has_many :matched_cuisines, through: :matches, source: :cuisine, class_name: 'Cuisine'
 
-  # validates :name, prensence: true
-  # validates :email, prensence: true
+  def matched?(cuisine)
+    matched_cuisines.pluck(:id).include?(cuisine.id)
+  end
 end

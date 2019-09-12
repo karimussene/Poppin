@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :cuisines, only: [:index]
   resources :matches, only: [:index, :create, :destroy]
 
+  delete '/cuisines/:cuisine_id/destroy_match', to: 'matches#destroy', as: :match_destroy
+
   resources :favorite_cuisines, only: [:create, :destroy] do
     collection do #removing the ID in the url <> member which shos the ID
       get 'add'
