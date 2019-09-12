@@ -3,3 +3,23 @@ var button = document.getElementById('btn-favorite-<%= @cuisine.id %>');
 
 activeButton.style.display = 'block';
 button.style.display = 'none';
+
+var alert = document.getElementsByClassName('alert-yellow')[0];
+alert.classList.remove('d-none');
+alert.classList.add('animated', 'flipInX');
+
+var alertButton = alert.querySelector('.close');
+
+var hideAlert = () => {
+  alert.classList.remove('animated', 'flipInX');
+  alert.classList.add('animated', 'fadeOut');
+}
+
+alertButton.addEventListener('click', () => {
+  hideAlert();
+});
+
+
+setTimeout(() => {
+  hideAlert();
+}, 3000);

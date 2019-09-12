@@ -6,12 +6,10 @@ class MatchesController < ApplicationController
   def create
     @cuisine = Cuisine.find(params[:cuisine_id])
 
-    Match.create(
-      user: current_user,
-      cuisine: @cuisine,
-      city: params[:city],
-      season: params[:season]
-    )
+    current_user.matches.where(cuisine: @cuisine).first_or_create do |match|
+      match.city = params[:city],
+      match.season = params[:season]
+    end
   end
 
   def destroy

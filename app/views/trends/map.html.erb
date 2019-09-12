@@ -5,8 +5,15 @@
     <% end %>
 
     <div class="mx-5">
+      <div class="alert alert-warning alert-yellow alert-no-float d-none">
+        Cuisine type added to favorites.
+        <button type="button" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
       <h1 class="map-rounded-card-header mt-5 mb-4">
-        See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %>
+        See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to
       </h1>
 
       <div class="card-product-map p-3">
