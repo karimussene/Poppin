@@ -12,15 +12,9 @@
         </button>
       </div>
 
-      <h1 class="mt-5 mb-0">
-        <strong><%= @cuisine.name %> cuisine</strong> in <strong><%= @city.name %></strong>
+      <h1 class="map-rounded-card-header mt-5 mb-4">
+        See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to
       </h1>
-
-      <h4 class="mb-4 text-secondary">
-        <%= Date::MONTHNAMES[session[:start_period].to_i] %>
-        to
-        <%= Date::MONTHNAMES[session[:end_period].to_i] %>
-      </h4>
 
       <div class="card-product-map p-3">
         <!-- Column for Metrics -->
@@ -97,6 +91,15 @@
         </div>
       </div>
       <!-- additionnale metrics and comments -->
+      <div>
+        <p>
+        Trend <% if @trend  %>
+        <%=  %>
+        <% end %>
+
+        </p>
+
+      </div>
 
       <div class="mt-4">
         <%= render 'shared/favorite_button', cuisine: @cuisine %>
