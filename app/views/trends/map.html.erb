@@ -1,13 +1,15 @@
-<div class=" d-flex">
-  <div class="container col-6 mt-3 mx-5">
-    <%=  link_to results_path, class: 'small-cuisine-card-name-gray' do %>
+<div class="row">
+  <div class="col-6 mt-5">
+    <%=  link_to graph_path(cuisine_id: params[:cuisine_id], season: params[:season]), class: 'small-cuisine-card-name-gray mx-5' do %>
       |<i class="fas fa-arrow-left"></i> Back
     <% end %>
-    <h1 class="map-rounded-card-header mt-5 mb-4">See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %></h1>
 
-    <div class="row col-12">
+    <div class="mx-5">
+      <h1 class="map-rounded-card-header mt-5 mb-4">
+        See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %>
+      </h1>
+
       <div class="card-product-map p-3">
-          <%#= image_tag @cuisine.photo %>
         <!-- Column for Metrics -->
         <div class="card-product-infos-map">
           <h2>
@@ -44,7 +46,7 @@
             <%= @cuisine.no_restaurants %>
           </p>
         </div>
-        <!-- column for City -->
+
         <div class="card-product-infos-map">
           <h2>
             <%= City %>
@@ -70,7 +72,7 @@
 
       <div class=""> <!-- KARINHO -->
       </div>
-    </div>
+    </div> <!-- /col-6 -->
   </div>
 
   <!-- Map -->
