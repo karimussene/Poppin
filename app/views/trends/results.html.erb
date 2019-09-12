@@ -12,7 +12,7 @@
 
   <!-- Cuisine not selected side menu 2/12 columns-->
   <div class="col-2 lg-container-card small-cuisine-card-container">
-    <h2 class="home-rounded-card-header">Top cuisines ranking: </h2>
+    <h3 class="results-rounded-card-header">Add from the Top ranked cuisines: </h3>
     <% @unselectedcuisines.each do |c| %>
       <div class="small-cuisine-card mb-2 ">
         <div class="mx-auto">
@@ -48,9 +48,9 @@
 
     </div>
 
-    <div class="m-2 pt-1">
+    <div class=" d-flex flex-column m-2 pt-1">
       <div class="text my-4  mx-2">
-        <h4>Select your favourite cuisines in <%= @city.name %> and check out the trends: </h4>
+        <h4>Compare cuisines in <strong><%= @city.name %></strong> </h4>
       </div>
 
       <!-- Card Product -->
@@ -68,15 +68,12 @@
               <div class="border-right-line-add-card">
                 <h2 class="mb-3"><%= fc.cuisine.name %></h2>
                 <div class="d-flex">
-                  <%= link_to graph_path, class: 'btn btn-sm btn-outline-yellow ml-auto mr-3 px-4' do%>
-                    <i class="fas fa-chart-area"></i> Trends
-                  <% end %>
 
-                  <%= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
-                    <div class="btn btn-yellow btn-yellow-smaller px-4">
+                  <%#= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
+                    <!-- <div class="btn btn-yellow btn-yellow-smaller px-4">
                       <i class="fas fa-map-marker-alt"></i> Select cuisine
-                    </div>
-                  <% end %>
+                    </div> -->
+                  <%# end %>
                   <%#= link_to favorite_cuisine_compare_path(favorite_cuisine_id: fc.id) do %>
                     <!-- <div class="btn btn-outline-yellow btn-yellow-smaller">
                       <i class="fas fa-chart-area"></i> Compare
@@ -88,19 +85,19 @@
 
               <!-- Cuisine ranking 2/12 columns-->
               <div class="card-product-price-range">
-                <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
+                <p class ="card-product-metric-title" title ="Ranking by attendance">Ranking</p>
                 <p># <%= @cuisines.find_index(fc.cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
               </div>
 
               <!-- Cuisine attendance 2/12 columns-->
               <div class="card-product-attendance">
-                <p title="Average people by restaurant every month"> Av. Attendance <i class="far fa-question-circle"></i></p>
+                <p class ="card-product-metric-title" title="Average people by restaurant every month"> Av. Attendance </p>
                 <p><%=  fc.cuisine.av_attendance(@city,@season).floor%> people/mth</p>
               </div>
 
               <!-- Cuisine rating 2/12 columns-->
               <div class="card-product-rating">
-                <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
+                <p class ="card-product-metric-title" title="Average rating of all restaurants of this cuisine">Rating </p>
                 <!-- <p><%#=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p> -->
                 <p><%=fc.cuisine.av_rating.to_f %> / 5</p>
               </div>
@@ -114,13 +111,13 @@
 
               <!-- Cuisine price-range 2/12 columns-->
               <div class="card-product-price-range">
-                <p title = "Average money spend by customer per visit">Price <i class="far fa-question-circle"></i></p>
+                <p class ="card-product-metric-title" title = "Average money spend by customer per visit">Price </p>
                 <p><%= fc.cuisine.av_price_range %> $</p>
               </div>
 
               <!-- Cuisine no. restaurants 2/12 columns-->
               <div class="card-product-no_restaurants">
-                <p title="No restaurants of this cuisine in the city">No. restaurants <i class="far fa-question-circle"></i></p>
+                <p class ="card-product-metric-title" title="No restaurants of this cuisine in the city">No. restaurants </p>
                 <p><%= fc.cuisine.no_restaurants %></p>
               </div>
 
@@ -133,6 +130,9 @@
             </div>
           </div>
         </div>
+      <% end %>
+      <%= link_to graph_path, id:"compare-trend-button", class: 'btn btn-lg btn-yellow ml-auto mr-3 px-4' do%>
+        <i class="fas fa-chart-area"></i> Trends comparison
       <% end %>
     </div>
 
