@@ -35,7 +35,7 @@
                 <%=  @cuisine.av_attendance(@city,@season).floor%>
               </p>
               <p class="card-product-rating-map">
-                <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+                <%=@cuisine.av_rating %>
               </p>
               <p class="card-product-price-range-map">
                 <%= @cuisine.av_price_range %> $
@@ -53,7 +53,7 @@
                 <%= @city.av_attendance(@season).floor%>
               </p>
               <p class="card-product-rating-map">
-                <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>
+                <%= @city.av_rating %>
               </p>
               <p class="card-product-price-range-map">
                 <%= @city.av_price_range %> $
@@ -136,6 +136,11 @@
       <%= @average_mid_price %>
       <br>
 
+      Trend indication
+      2019
+      <%= @av_trend_current_year %>
+      2018
+      <%= @av_trend_previous_year %>
 
     </p>
   </div>
