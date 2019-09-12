@@ -70,7 +70,9 @@
   border-color: $mustard;
   text-decoration: none;
 }
-
+#compare-trend-button{
+  align-self: end;
+}
 .btn-outline-mustard:hover{
   color: white;
   background-color: $mustard;
