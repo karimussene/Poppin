@@ -3,7 +3,7 @@
     <%=  link_to results_path, class: 'small-cuisine-card-name-gray' do %>
       |<i class="fas fa-arrow-left"></i> Back
     <% end %>
-    <h1 class="map-rounded-card-header mt-5 mb-4">See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %></h1>
+    <p class="map-rounded-card-header mt-5 mb-4"> <strong><%= @cuisine.name %></strong> cuisine performance in <strong><%= @city.name %></strong>  for <%= Date::MONTHNAMES[session[:start_period].to_i] %> to <%= Date::MONTHNAMES[session[:end_period].to_i] %></p>
 
     <div class="row col-12">
       <div class="card-product-map p-3">
@@ -35,7 +35,7 @@
             <%=  @cuisine.av_attendance(@city,@season).floor%>
           </p>
           <p class="card-product-rating-map">
-            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+            <%=@cuisine.av_rating.round(2) %>
           </p>
           <p class="card-product-price-range-map">
             <%= @cuisine.av_price_range %> $
@@ -44,26 +44,48 @@
             <%= @cuisine.no_restaurants %>
           </p>
         </div>
-        <!-- column for City -->
+        <!-- column for top range cuisine in the City -->
         <div class="card-product-infos-map">
           <h2>
-            <%= City %>
+            Top range Cuisines
           </h2>
           <p class="card-product-attendance-map">
-            <%= @city.av_attendance(@season).floor%>
+            <%= @threshold_attendance_top.floor %>
           </p>
           <p class="card-product-rating-map">
-            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>
+            <%= @average_top_rating.round(2) %>
           </p>
           <p class="card-product-price-range-map">
-            <%= @city.av_price_range %> $
+            <%= @average_top_price %> $
           </p>
           <p class="card-product-no_restaurants-map">
-            <%= @city.no_restaurants %>
+            <%= @average_top_competitors %>
+          </p>
+        </div>
+        <!-- column for mid range cuisine in the City -->
+        <div class="card-product-infos-map">
+          <h2>
+            Mid range Cuisines
+          </h2>
+          <p class="card-product-attendance-map">
+            <%= @threshold_attendance_bottom.floor %>
+          </p>
+          <p class="card-product-rating-map">
+            <%= @average_mid_rating.round(2) %>
+          </p>
+          <p class="card-product-price-range-map">
+            <%= @average_mid_price %> $
+          </p>
+          <p class="card-product-no_restaurants-map">
+            <%= @average_mid_competitors %>
           </p>
         </div>
       </div>
+      <!-- additionnale metrics and comments -->
 
+      <div>
+
+      </div>
       <%= render 'shared/favorite_button', cuisine: @cuisine %>
 
       <div class=""> <!-- KARINHO -->
