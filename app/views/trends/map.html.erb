@@ -25,7 +25,6 @@
           <p class="card-product-no_restaurants-map">
             No restaurants:
           </p>
-
         </div>
         <!-- column for Selected food -->
         <div class="card-product-infos-map">
@@ -64,16 +63,75 @@
           </p>
         </div>
       </div>
-    </div>
 
-    <%= render 'shared/favorite_button', cuisine: @cuisine %>
+      <%= render 'shared/favorite_button', cuisine: @cuisine %>
+
+      <div class=""> <!-- KARINHO -->
+      </div>
+
+      <div>
+        <p>
+          attendance
+          <!-- Array of Cuisines sorted by higher average attendance -->
+          <% @cuisine_attendance_array.each do |r| %>
+          <%= r %>
+          <% end %>
+          <br>
+          range attendance
+          <!-- mini Attendance of the top third   -->
+          <%= @threshold_attendance_top %>
+          <!-- min Attendance of the mid third   -->
+          <%= @threshold_attendance_bottom %>
+          <br>
+
+           rating
+          <% @cuisine_rating_array.each do |r| %>
+          <%= r %>
+          <% end %>
+          <br>
+          rating
+          average
+          <!-- average of the top third-->
+          <%= @average_top_rating %>
+          <!-- average of the second third -->
+          <%= @average_mid_rating %>
+          <br>
+
+          number of competitors
+          <% @cuisine_no_competitors_array.each do |r| %>
+          <%= r %>
+          <% end %>
+          <br>
+          average competitors
+          <!-- average of the top third-->
+          <%= @average_top_competitors %>
+          <!-- average of the second third -->
+          <%= @average_mid_competitors %>
+          <br>
+
+          price
+          <% @cuisine_price_array.each do |r| %>
+          <%= r %>
+          <% end %>
+          <br>
+          Average
+          <!-- average of the top third-->
+          <%= @average_top_price %>
+          <!-- average of the second third -->
+          <%= @average_mid_price %>
+          <br>
+
+          Trend indication
+          2019
+          <%= @av_trend_current_year %>
+          2018
+          <%= @av_trend_previous_year %>
+
+        </p>
+      </div>
+    </div>
   </div>
 
-
-    <div class="row col-12"> <!-- KARINHO -->
-
-    </div>
-  </div>
   <!-- Map -->
   <div class="col-6" style="padding: 0px;">
     <div
@@ -87,63 +145,3 @@
   </div>
 </div>
 
-<div>
-    <p>
-      attendance
-      <!-- Array of Cuisines sorted by higher average attendance -->
-      <% @cuisine_attendance_array.each do |r| %>
-      <%= r %>
-      <% end %>
-      <br>
-      range attendance
-      <!-- mini Attendance of the top third   -->
-      <%= @threshold_attendance_top %>
-      <!-- min Attendance of the mid third   -->
-      <%= @threshold_attendance_bottom %>
-      <br>
-
-       rating
-      <% @cuisine_rating_array.each do |r| %>
-      <%= r %>
-      <% end %>
-      <br>
-      rating
-      average
-      <!-- average of the top third-->
-      <%= @average_top_rating %>
-      <!-- average of the second third -->
-      <%= @average_mid_rating %>
-      <br>
-
-      number of competitors
-      <% @cuisine_no_competitors_array.each do |r| %>
-      <%= r %>
-      <% end %>
-      <br>
-      average competitors
-      <!-- average of the top third-->
-      <%= @average_top_competitors %>
-      <!-- average of the second third -->
-      <%= @average_mid_competitors %>
-      <br>
-
-      price
-      <% @cuisine_price_array.each do |r| %>
-      <%= r %>
-      <% end %>
-      <br>
-      Average
-      <!-- average of the top third-->
-      <%= @average_top_price %>
-      <!-- average of the second third -->
-      <%= @average_mid_price %>
-      <br>
-
-      Trend indication
-      2019
-      <%= @av_trend_current_year %>
-      2018
-      <%= @av_trend_previous_year %>
-
-    </p>
-  </div>
