@@ -1,4 +1,6 @@
-<%= link_to "Back to Results", results_path %>
+<%=  link_to results_path, class: 'small-cuisine-card-name-gray' do %>
+  |<i class="fas fa-arrow-left"></i> Back
+<% end %>
 
 <%= line_chart @cuisines_map.map { |cuisine|
     {

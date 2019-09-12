@@ -313,7 +313,6 @@ padding: 22px;
 .card-product p {
   font-size: 12px;
   line-height: 1.4;
-  opacity: .7;
   margin-bottom: 0;
   margin-top: 8px;
 
@@ -337,8 +336,11 @@ padding-left:16px;
   color:black;
   text-decoration:none;
 }
+
 .card-product-metric-title{
-  border-bottom: 1px dotted #000;
+  border-bottom: 1px dotted gray;
+  font-size: 12px;
+  color:gray;
   text-decoration: none;
   cursor: help;
 }
