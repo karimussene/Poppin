@@ -14,7 +14,7 @@
   <div class="col-2 lg-container-card small-cuisine-card-container">
     <h3 class="results-rounded-card-header">Add from the Top ranked cuisines: </h3>
     <% @unselectedcuisines.each do |c| %>
-      <%= link_to add_favorite_cuisines_path(cuisine_id: c.id), class: "small-cuisine-card-name-gray" do %>
+      <%= top_cuisine_link_to c, @favoritecuisines, class: "small-cuisine-card-name-gray" do %>
         <div class="border-bottom-line-add-card d-flex <%= @favoritecuisines.map(&:cuisine).include?(c) ? 'selected' : '' %>">
           <span class="badge badge-warning flex-grow-0 badge-ranking ml-2 mr-2"><%= c.ranking %></span>
 
