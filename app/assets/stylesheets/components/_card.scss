@@ -211,6 +211,10 @@
   &.selected {
     background-color: $yellow;
     color: black;
+
+    .plus-icon {
+      transform: rotate3d(0, 0, 1, 45deg);
+    }
   }
 }
 
@@ -221,6 +225,18 @@
   font-weight: 500;
   font-size: 16px;
   color: #A5A5A5;
+}
+
+.ancor-link-gray {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  color: #A5A5A5;
+
+  &:hover{
+    color: black;
+    text-decoration: underline;
+  }
 }
 
 .small-cuisine-card-name-gray:hover{
