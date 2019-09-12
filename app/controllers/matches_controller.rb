@@ -13,7 +13,7 @@ class MatchesController < ApplicationController
       season: params[:season]
     )
 
-    redirect_to matches_path, notice: "Added #{cuisine.name} to your favorites."
+    head :ok
   end
 
   def destroy

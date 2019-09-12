@@ -66,8 +66,10 @@
         </div>
     </div>
 
-    <%= link_to 'Add to your favorites',
-      matches_path(cuisine_id: @cuisine.id, city: @city, season: @season), method: :post %>
+    <%= link_to matches_path(cuisine_id: @cuisine.id, city: @city, season: @season),
+      method: :post, class: 'btn btn-lg btn-outline-yellow btn-favorite', remote: true do %>
+      <i class="far fa-heart"></i> Favorite
+    <% end %>
   </div>
 
   <!-- Map -->
@@ -82,5 +84,4 @@
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
-
 </div>
