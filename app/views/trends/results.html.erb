@@ -92,7 +92,7 @@
 
 
               <!-- Cuisine ranking 2/12 columns-->
-              <div class="card-product-price-range col-2">
+              <div class="card-product-price-range col-2 ml-3">
                 <span class ="card-product-metric-title" title ="Ranking by attendance">Ranking</span>
                 <span class="d-block pl-2">
                   <span class="badge badge-warning badge-ranking"><%= fc.cuisine.ranking %></span>
@@ -131,12 +131,12 @@
                   <p><%= fc.cuisine.no_restaurants %></p>
                 </div>
 
-                <!-- Delete info -->
-                <div class="flex-shrink-1 m-2">
-                  <%= link_to favorite_cuisine_path(fc.id), method: :delete, class: "cuisine-comparison-horizontal-card-button_delete" do %>
-                    <div></div>
-                  <% end %>
-                </div>
+              </div>
+              <!-- Delete info -->
+              <div class="flex-shrink-1 m-2">
+                <%= link_to favorite_cuisine_path(fc.id), method: :delete, class: "cuisine-comparison-horizontal-card-button_delete" do %>
+                  <div></div>
+                <% end %>
               </div>
             </div>
           </div>
