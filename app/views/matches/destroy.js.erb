@@ -1,0 +1,5 @@
+var activeButton = document.getElementById('btn-favorite-active-<%= @cuisine.id %>');
+var button = document.getElementById('btn-favorite-<%= @cuisine.id %>');
+
+activeButton.style.display = 'none';
+button.style.display = 'block';

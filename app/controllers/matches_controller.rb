@@ -4,22 +4,29 @@ class MatchesController < ApplicationController
   end
 
   def create
-    cuisine = Cuisine.find(params[:cuisine_id])
+    @cuisine = Cuisine.find(params[:cuisine_id])
 
-    @match = Match.create(
+    Match.create(
       user: current_user,
-      cuisine: cuisine,
+      cuisine: @cuisine,
       city: params[:city],
       season: params[:season]
     )
-
-    redirect_to matches_path, notice: "Added #{cuisine.name} to your favorites."
   end
 
   def destroy
-    @match = Match.find(params[:id])
+    if (params[:cuisine_id])
+      @cuisine = Cuisine.find(params[:cuisine_id])
+      @match = current_user.matches.find_by(cuisine: @cuisine)
+    else
+      @match = current_user.matches.find(params[:id])
+    end
+
     @match.destroy
 
-    redirect_to matches_path
+    respond_to do |format|
+      format.js
+      format.html { redirect_to matches_path }
+    end
   end
 end

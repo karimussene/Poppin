@@ -1,89 +1,92 @@
-<div class="container d-flex">
-  <div class="col-6">
-    <%= link_to "Back to Results", results_path %>
-    <h1 class="map-rounded-card-header mt-4">See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %></h1>
+<div class=" d-flex">
+  <div class="container col-6 mt-3 mx-5">
+    <%=  link_to results_path, class: 'small-cuisine-card-name-gray' do %>
+      |<i class="fas fa-arrow-left"></i> Back
+    <% end %>
+    <h1 class="map-rounded-card-header mt-5 mb-4">See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %></h1>
 
-    <div class="row">
+    <div class="row col-12">
+      <div class="card-product-map p-3">
+          <%#= image_tag @cuisine.photo %>
+        <!-- Column for Metrics -->
+        <div class="card-product-infos-map">
+          <h2>
+              Metrics
+          </h2>
+          <p class="card-product-attendance-map">
+            Attendance:
+          </p>
+          <p class="card-product-rating-map">
+            Rating:
+          </p>
+          <p class="card-product-price-range-map">
+            Price:
+          </p>
+          <p class="card-product-no_restaurants-map">
+            No restaurants:
+          </p>
 
-        <div class="">
-          <div class="card-product-map">
-              <%= image_tag @cuisine.photo %>
-            <!-- Column for Metrics -->
-            <div class="card-product-infos-map">
-              <h2>
-                  Metrics
-              </h2>
-              <p class="card-product-attendance-map">
-                Attendance:
-              </p>
-              <p class="card-product-rating-map">
-                Rating:
-              </p>
-              <p class="card-product-price-range-map">
-                Price:
-              </p>
-              <p class="card-product-no_restaurants-map">
-                No restaurants:
-              </p>
-            </div>
-            <!-- column for Selected food -->
-            <div class="card-product-infos-map">
-              <h2>
-                <%= @cuisine.name %>
-              </h2>
-              <p class="card-product-attendance-map">
-                <%=  @cuisine.av_attendance(@city,@season).floor%>
-              </p>
-              <p class="card-product-rating-map">
-                <%=@cuisine.av_rating %>
-              </p>
-              <p class="card-product-price-range-map">
-                <%= @cuisine.av_price_range %> $
-              </p>
-              <p class="card-product-no_restaurants-map">
-                <%= @cuisine.no_restaurants %>
-              </p>
-            </div>
-            <!-- column for City -->
-            <div class="card-product-infos-map">
-              <h2>
-                <%= City %>
-              </h2>
-              <p class="card-product-attendance-map">
-                <%= @city.av_attendance(@season).floor%>
-              </p>
-              <p class="card-product-rating-map">
-                <%= @city.av_rating %>
-              </p>
-              <p class="card-product-price-range-map">
-                <%= @city.av_price_range %> $
-              </p>
-              <p class="card-product-no_restaurants-map">
-                <%= @city.no_restaurants %>
-              </p>
-            </div>
-          </div>
         </div>
+        <!-- column for Selected food -->
+        <div class="card-product-infos-map">
+          <h2>
+            <%= @cuisine.name %>
+          </h2>
+          <p class="card-product-attendance-map">
+            <%=  @cuisine.av_attendance(@city,@season).floor%>
+          </p>
+          <p class="card-product-rating-map">
+            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+          </p>
+          <p class="card-product-price-range-map">
+            <%= @cuisine.av_price_range %> $
+          </p>
+          <p class="card-product-no_restaurants-map">
+            <%= @cuisine.no_restaurants %>
+          </p>
+        </div>
+        <!-- column for City -->
+        <div class="card-product-infos-map">
+          <h2>
+            <%= City %>
+          </h2>
+          <p class="card-product-attendance-map">
+            <%= @city.av_attendance(@season).floor%>
+          </p>
+          <p class="card-product-rating-map">
+            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>
+          </p>
+          <p class="card-product-price-range-map">
+            <%= @city.av_price_range %> $
+          </p>
+          <p class="card-product-no_restaurants-map">
+            <%= @city.no_restaurants %>
+          </p>
+        </div>
+      </div>
     </div>
 
-    <%= link_to 'Add to your favorites',
-      matches_path(cuisine_id: @cuisine.id, city: @city, season: @season), method: :post %>
+    <%= render 'shared/favorite_button', cuisine: @cuisine %>
   </div>
 
-  <!-- Map -->
 
-  <div class="col-6">
+    <div class="row col-12"> <!-- KARINHO -->
+
+    </div>
+  </div>
+  <!-- Map -->
+  <div class="col-6" style="padding: 0px;">
     <div
       id="map"
       style="width: 100%;
-      height: 600px;"
+      height: calc(100vh - 70px);"
       data-markers="<%= @markers.to_json %>"
       data-restaurants="<%= @geojson.to_json %>"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
-
 </div>
+
 <div>
     <p>
       attendance
@@ -144,3 +147,4 @@
 
     </p>
   </div>
+
