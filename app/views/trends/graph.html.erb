@@ -22,7 +22,7 @@
 
                 <div class="card-product-price-range">
                   <p class ="card-product-metric-title" title ="Ranking by attendance">Ranking </p>
-                  <p># <%#= cuisine.find_index(cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
+                  <p># <%= cuisine.ranking %> of <%= Cuisine.count %> </p>
                 </div>
 
                 <div class="card-product-attendance">
@@ -51,7 +51,7 @@
     </div>
 
     <div class="col-6">
-      <h2 class="mb-3 ml-4"> Attendence trend</h2>
+      <h3 class="mb-3 ml-4">Attendance over time in <%= @city.name %></h3>
       <%= line_chart @cuisines_map.map { |cuisine| { name: cuisine[:name], data: cuisine[:data] }},
         height: '500px', points: false, legend: 'bottom' %>
     </div>

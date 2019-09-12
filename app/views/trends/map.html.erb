@@ -1,13 +1,21 @@
-<div class=" d-flex">
-  <div class="container col-6 mt-3 mx-5 mt-5">
-    <%=  link_to results_path, class: 'small-cuisine-card-name-gray' do %>
+<div class="row">
+  <div class="col-6 mt-5">
+    <%=  link_to graph_path(cuisine_id: params[:cuisine_id], season: params[:season]), class: 'small-cuisine-card-name-gray mx-5' do %>
       |<i class="fas fa-arrow-left"></i> Back
     <% end %>
-    <h1 class="map-rounded-card-header mt-4 mb-4">See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %></h1>
 
-    <div class="row col-12">
+    <div class="mx-5">
+      <h1 class="mt-5 mb-0">
+        <strong><%= @cuisine.name %> cuisine</strong> in <strong><%= @city.name %></strong>
+      </h1>
+
+      <h4 class="mb-4 text-secondary">
+        <%= Date::MONTHNAMES[session[:start_period].to_i] %>
+        to
+        <%= Date::MONTHNAMES[session[:end_period].to_i] %>
+      </h4>
+
       <div class="card-product-map p-3">
-          <%#= image_tag @cuisine.photo %>
         <!-- Column for Metrics -->
         <div class="card-product-infos-map">
           <h2>
@@ -35,7 +43,7 @@
             <%=  @cuisine.av_attendance(@city,@season).floor%>
           </p>
           <p class="card-product-rating-map">
-            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @cuisine.av_rating %>
+            <%=@cuisine.av_rating.round(2) %>
           </p>
           <p class="card-product-price-range-map">
             <%= @cuisine.av_price_range %> $
@@ -44,104 +52,62 @@
             <%= @cuisine.no_restaurants %>
           </p>
         </div>
-        <!-- column for City -->
+        <!-- column for top range cuisine in the City -->
         <div class="card-product-infos-map">
           <h2>
-            <%= City %>
+            Top range Cuisines
           </h2>
           <p class="card-product-attendance-map">
-            <%= @city.av_attendance(@season).floor%>
+            <%= @threshold_attendance_top.floor %>
           </p>
           <p class="card-product-rating-map">
-            <%=raw "<i class='fas fa-star icon-color-mustard'></i>" * @city.av_rating %>
+            <%= @average_top_rating.round(2) %>
           </p>
           <p class="card-product-price-range-map">
-            <%= @city.av_price_range %> $
+            <%= @average_top_price %> $
           </p>
           <p class="card-product-no_restaurants-map">
-            <%= @city.no_restaurants %>
+            <%= @average_top_competitors %>
+          </p>
+        </div>
+        <!-- column for mid range cuisine in the City -->
+        <div class="card-product-infos-map">
+          <h2>
+            Mid range Cuisines
+          </h2>
+          <p class="card-product-attendance-map">
+            <%= @threshold_attendance_bottom.floor %>
+          </p>
+          <p class="card-product-rating-map">
+            <%= @average_mid_rating.round(2) %>
+          </p>
+          <p class="card-product-price-range-map">
+            <%= @average_mid_price %> $
+          </p>
+          <p class="card-product-no_restaurants-map">
+            <%= @average_mid_competitors %>
           </p>
         </div>
       </div>
+      <!-- additionnale metrics and comments -->
 
-      <%= render 'shared/favorite_button', cuisine: @cuisine %>
+      <div class="mt-4">
+        <%= render 'shared/favorite_button', cuisine: @cuisine %>
+      </div>
 
       <div class=""> <!-- KARINHO -->
       </div>
-
-      <div>
-        <p>
-          attendance
-          <!-- Array of Cuisines sorted by higher average attendance -->
-          <% @cuisine_attendance_array.each do |r| %>
-          <%= r %>
-          <% end %>
-          <br>
-          range attendance
-          <!-- mini Attendance of the top third   -->
-          <%= @threshold_attendance_top %>
-          <!-- min Attendance of the mid third   -->
-          <%= @threshold_attendance_bottom %>
-          <br>
-
-           rating
-          <% @cuisine_rating_array.each do |r| %>
-          <%= r %>
-          <% end %>
-          <br>
-          rating
-          average
-          <!-- average of the top third-->
-          <%= @average_top_rating %>
-          <!-- average of the second third -->
-          <%= @average_mid_rating %>
-          <br>
-
-          number of competitors
-          <% @cuisine_no_competitors_array.each do |r| %>
-          <%= r %>
-          <% end %>
-          <br>
-          average competitors
-          <!-- average of the top third-->
-          <%= @average_top_competitors %>
-          <!-- average of the second third -->
-          <%= @average_mid_competitors %>
-          <br>
-
-          price
-          <% @cuisine_price_array.each do |r| %>
-          <%= r %>
-          <% end %>
-          <br>
-          Average
-          <!-- average of the top third-->
-          <%= @average_top_price %>
-          <!-- average of the second third -->
-          <%= @average_mid_price %>
-          <br>
-
-          Trend indication
-          2019
-          <%= @av_trend_current_year %>
-          2018
-          <%= @av_trend_previous_year %>
-
-        </p>
-      </div>
-    </div>
+    </div> <!-- /col-6 -->
   </div>
 
   <!-- Map -->
-  <div class="col-6" style="padding: 0px;">
+  <div class="col-6" style="padding:0px;">
     <div
       id="map"
-      style="width: 100%;
-      height: calc(100vh - 70px);"
+      style="width: 100%;height: calc(100vh - 70px);"
       data-markers="<%= @markers.to_json %>"
       data-restaurants="<%= @geojson.to_json %>"
       data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
 </div>
-

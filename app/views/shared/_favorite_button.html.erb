@@ -2,15 +2,15 @@
 <%= content_tag :div, id: "btn-favorite-active-#{@cuisine.id}",
   style: "display: #{current_user.matched?(@cuisine) ? 'block' : 'none'}" do %>
   <%= link_to match_destroy_path(@cuisine),
-    method: :delete, class: 'btn btn-lg btn-yellow', remote: true do %>
-    <i class="fas fa-heart text-warning"></i> Favorite
+    method: :delete, class: 'btn btn-lg btn-yellow px-4', remote: true do %>
+    <i class="fas fa-heart"></i> Favorite
   <% end %>
 <% end %>
 
 <%= content_tag :div, id: "btn-favorite-#{@cuisine.id}",
   style: "display: #{current_user.matched?(@cuisine) ? 'none' : 'block'}" do %>
   <%= link_to matches_path(cuisine_id: @cuisine.id, city: @city, season: @season),
-    method: :post, class: 'btn btn-lg btn-outline-yellow', remote: true do %>
+    method: :post, class: 'btn btn-lg btn-outline-yellow px-4', remote: true do %>
     <i class="far fa-heart"></i> Favorite
   <% end %>
 <% end %>
