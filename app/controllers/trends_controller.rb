@@ -144,4 +144,28 @@ class TrendsController < ApplicationController
     @high_percentile_index = Cuisine.all.count/3.to_i-1
     @low_percentile_index = Cuisine.all.count/4*3.to_i-1
   end
+
+  def recomendation
+    if @cuisines_sorted_by_attendance.first(@high_percentile_index).include? (@cuisine)
+      high_end_cuisine
+    else
+      low_end_cuisine
+    end
+  end
+
+  def high_end_cuisine
+    attendance = @cuisine.av_attendance(@city, @season)
+    case attendance
+    when attendance / @threshold_attendance_top > 1.25
+      @attendance_evaluation = "the attendance for #{@cuisine} is #{((attendance / @threshold_attendance_top)* 100).floor - 100 } higher the the average top ranked restaurant"
+    when attendance / @threshold_attendance_top > 1.1
+      @attendance_evaluation = "the attendance for #{@cuisine} is #{((attendance / @threshold_attendance_top)* 100).floor - 100 } higher the the average top ranked restaurant"
+
+    end
+  end
+
+  def low_end_cuisine
+    @results = "results low"
+  end
+
 end
