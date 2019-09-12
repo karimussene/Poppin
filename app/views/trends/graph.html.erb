@@ -1,6 +1,8 @@
 <div class="m-5">
-  <%= link_to "Back to Results", results_path %>
-  <div class="row">
+  <%=  link_to results_path, class: 'small-cuisine-card-name-gray' do %>
+    |<i class="fas fa-arrow-left"></i> Back
+  <% end %>
+  <div class="row mt-3">
     <div class="col-6">
       <% current_user.favorite_cuisines.map(&:cuisine).each do |cuisine| %>
         <div class="card-product m-2">
@@ -49,6 +51,7 @@
     </div>
 
     <div class="col-6">
+      <h2 class="mb-3 ml-4"> Attendence trend</h2>
       <%= line_chart @cuisines_map.map { |cuisine| { name: cuisine[:name], data: cuisine[:data] }},
         height: '500px', points: false, legend: 'bottom' %>
     </div>

@@ -11,6 +11,6 @@
   style: "display: #{current_user.matched?(@cuisine) ? 'none' : 'block'}" do %>
   <%= link_to matches_path(cuisine_id: @cuisine.id, city: @city, season: @season),
     method: :post, class: 'btn btn-lg btn-outline-yellow', remote: true do %>
-    <i class="far fa-heart text-warning"></i> Favorite
+    <i class="far fa-heart"></i> Favorite
   <% end %>
 <% end %>
