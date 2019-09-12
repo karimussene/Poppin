@@ -21,7 +21,11 @@
                 <span style="display:inline-block; width:18px; margin-right:5px">
                   <%= show_svg('plus-icon.svg') %>
                 </span>
-                <%= @cuisines.find_index(c).to_i + 1 %> | <%= c.name %>
+
+
+                 <%= c.name %>
+
+                 <span class="badge badge-warning badge-ranking"><%= @cuisines.find_index(c).to_i + 1 %></span>
               <% end %>
             </div>
         </div>
@@ -65,9 +69,9 @@
             <!-- Info -->
             <div class="d-flex flex-grow-1 d-flex justify-content-between p-3 mx-2">
               <!-- Cuisine name 2/12 columns-->
-              <div class="border-right-line-add-card">
+              <div class="border-right-line-add-card col-2">
                 <h2 class="mb-3"><%= fc.cuisine.name %></h2>
-                <div class="d-flex">
+                <!-- <div classs="d-flex"> -->
 
                   <%#= link_to map_path(cuisine_id: fc.cuisine.id, season: @season) do %>
                     <!-- <div class="btn btn-yellow btn-yellow-smaller px-4">
@@ -80,24 +84,27 @@
                     </div> -->
                   <%# end %>
 
-                </div>
+                <!-- </div> -->
               </div>
 
+
               <!-- Cuisine ranking 2/12 columns-->
-              <div class="card-product-price-range">
-                <p class ="card-product-metric-title" title ="Ranking by attendance">Ranking</p>
-                <p># <%= @cuisines.find_index(fc.cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
+              <div class="card-product-price-range col-2">
+
+                <span class ="card-product-metric-title" title ="Ranking by attendance">Ranking</span>
+                <span class="badge badge-warning badge-ranking"><%= @cuisines.find_index(fc.cuisine).to_i + 1 %></span>
+                <!-- <p> of <#%= Cuisine.all.count %> </p> -->
               </div>
 
               <!-- Cuisine attendance 2/12 columns-->
-              <div class="card-product-attendance">
-                <p class ="card-product-metric-title" title="Average people by restaurant every month"> Av. Attendance </p>
+              <div class="card-product-attendance col-2">
+                <span class ="card-product-metric-title" title="Average people by restaurant every month"> Av. Attendance </span>
                 <p><%=  fc.cuisine.av_attendance(@city,@season).floor%> people/mth</p>
               </div>
 
               <!-- Cuisine rating 2/12 columns-->
-              <div class="card-product-rating">
-                <p class ="card-product-metric-title" title="Average rating of all restaurants of this cuisine">Rating </p>
+              <div class="card-product-rating col-2">
+                <span class ="card-product-metric-title" title="Average rating of all restaurants of this cuisine">Rating </span>
                 <!-- <p><%#=raw "<i class='fas fa-star icon-color-mustard'></i>" * fc.cuisine.av_rating %></p> -->
                 <p><%=fc.cuisine.av_rating.to_f %> / 5</p>
               </div>
@@ -110,23 +117,23 @@
               <%# end %>
 
               <!-- Cuisine price-range 2/12 columns-->
-              <div class="card-product-price-range">
-                <p class ="card-product-metric-title" title = "Average money spend by customer per visit">Price </p>
+              <div class="card-product-price-range col-2">
+                <span class ="card-product-metric-title" title = "Average money spend by customer per visit">Price </span>
                 <p><%= fc.cuisine.av_price_range %> $</p>
               </div>
 
               <!-- Cuisine no. restaurants 2/12 columns-->
-              <div class="card-product-no_restaurants">
-                <p class ="card-product-metric-title" title="No restaurants of this cuisine in the city">No. restaurants </p>
+              <div class="card-product-no_restaurants col-2">
+                <span class ="card-product-metric-title" title="No restaurants of this cuisine in the city">No. restaurants </span>
                 <p><%= fc.cuisine.no_restaurants %></p>
               </div>
 
-              <!-- Delete info -->
-              <div class="flex-shrink-1 ">
-                <%= link_to favorite_cuisine_path(fc.id), method: :delete, class: "cuisine-comparison-horizontal-card-button_delete" do %>
-                  <div></div>
-                <% end %>
-              </div>
+            </div>
+            <!-- Delete info -->
+            <div class="flex-shrink-1 m-2">
+              <%= link_to favorite_cuisine_path(fc.id), method: :delete, class: "cuisine-comparison-horizontal-card-button_delete" do %>
+                <div></div>
+              <% end %>
             </div>
           </div>
         </div>
