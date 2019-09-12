@@ -125,19 +125,19 @@ class TrendsController < ApplicationController
     @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
     @cuisine_rating_array = @cuisines_sorted_by_attendance.map { |c| c.av_rating }
     @average_top_rating = @cuisine_rating_array.first(@high_percentile_index).sum/@high_percentile_index
-    @average_mid_rating = @cuisine_rating_array.first(@low_percentile_index).sum/@low_percentile_index
+    @average_mid_rating = @cuisine_rating_array[@high_percentile_index..@low_percentile_index].sum/@low_percentile_index
   end
   def competitors_array
     @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
     @cuisine_no_competitors_array = @cuisines_sorted_by_attendance.map {|c| c.no_restaurants}
     @average_top_competitors = @cuisine_no_competitors_array.first(@high_percentile_index).sum/@high_percentile_index
-    @average_mid_competitors = @cuisine_no_competitors_array.first(@low_percentile_index).sum/@low_percentile_index
+    @average_mid_competitors = @cuisine_no_competitors_array[@high_percentile_index..@low_percentile_index].sum/@low_percentile_index
   end
   def price_array
     @cuisines_sorted_by_attendance = Cuisine.all.sort_by {|c| c.av_attendance(@city, @season) }.reverse
     @cuisine_price_array = @cuisines_sorted_by_attendance.map { |c| c.av_price_range }
     @average_top_price = @cuisine_price_array.first(@high_percentile_index).sum/@high_percentile_index
-    @average_mid_price = @cuisine_price_array.first(@low_percentile_index).sum/@low_percentile_index
+    @average_mid_price = @cuisine_price_array[@high_percentile_index..@low_percentile_index].sum/@low_percentile_index
   end
   def trend_indication
     @av_trend_current_year = Trend.all.where(cuisine_id: params[:cuisine_id]).where("month like ?","%#{Time.now.year}%").sum(:scaled_attendance)/9

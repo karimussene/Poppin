@@ -6,7 +6,6 @@
     <h1 class="map-rounded-card-header mt-5 mb-4">See how the <%= @cuisine.name %> cuisine performs in <%= @city.name %> for the season <%= Date::MONTHNAMES[session[:start_period].to_i] %> - <%= Date::MONTHNAMES[session[:end_period].to_i] %></h1>
 
     <div class="row col-12">
-
       <div class="card-product-map p-3">
           <%#= image_tag @cuisine.photo %>
         <!-- Column for Metrics -->
@@ -26,6 +25,7 @@
           <p class="card-product-no_restaurants-map">
             No restaurants:
           </p>
+
         </div>
         <!-- column for Selected food -->
         <div class="card-product-infos-map">
@@ -90,12 +90,15 @@
 <div>
     <p>
       attendance
+      <!-- Array of Cuisines sorted by higher average attendance -->
       <% @cuisine_attendance_array.each do |r| %>
       <%= r %>
       <% end %>
       <br>
       range attendance
+      <!-- mini Attendance of the top third   -->
       <%= @threshold_attendance_top %>
+      <!-- min Attendance of the mid third   -->
       <%= @threshold_attendance_bottom %>
       <br>
 
@@ -104,25 +107,23 @@
       <%= r %>
       <% end %>
       <br>
-      range rating
-      <%= @threshold_rating_top %>
-      <%= @threshold_rating_bottom %>
+      rating
       average
+      <!-- average of the top third-->
       <%= @average_top_rating %>
+      <!-- average of the second third -->
       <%= @average_mid_rating %>
       <br>
 
-      competitors
+      number of competitors
       <% @cuisine_no_competitors_array.each do |r| %>
       <%= r %>
       <% end %>
       <br>
-      Range competitors
-      <%= @threshold_competitor_top %>
-      <%= @threshold_competitor_bottom %>
-
-      average
+      average competitors
+      <!-- average of the top third-->
       <%= @average_top_competitors %>
+      <!-- average of the second third -->
       <%= @average_mid_competitors %>
       <br>
 
@@ -131,11 +132,18 @@
       <%= r %>
       <% end %>
       <br>
-      Average c
+      Average
+      <!-- average of the top third-->
       <%= @average_top_price %>
+      <!-- average of the second third -->
       <%= @average_mid_price %>
       <br>
 
+      Trend indication
+      2019
+      <%= @av_trend_current_year %>
+      2018
+      <%= @av_trend_previous_year %>
 
     </p>
   </div>
