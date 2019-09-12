@@ -71,10 +71,12 @@ class TrendsController < ApplicationController
         lng: r.longitude
       }
     end
+
   end
 
   def graph
-    @cuisines = current_user.favorite_cuisines.map(&:cuisine)
+    @season = params[:season]
+    @cuisines = current_user.favorite_cuisines.map(&:cuisine).sort_by { |c| c.av_attendance(@city, @season) }.reverse
 
     @cuisines_map = @cuisines.map do |cuisine|
       {
@@ -139,13 +141,23 @@ class TrendsController < ApplicationController
   def trend_indication
     @av_trend_current_year = Trend.all.where(cuisine_id: params[:cuisine_id]).where("month like ?","%#{Time.now.year}%").sum(:scaled_attendance)/9
     @av_trend_previous_year = Trend.all.where(cuisine_id: params[:cuisine_id]).where("month like ?","%#{Time.now.year - 1}%").sum(:scaled_attendance)/12
+    if @av_trend_previous_year!=0 && @av_trend_current_year / @av_trend_previous_year > 1.05
+      @trend = "increasing ↗️"
+    elsif @av_trend_previous_year!=0 && (@av_trend_current_year / @av_trend_previous_year < 1.05 || @av_trend_current_year / @av_trend_previous_year > 0.95)
+      @trend = "stable ➡️"
+    elsif @av_trend_previous_year!=0 && @av_trend_current_year / @av_trend_previous_year < 0.95
+      @trend = "decreasing ↘️"
+    else
+      @trend = "No trend"
+    end
   end
   def threshold
     @high_percentile_index = Cuisine.all.count/3.to_i-1
     @low_percentile_index = Cuisine.all.count/4*3.to_i-1
   end
 
-  def recomendation
+
+  def recommendation
     if @cuisines_sorted_by_attendance.first(@high_percentile_index).include? (@cuisine)
       high_end_cuisine
     else

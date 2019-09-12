@@ -43,6 +43,11 @@ class Cuisine < ApplicationRecord
   end
 
   def trend_data
-    trends.order(:date).map { |trend| [trend.date, trend.scaled_attendance.to_i] }
+    query = 'date in '
+    trends.order(:date).map { |trend| [trend.date, trend.scaled_attendance.to_i] }.select do |trend|
+      ["2017", "2018", "2019"].any? do |year|
+        trend[0].first(4).include?(year)
+      end
+    end
   end
 end

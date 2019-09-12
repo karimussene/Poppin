@@ -4,7 +4,7 @@
   <% end %>
   <div class="row mt-3">
     <div class="col-6">
-      <% current_user.favorite_cuisines.map(&:cuisine).each do |cuisine| %>
+      <% current_user.favorite_cuisines.map(&:cuisine).sort_by { |c| c.av_attendance(@city, @season) }.reverse.each do |cuisine| %>
         <div class="card-product m-2">
             <!-- Image plus info -->
             <div class="d-flex">
@@ -22,12 +22,14 @@
 
                 <div class="card-product-price-range">
                   <p class ="card-product-metric-title" title ="Ranking by attendance">Ranking </p>
-                  <p># <%= cuisine.ranking %> of <%= Cuisine.count %> </p>
+                  <span class="d-block pl-3">
+                    <span class="badge badge-warning badge-ranking"><%= cuisine.ranking %></span>
+                </span>
                 </div>
 
                 <div class="card-product-attendance">
                   <p class ="card-product-metric-title" title="Average people by restaurant every month"> Av. Attendance</p>
-                  <p><%=  cuisine.av_attendance(@city, params[:season]).floor %> people/mth</p>
+                  <p><%=  cuisine.av_attendance(@city, params[:season]).floor %> people / mth</p>
                 </div>
 
                 <div class="card-product-rating">
@@ -42,7 +44,7 @@
 
                 <div class="card-product-no_restaurants">
                   <p class ="card-product-metric-title" title="No restaurants of this cuisine in the city">No. restaurants</p>
-                  <p><%= cuisine.no_restaurants %></p>
+                  <p class="px-4"><%= cuisine.no_restaurants %></p>
                 </div>
               </div>
             </div>
