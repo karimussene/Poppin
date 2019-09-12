@@ -1,14 +1,14 @@
 <div class="rectangle-white no-margin-no-padding">
   <div class="container">
     <div style="padding:50px 0px 30px 0px;">
-      <h1 class="top-header-page-black">Type of food</h1>
-      <h2 class="top-text-page-black">What type of food would you like to cook? Let's select the ones you like 🤤🤤🤤</h2>
+      <h1><strong>Type of food</strong></h1>
+      <h4 class="top-text-page-black mb-5">What type of food would you like to cook? Let's select the ones you like 🤤🤤🤤</h4>
 
       <div id="create-favorites-form">
         <%= form_for current_user, url: favorite_cuisines_path, method: :post do |f| %>
 
           <%= f.collection_check_boxes :cuisine_ids , @cuisines, :id, :name, item_label_class: 'my-custom-class'   %>
-          <%= f.submit 'Submit >', class: "btn btn-lg btn-yellow " %>
+          <%= f.submit 'Submit >', class: "btn btn-lg btn-yellow" %>
         <% end %>
       </div>
     </div>

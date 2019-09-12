@@ -51,7 +51,10 @@
     </div>
 
     <div class="col-6">
-      <h3 class="mb-3 ml-4">Attendance over time in <%= @city.name %></h3>
+      <div class="mb-3 ml-4">
+        <h1><strong>Attendance over time</strong></h1>
+        <h4> in <%= @city.name %></h4>
+      </div>
       <%= line_chart @cuisines_map.map { |cuisine| { name: cuisine[:name], data: cuisine[:data] }},
         height: '500px', points: false, legend: 'bottom' %>
     </div>
