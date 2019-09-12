@@ -3,7 +3,7 @@
   style: "display: #{current_user.matched?(@cuisine) ? 'block' : 'none'}" do %>
   <%= link_to match_destroy_path(@cuisine),
     method: :delete, class: 'btn btn-lg btn-yellow', remote: true do %>
-    <i class="fas fa-heart text-warning"></i> Favorite
+    <i class="fas fa-heart"></i> Favorite
   <% end %>
 <% end %>
 

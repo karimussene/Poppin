@@ -90,10 +90,10 @@
 
               <!-- Cuisine ranking 2/12 columns-->
               <div class="card-product-price-range col-2">
-
                 <span class ="card-product-metric-title" title ="Ranking by attendance">Ranking</span>
-                <span class="badge badge-warning badge-ranking"><%= @cuisines.find_index(fc.cuisine).to_i + 1 %></span>
-                <!-- <p> of <#%= Cuisine.all.count %> </p> -->
+                <span class="d-block pl-2">
+                  <span class="badge badge-warning badge-ranking"><%= fc.cuisine.ranking %></span>
+                </span>
               </div>
 
               <!-- Cuisine attendance 2/12 columns-->
@@ -138,7 +138,8 @@
           </div>
         </div>
       <% end %>
-      <%= link_to graph_path(season: @season), id:"compare-trend-button", class: 'btn btn-lg btn-yellow ml-auto mr-3 px-4' do%>
+
+      <%= link_to graph_path(season: @season), id:"compare-trend-button", class: 'btn btn-lg btn-yellow ml-auto mr-3 px-4 mt-4' do%>
         <i class="fas fa-chart-area"></i> Trends comparison
       <% end %>
     </div>
