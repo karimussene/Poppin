@@ -65,6 +65,9 @@
           </div>
         </div>
     </div>
+
+    <%= link_to 'Add to your favorites',
+      matches_path(cuisine_id: @cuisine.id, city: @city, season: @season), method: :post %>
   </div>
 
   <!-- Map -->

@@ -1,0 +1,54 @@
+<h2>My favourites</h2>
+
+<% @matches.each do |match| %>
+  <div class="card-product m-2">
+    <!-- Image plus info -->
+    <div class="d-flex">
+      <%= image_tag match.cuisine.photo %>
+
+      <div class="d-flex flex-grow-1 d-flex justify-content-between p-3 mx-2">
+        <div class="border-right-line-add-card">
+          <h2 class="mb-3"><%= match.cuisine.name %></h2>
+          <div class="d-flex">
+            <%= link_to map_path(cuisine_id: match.cuisine.id, season: match.season) do %>
+              <div class="btn btn-yellow btn-yellow-smaller px-4">
+                <i class="fas fa-map-marker-alt"></i> Select cuisine
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="card-product-price-range">
+          <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
+          <p># <%#= match.cuisine.find_index(match.cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
+        </div>
+
+        <div class="card-product-attendance">
+          <p title="Average people by restaurant every month"> Av. Attendance <i class="far fa-question-circle"></i></p>
+          <p><%=  match.cuisine.av_attendance(match.city, match.season).floor %> people/mth</p>
+        </div>
+
+        <div class="card-product-rating">
+          <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
+          <p><%= match.cuisine.av_rating.to_f %> / 5</p>
+        </div>
+
+        <div class="card-product-price-range">
+          <p title = "Average money spend by customer per visit">Price <i class="far fa-question-circle"></i></p>
+          <p><%= match.cuisine.av_price_range %> $</p>
+        </div>
+
+        <div class="card-product-no_restaurants">
+          <p title="No restaurants of this cuisine in the city">No. restaurants <i class="far fa-question-circle"></i></p>
+          <p><%= match.cuisine.no_restaurants %></p>
+        </div>
+
+        <div class="flex-shrink-1 ">
+          <%= link_to match_path(match), method: :delete, class: "cuisine-comparison-horizontal-card-button_delete" do %>
+            <div></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
