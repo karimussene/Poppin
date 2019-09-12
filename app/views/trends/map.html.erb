@@ -92,27 +92,30 @@
       attendance
       <!-- Array of Cuisines sorted by higher average attendance -->
       <% @cuisine_attendance_array.each do |r| %>
-      <%= r %>
+      <%= r.floor %>
       <% end %>
       <br>
       range attendance
       <!-- mini Attendance of the top third   -->
-      <%= @threshold_attendance_top %>
+      <%= @threshold_attendance_top.floor %>
       <!-- min Attendance of the mid third   -->
-      <%= @threshold_attendance_bottom %>
+      <%= @threshold_attendance_bottom.floor %>
+
+      <p>-----------------</p>
       <br>
 
        rating
       <% @cuisine_rating_array.each do |r| %>
-      <%= r %>
+      <%= r.round(1) %>
       <% end %>
       <br>
       rating
       average
       <!-- average of the top third-->
-      <%= @average_top_rating %>
+      <%= @average_top_rating.round(1) %>
       <!-- average of the second third -->
-      <%= @average_mid_rating %>
+      <%= @average_mid_rating.round(1) %>
+      <p>-----------------</p>
       <br>
 
       number of competitors
@@ -125,6 +128,7 @@
       <%= @average_top_competitors %>
       <!-- average of the second third -->
       <%= @average_mid_competitors %>
+      <p>-----------------</p>
       <br>
 
       price
@@ -138,12 +142,15 @@
       <!-- average of the second third -->
       <%= @average_mid_price %>
       <br>
+      <p>-----------------</p>
 
       Trend indication
-      2019
-      <%= @av_trend_current_year %>
-      2018
-      <%= @av_trend_previous_year %>
+      <br>
+      2019 →
+      <%= @av_trend_current_year.floor %>
+      <br>
+      2018 →
+      <%= @av_trend_previous_year.floor %>
 
     </p>
   </div>
