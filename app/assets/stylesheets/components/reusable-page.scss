@@ -16,7 +16,7 @@
 }
 
 .rectangle-light-gray {
-  max-height: calc(100vh - 350px);
+  max-height: calc(100vh - 334px);
   width: 100%;
   background-color: #F5F5F5;
   overflow: scroll;
@@ -42,4 +42,10 @@
 
 #text-page-bold{
   font-weight: 900;
+}
+
+// <------------------------------------------ MAP
+#map-page{
+  width: 100%;
+  height: calc(100vh - 78px);
 }
