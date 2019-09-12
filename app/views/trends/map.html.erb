@@ -66,10 +66,7 @@
         </div>
     </div>
 
-    <%= link_to matches_path(cuisine_id: @cuisine.id, city: @city, season: @season),
-      method: :post, class: 'btn btn-lg btn-outline-yellow btn-favorite', remote: true do %>
-      <i class="far fa-heart"></i> Favorite
-    <% end %>
+    <%= render 'shared/favorite_button', cuisine: @cuisine %>
   </div>
 
   <!-- Map -->
