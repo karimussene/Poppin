@@ -14,22 +14,17 @@
   <div class="col-2 lg-container-card small-cuisine-card-container">
     <h3 class="results-rounded-card-header">Add from the Top ranked cuisines: </h3>
     <% @unselectedcuisines.each do |c| %>
-      <div class="small-cuisine-card mb-2 ">
-        <div class="mx-auto">
-            <div class="border-bottom-line-add-card">
-              <%= link_to add_favorite_cuisines_path(cuisine_id: c.id), class:"small-cuisine-card-name-gray" do %>
-                <span style="display:inline-block; width:18px; margin-right:5px">
-                  <%= show_svg('plus-icon.svg') %>
-                </span>
+      <%= link_to add_favorite_cuisines_path(cuisine_id: c.id), class: "small-cuisine-card-name-gray" do %>
+        <div class="border-bottom-line-add-card d-flex <%= @favoritecuisines.map(&:cuisine).include?(c) ? 'selected' : '' %>">
+          <span class="badge badge-warning flex-grow-0 badge-ranking ml-2 mr-2"><%= c.ranking %></span>
 
+          <span class="flex-grow-1"><%= c.name %></span>
 
-                 <%= c.name %>
-
-                 <span class="badge badge-warning badge-ranking"><%= @cuisines.find_index(c).to_i + 1 %></span>
-              <% end %>
-            </div>
+          <span class="plus-icon">
+            <%= show_svg('plus-icon.svg') %>
+          </span>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 

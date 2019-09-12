@@ -146,8 +146,10 @@
 
 //<------------------------------------------ RESULTS PAGE SMALL CARD
 .small-cuisine-card-container {
-  height: calc(100vh - 78px);
+  height: calc(100vh - 70px);
   overflow-y: scroll;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .small-cuisine-card{
@@ -179,11 +181,37 @@
   text-decoration: none;
 }
 
-.border-bottom-line-add-card{
-  margin-bottom: 10px;
+.border-bottom-line-add-card {
+  height: 45px;
   border-bottom: 0.3px solid #F4F4F4;
   flex-grow: 1;
-  padding-bottom: 15px;
+  align-items: center;
+
+  .badge {
+    text-align: center;
+    min-width: 25px;
+  }
+
+  .plus-icon {
+    display: none;
+    align-self: flex-end;
+    width: 24px;
+    height: 34px;
+    margin-right: 5px;
+  }
+
+  &:hover {
+    background-color: #f4f4f4;
+
+    .plus-icon {
+      display: block;
+    }
+  }
+
+  &.selected {
+    background-color: $yellow;
+    color: black;
+  }
 }
 
 

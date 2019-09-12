@@ -6,8 +6,8 @@ class TrendsController < ApplicationController
   before_action :price_array, only: [:map]
   before_action :competitors_array, only: [:map]
   before_action :trend_indication, only: [:map]
-  def results
 
+  def results
     @season = selected_season(session[:start_period], session[:end_period])
 
     if params[:query].present?
