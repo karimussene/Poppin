@@ -169,4 +169,3 @@ Cuisine.all.each do |c|
   c.save
   end
 end
-
