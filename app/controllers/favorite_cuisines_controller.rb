@@ -7,7 +7,7 @@ class FavoriteCuisinesController < ApplicationController
   end
 
   def add
-    FavoriteCuisine.create(user: current_user, cuisine_id: params[:cuisine_id], rank: params[:rank])
+    FavoriteCuisine.create(user: current_user, cuisine_id: params[:cuisine_id])
     redirect_to results_path
   end
 
