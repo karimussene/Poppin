@@ -3,4 +3,21 @@
   bottom: 16px;
   right: 16px;
   z-index: 1000;
+
+  .close {
+    outline: none !important;
+  }
+
+  &.alert-no-float {
+    top: 0px;
+    left: 60px;
+    width: calc(100% - 120px);
+    bottom: inherit !important;
+    position: absolute;
+    display: block;
+  }
+
+  &.alert-yellow {
+    background: lighten($yellow, 20%);
+  }
 }

@@ -3,4 +3,5 @@ class Match < ApplicationRecord
   belongs_to :cuisine
 
   validates :user, :cuisine, presence: true
+  validates :user, uniqueness: { scope: :cuisine }
 end

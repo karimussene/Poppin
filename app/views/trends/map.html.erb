@@ -5,6 +5,13 @@
     <% end %>
 
     <div class="mx-5">
+      <div class="alert alert-warning alert-yellow alert-no-float d-none">
+        Cuisine type added to favorites.
+        <button type="button" class="close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
       <h1 class="mt-5 mb-0">
         <strong><%= @cuisine.name %> cuisine</strong> in <strong><%= @city.name %></strong>
       </h1>
