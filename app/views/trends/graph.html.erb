@@ -19,27 +19,27 @@
                 </div>
 
                 <div class="card-product-price-range">
-                  <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
+                  <p class ="card-product-metric-title" title ="Ranking by attendance">Ranking </p>
                   <p># <%#= cuisine.find_index(cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
                 </div>
 
                 <div class="card-product-attendance">
-                  <p title="Average people by restaurant every month"> Av. Attendance <i class="far fa-question-circle"></i></p>
+                  <p class ="card-product-metric-title" title="Average people by restaurant every month"> Av. Attendance</p>
                   <p><%=  cuisine.av_attendance(@city, params[:season]).floor %> people/mth</p>
                 </div>
 
                 <div class="card-product-rating">
-                  <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
+                  <p class ="card-product-metric-title" title="Average rating of all restaurants of this cuisine">Rating</p>
                   <p><%= cuisine.av_rating.to_f %> / 5</p>
                 </div>
 
                 <div class="card-product-price-range">
-                  <p title = "Average money spend by customer per visit">Price <i class="far fa-question-circle"></i></p>
+                  <p class ="card-product-metric-title" title = "Average money spend by customer per visit">Price</p>
                   <p><%= cuisine.av_price_range %> $</p>
                 </div>
 
                 <div class="card-product-no_restaurants">
-                  <p title="No restaurants of this cuisine in the city">No. restaurants <i class="far fa-question-circle"></i></p>
+                  <p class ="card-product-metric-title" title="No restaurants of this cuisine in the city">No. restaurants</p>
                   <p><%= cuisine.no_restaurants %></p>
                 </div>
               </div>
