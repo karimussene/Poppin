@@ -131,7 +131,7 @@
           </div>
         </div>
       <% end %>
-      <%= link_to graph_path, id:"compare-trend-button", class: 'btn btn-lg btn-yellow ml-auto mr-3 px-4' do%>
+      <%= link_to graph_path(season: @season), id:"compare-trend-button", class: 'btn btn-lg btn-yellow ml-auto mr-3 px-4' do%>
         <i class="fas fa-chart-area"></i> Trends comparison
       <% end %>
     </div>
