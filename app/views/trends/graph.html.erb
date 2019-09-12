@@ -1,9 +1,56 @@
-<%= link_to "Back to Results", results_path %>
+<div class="m-5">
+  <%= link_to "Back to Results", results_path %>
+  <div class="row">
+    <div class="col-6">
+      <% current_user.favorite_cuisines.map(&:cuisine).each do |cuisine| %>
+        <div class="card-product m-2">
+            <!-- Image plus info -->
+            <div class="d-flex">
+              <div class="d-flex flex-grow-1 d-flex justify-content-between p-3 mx-2">
+                <div class="border-right-line-add-card">
+                  <h2 class="mb-3"><%= cuisine.name %></h2>
+                  <div class="d-flex">
+                    <%= link_to map_path(cuisine_id: cuisine.id, season: params[:season]) do %>
+                      <div class="btn btn-yellow btn-yellow-smaller px-4">
+                        <i class="fas fa-map-marker-alt"></i> Select cuisine
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
 
-<%= line_chart @cuisines_map.map { |cuisine|
-    {
-      name: cuisine[:name],
-      data: cuisine[:data]
-    }
-} %>
+                <div class="card-product-price-range">
+                  <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
+                  <p># <%#= cuisine.find_index(cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
+                </div>
 
+                <div class="card-product-attendance">
+                  <p title="Average people by restaurant every month"> Av. Attendance <i class="far fa-question-circle"></i></p>
+                  <p><%=  cuisine.av_attendance(@city, params[:season]).floor %> people/mth</p>
+                </div>
+
+                <div class="card-product-rating">
+                  <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
+                  <p><%= cuisine.av_rating.to_f %> / 5</p>
+                </div>
+
+                <div class="card-product-price-range">
+                  <p title = "Average money spend by customer per visit">Price <i class="far fa-question-circle"></i></p>
+                  <p><%= cuisine.av_price_range %> $</p>
+                </div>
+
+                <div class="card-product-no_restaurants">
+                  <p title="No restaurants of this cuisine in the city">No. restaurants <i class="far fa-question-circle"></i></p>
+                  <p><%= cuisine.no_restaurants %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="col-6">
+      <%= line_chart @cuisines_map.map { |cuisine| { name: cuisine[:name], data: cuisine[:data] }},
+        height: '500px', points: false, legend: 'bottom' %>
+    </div>
+  </div>
+</div>
