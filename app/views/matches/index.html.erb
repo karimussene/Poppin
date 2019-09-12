@@ -20,29 +20,32 @@
             </div>
           </div>
 
-          <div class="card-product-price-range">
-            <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
-            <p># <%= match.cuisine.ranking %> of <%= Cuisine.count %> </p>
+          <div class="card-product-price-range ml-3">
+            <span class ="card-product-metric-title" title ="Ranking by attendance">Ranking</span>
+            <span class="d-block pl-2" >
+              <span class="badge badge-warning badge-ranking"> <%= match.cuisine.ranking %></span>
+            </span>
           </div>
 
           <div class="card-product-attendance">
-            <p title="Average people by restaurant every month"> Av. Attendance <i class="far fa-question-circle"></i></p>
-            <p><%=  match.cuisine.av_attendance(match.city, match.season).floor %> people/mth</p>
+            <span class ="card-product-metric-title" title="Average people by restaurant every month"> Av. Attendance </span>
+            <p><%=  match.cuisine.av_attendance(match.city, match.season).floor %> people / mth</p>
           </div>
 
           <div class="card-product-rating">
-            <p title="Average rating of all restaurants of this cuisine">Rating <i class="far fa-question-circle"></i></p>
+            <span class ="card-product-metric-title" title="Average rating of all restaurants of this cuisine">Rating </span>
             <p><%= match.cuisine.av_rating.to_f %> / 5</p>
           </div>
 
           <div class="card-product-price-range">
-            <p title = "Average money spend by customer per visit">Price <i class="far fa-question-circle"></i></p>
+            <span class ="card-product-metric-title" title = "Average money spend by customer per visit">Price </span>
             <p><%= match.cuisine.av_price_range %> $</p>
           </div>
 
           <div class="card-product-no_restaurants">
-            <p title="No restaurants of this cuisine in the city">No. restaurants <i class="far fa-question-circle"></i></p>
-            <p><%= match.cuisine.no_restaurants %></p>
+            <span class ="card-product-metric-title" title="No restaurants of this cuisine in the city">No. restaurants </span>
+            <p class="pl-5
+            4"><%= match.cuisine.no_restaurants %></p>
           </div>
 
           <div class="flex-shrink-1 ">

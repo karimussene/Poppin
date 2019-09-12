@@ -58,7 +58,11 @@
         <h4> in <%= @city.name %></h4>
       </div>
       <%= line_chart @cuisines_map.map { |cuisine| { name: cuisine[:name], data: cuisine[:data] }},
-        height: '500px', points: false, legend: 'bottom' %>
+        height: '80%', points: false, legend: 'bottom' %>
+    </div>
+
+    <div >
     </div>
   </div>
+  <p class = "text-right mt-3" style="font-size: 15px">*Click on the legend to change the selection</p>
 </div>
