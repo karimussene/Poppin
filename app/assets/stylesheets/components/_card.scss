@@ -338,9 +338,11 @@ padding-left:16px;
   text-decoration:none;
 }
 .card-product-metric-title{
-  border-bottom: 1px dotted #000;
+  border-bottom: 1px dotted black;
   text-decoration: none;
   cursor: help;
+  font-size: 12px;
+  color: grey;
 }
 // <--------------------------------------- MAP PAGE CARD
 
@@ -370,6 +372,14 @@ padding-left:16px;
 }
 
 .card-product-map p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product-map span {
   font-size: 12px;
   line-height: 1.4;
   opacity: .7;

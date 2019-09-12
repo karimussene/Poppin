@@ -1,4 +1,4 @@
-<h2>My favourites</h2>
+<h2>My favorites</h2>
 
 <% @matches.each do |match| %>
   <div class="card-product m-2">
@@ -20,7 +20,7 @@
 
         <div class="card-product-price-range">
           <p title ="Ranking by attendance">Ranking <i class="far fa-question-circle"></i></p>
-          <p># <%#= match.cuisine.find_index(match.cuisine).to_i + 1 %> of <%= Cuisine.all.count %> </p>
+          <p># <%= match.cuisine.ranking %> of <%= Cuisine.count %> </p>
         </div>
 
         <div class="card-product-attendance">
