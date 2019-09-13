@@ -35,14 +35,14 @@
             <tr>
 
               <td>Av. Attendance</td>
-              <td class="<%= @cuisine.av_attendance(@city,@season) > @threshold_attendance_top ? 'text-success':'text-danger' %>"><%=  @cuisine.av_attendance(@city,@season).floor%></td>
+              <td class="<%= @cuisine.av_attendance(@city,@season) > @threshold_attendance_top ? 'text-success':'text-warning' %>"><%=  @cuisine.av_attendance(@city,@season).floor%></td>
               <td><%= @threshold_attendance_top.floor %></td>
               <td><%= @threshold_attendance_bottom.floor %></td>
             </tr>
             <tr>
 
               <td>Rating</td>
-              <td class="<%= @cuisine.av_rating > @average_top_rating ? 'text-success':'text-danger'%>"> <%=@cuisine.av_rating.round(2) %></td>
+              <td class="<%= @cuisine.av_rating > @average_top_rating ? 'text-success':'text-warning'%>"> <%=@cuisine.av_rating.round(2) %></td>
               <td><%= @average_top_rating.round(2) %></td>
               <td><%= @average_mid_rating.round(2) %></td>
             </tr>
@@ -54,7 +54,7 @@
             </tr>
             <tr>
               <td>No. Restaurants</td>
-              <td class="<%= @cuisine.no_restaurants < @average_top_competitors ? 'text-success':'text-danger' %>"><%= @cuisine.no_restaurants %></td>
+              <td class="<%= @cuisine.no_restaurants < @average_top_competitors ? 'text-success':'text-warning' %>"><%= @cuisine.no_restaurants %></td>
               <td><%= @average_top_competitors %></td>
               <td><%= @average_mid_competitors %></td>
             </tr>
